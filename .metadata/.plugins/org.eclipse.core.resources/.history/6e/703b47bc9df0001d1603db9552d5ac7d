@@ -20,12 +20,6 @@ public class HelloServlet extends HttpServlet {
 		resp.setContentType("text/html;charset=UTF-8");
 		PrintWriter out = resp.getWriter();
 		out.print("<h2>이순신</h2>"); //브라우저에 출력하려면 반드시 mime type이 필요함 안그러면 태그를 다 찍음
-		String mem_id = req.getParameter("mem_id");
-		String mem_pw = req.getParameter("mem_pw");
-		out.print("<h3>"+mem_id+"</h3>");
-		out.print("<span>"+mem_pw+"</span>"); //인라인요소
-		
-	
 	}
 	
 

@@ -23,7 +23,7 @@ public class HelloServlet extends HttpServlet {
 		String mem_id = req.getParameter("mem_id");
 		String mem_pw = req.getParameter("mem_pw");
 		out.print("<h3>"+mem_id+"</h3>");
-		out.print("<span>"+mem_pw+"</span>"); //인라인요소
+		out.print("<span>"+mem_pw_"</span>"); //인라인요소
 		
 	
 	}

@@ -32,6 +32,7 @@ semanticHighlighting.localVariableDeclaration.color=237,127,72
 semanticHighlighting.localVariableDeclaration.enabled=true
 semanticHighlighting.parameterVariable.color=121,171,255
 semanticHighlighting.parameterVariable.enabled=true
+smart_semicolon=true
 sourceHoverBackgroundColor=68,68,68
 sourceHoverBackgroundColor.SystemDefault=false
 tabWidthPropagated=true
