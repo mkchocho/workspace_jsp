@@ -1,6 +1,9 @@
 전자정부 2022-03 이클립스
 https://www.egovframe.go.kr/home/sub.do?menuNo=94
 
+설정변경 ** workspace, build - 외부에서 파일 수정했을 때 새로고침 없이 자동저장
+
+
 
 관리자권한으로 실행
 압축풀고 이클립스만 d드라이브
