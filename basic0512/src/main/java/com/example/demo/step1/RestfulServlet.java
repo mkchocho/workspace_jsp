@@ -1,6 +1,8 @@
 package com.example.demo.step1;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
@@ -15,11 +17,22 @@ import org.apache.log4j.Logger;
 @WebServlet("/rest/test")
 public class RestfulServlet extends HttpServlet {
 	Logger logger = Logger.getLogger(RestfulServlet.class);
-
+	//스프링에서는 annotation으로 지원하는 API가 존재함
+	//request와 response없이도 웹서비스를 제공할 수 있게 되었다. -서블릿에 대한 의존성을 낮추었다.
 	@Override
 	protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		logger.info("doDelete"); //405번이면 대응하는 메소드 이름 오타
-	
+		String temp = null;
+		String param="";
+		BufferedReader br = new BufferedReader(new InputStreamReader(req.getInputStream()));
+			//bufferredaer 단독으로 쓸 수 없어 inputstreamreader 써야함
+		while((temp=br.readLine())!=null) {
+			param += temp; //+ contact 붙여쓰기
+			
+		}
+		logger.info(param);
+		//사용한 IO클래스는 반드시 닫아주어야 한다 - 왜냐하면 다른사람이 탈취 ,읽기
+		br.close();
 }
 
 	//GET전송방식이 디폴트이다
@@ -51,11 +64,29 @@ public class RestfulServlet extends HttpServlet {
 		logger.info("doPost"); //405번이면 대응하는 메소드 이름 오타
 		String mem_id = req.getParameter("mem_id");
 		String mem_pw = req.getParameter("mem_pw");
+		logger.info(mem_pw);//null출력
 		}
-
+	//rest api put 메소드는 getParameter 값을 읽을 수 없다
 	@Override
 	protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		logger.info("doPut"); //405번이면 대응하는 메소드 이름 오타
+		//String mem_id = req.getParameter("mem_id");
+		//String mem_pw = req.getParameter("mem_pw");
+		//logger.info(mem_id+","+mem_pw);//null출력
+		String temp = null;
+		String param="";
+		BufferedReader br = new BufferedReader(new InputStreamReader(req.getInputStream()));
+			//bufferredaer 단독으로 쓸 수 없어 inputstreamreader 써야함
+			//두줄에 나눠 쓰면
+		InputStreamReader isr = new InputStreamReader(req.getInputStream());
+		BufferedReader br2 = new BufferedReader(isr);
+		
+		while((temp=br2.readLine())!=null) {
+			param += temp; //+ contact 붙여쓰기
+		}
+		logger.info(param);
+		//사용한 IO클래스는 반드시 닫아주어야 한다 - 왜냐하면 다른사람이 탈취 ,읽기
+		br.close();
 	}
 
 }
