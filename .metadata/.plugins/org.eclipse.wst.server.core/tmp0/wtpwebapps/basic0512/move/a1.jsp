@@ -17,6 +17,7 @@
     </ul>
     <%
         //4번
+        //DML중에서 SELECT처리할 때 사용함 - forward로 페이지 이동 처리를 해야 유지할 수 있다.
         RequestDispatcher view = request.getRequestDispatcher("b1.jsp");//메소드 호출이 객체를 리턴함
         //List는 인터페이스이다
         //인터페이스는 단독으로 인스턴스화를 할 수 없다.
