@@ -152,8 +152,12 @@ SQL> alter user scott identified by tiger; - 비번변경
 SQL> alter user scott account unlock; - 언락풀기
 
 ----------------------------------------------------------
-
-요청 				→ MemberServlet 					→ MemberDao 
+												  Select, from(집합)
+요청 		→		  MemberServlet				→ MemberDao 		→		DB(Oracle
+				(응답)	↓req.setAttribute()			←			←	
+		←		MemberList.jsp							executeQuery(select일때)
+													DB로부터 리스트와 맵에 담기게 됨 - jsp까지 유지
+							
 
 			  (어노테이션) ("url:경로(상대경로가 좋음)")
 e	 → URL	 	→ @WebServlet("(업무폴더이름)/(요청,기능이름)")	
@@ -187,6 +191,8 @@ forward : servlet과 jsp 사이의 이동을 유지/ SELECT와의 관계
 list의 주소번지를 불러올 수 있음
 List<Map> map에 컬럼들에 해당하는 정보를 담아
 요청을 유지시켜 조회할 수 있음
+map은 순서가 없음
+
 									
 
 									
