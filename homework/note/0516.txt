@@ -99,7 +99,7 @@ jsp가 아닌 Servlet이 되면
 MVC패턴을 생각
 
 sendRediect로 페이지 a→b가 되면
-a로의 요청은 끊어짐, 상태가 유지되지 않음-stateless
+a로의 요청은 끊어짐, 상태가 유지되지 않음-stateless /forward에서는 요청 유지됨 
 			└URL이 변경 됨
 기존의 요청이 화면에 남아있는것? => 실시간 정보가 아님(동기화)
 
@@ -135,7 +135,7 @@ URL 포트번호
 user(scott) pw(tiger) 집합적 사고-둘다일치해야함 → Connection 연결
 
 3)SELECT문을 ORACLE 서버까지 가져가야함
-가져가줄 Interface가 필요함 Statement/PreparedStatement // CRUD(***필수***) 8시간 안에 되도록 이거만 공부해야될 정도로 중요함
+가져가줄 Interface가 필요함 Statement/PreparedStatement // CRUD(***필수***) 8시간 안에 되도록 이거만 공부해야될 정도로 중요함	
 4)ResultSet - n건
 Select와 연관된 API - List<Map> 컬럼은 map, row는 list (고정값x) , list는 인터페이스, 구현체 클래스가 필요함 <백터, 어레이리스트> 인스턴스화 
 											     벡터-멀티스레드에 안전  |	싱글스레드에 안전 
@@ -153,11 +153,55 @@ SQL> alter user scott account unlock; - 언락풀기
 
 ----------------------------------------------------------
 
-요청 → MemberServlet → MemberDao 
+요청 				→ MemberServlet 					→ MemberDao 
 
-	  (어노테이션) ("url:경로(상대경로가 좋음)")
-e→ URL → @WebServlet("(업무이름)/(요청,기능이름)")
-	@Controller라는 어노테이션이 스프링에 있음
-	+@RequestMapping 합쳐놓은 것 
+			  (어노테이션) ("url:경로(상대경로가 좋음)")
+e	 → URL	 	→ @WebServlet("(업무폴더이름)/(요청,기능이름)")	
+			   @WebServlet("member/memberList")		
+			   @Controller라는 어노테이션이 스프링에 있음
+			  +@RequestMapping 합쳐놓은 것 
+			브라우저에서 요청할 수 있음 단위테스트는 doget만 가능
+(default)get→링크 		doGet 오타내면 405 
+				doPost 단위테스트 안됨 → Postman/js로 테스트 가능
+							
+								
+									브라우저 url에    @WebServlet("member/memberList") 이걸 적으면
+									doGet이 호출 됨 / cf.클라우드 서비스를 제대로 하려면 callback이 중요함
+									누가누구를 원하는가 (인스턴스화, 호출)
+									Servlet과 MemberDao 
+									MemberServlet클래스 안에서 MemberDao클래스가 구현하고 있는 선언된 MemberList를 호출해야함
+									
+									
+①크롬
+②http://172.16.2.19:9000/업무폴더명/
+③MemberServlet(req,res)
+		저장소,
+key로 값을 담을 수 있음
+scope개념 반복
+
+업무폴더명 앞까지는 Tomcat이 알고 있음									
+URL을 호출 → Servlet이 받음
+
+
+forward : servlet과 jsp 사이의 이동을 유지/ SELECT와의 관계
+list의 주소번지를 불러올 수 있음
+List<Map> map에 컬럼들에 해당하는 정보를 담아
+요청을 유지시켜 조회할 수 있음
+									
+
+									
+
+									
+
+									
+
+									
+									
+
+									
+									
+
+									
+									
 
 

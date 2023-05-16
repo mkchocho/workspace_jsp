@@ -35,8 +35,8 @@ public class MemberDao {
           Map<String,Object> rmap = null;
           
           //rs.next()호출하면 커서가 다음 행으로 가 버림
-          //rs.next();
-          //rs.next();
+          rs.next();
+          rs.next();
           //위(while문 앞에서)에서 두 번 rs.next하면 while문은 한 번만 실행됨.
           while(rs.next()) {//2번째 행부터 조회가 된다
              rmap = new HashMap<>();

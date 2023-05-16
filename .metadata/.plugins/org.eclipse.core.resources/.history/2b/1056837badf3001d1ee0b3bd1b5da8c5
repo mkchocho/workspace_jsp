@@ -18,7 +18,6 @@ public class MemberDao {
     Connection con = null;
     //전령의 역할-쿼리문(DML)을 오라클 서버에게 전달하고 처리를 요청(executeQuery(), executeUpdate():INS|UPD|DEL)한다
     PreparedStatement pstmt = null;
-    //오라클에 살고 있는 커서를 움직이는 메소드를 재정의하고 있는 인터페이스 이다
     ResultSet rs = null;
     public MemberDao() {
        dbMgr = DBConnectionMgr.getInstance();
@@ -33,12 +32,7 @@ public class MemberDao {
           pstmt = con.prepareStatement(sql.toString());
           rs = pstmt.executeQuery();
           Map<String,Object> rmap = null;
-          
-          //rs.next()호출하면 커서가 다음 행으로 가 버림
-          //rs.next();
-          //rs.next();
-          //위(while문 앞에서)에서 두 번 rs.next하면 while문은 한 번만 실행됨.
-          while(rs.next()) {//2번째 행부터 조회가 된다
+          while(rs.next()) {
              rmap = new HashMap<>();
              rmap.put("mem_id", rs.getString("mem_id"));
              rmap.put("mem_pw", rs.getString("mem_pw"));
@@ -52,10 +46,5 @@ public class MemberDao {
           logger.info(e.toString());
        }
        return mList;
-    }//end of memberList
-    public static void main(String[] args) {
-		MemberDao mDao = new MemberDao();
-		List<Map<String,Object>> mList = mDao.memberList();
-		System.out.println(mList);
-	}
-}////end of MemberDao
+    }
+}
