@@ -1,3 +1,6 @@
 
 5월 16, 2023 09:43:53.586 NEW SESSION
 5월 16, 2023 09:43:53.586 [14544:4396:0516/094353.569:ERROR:interface_endpoint_client.cc(696)] Message 0 rejected by interface blink.mojom.WidgetHost
+5월 16, 2023 10:40:45.615 [14544:4396:0516/104045.614:ERROR:interface_endpoint_client.cc(696)] Message 0 rejected by interface blink.mojom.WidgetHost
+5월 16, 2023 13:10:11.734 [14544:17760:0516/131011.734:ERROR:connection_factory_impl.cc(471)] ConnectionHandler failed with net error: -2
+5월 16, 2023 14:00:34.872 [14544:17760:0516/140034.872:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -106

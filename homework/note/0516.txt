@@ -86,6 +86,8 @@ Oracle default 포트번호 1521 (변경가능)
 exe 관리자 권한으로 실행 (오라클 서버에 접속하기 위한 도구 / sqlplus)
 맨위에거 필수설치, 4번째거 +에러나는거 다 체크박스 해제
 
+토드를 사용하려면 엑셀 - Oracle 32bit 다운로드
+
 ─────────────────────────────────────────────────────────
 *Repeat 페이지이동
 sendRedirect 	  |	 forward
@@ -112,3 +114,50 @@ jsp 스크립틀릿 <% %>이 안에만 자바코드를 쓸 수 있다
 
 누릴수있다 → a에서만
 b에서도 누리고 싶으면 해야하는게 forward
+----------------------------------------------------------
+forward를 제대로 사용하기 위해서 DB 연동 (SELECT)
+Servlet과 jsp 비벼보기 / MVC패턴 
+
+엑셀 - 회원관리 실습
+package com.util / DBConnectionMgr class생성 > 공통 코드 다른 클래스에서 가져다 쓰려고 생성 main 필요X
+basic0512\src\main\webapp\WEB-INF\lib > ojdbc6.jar 복붙
+
+
+------------------------
+설명-DB연동하는 4단계
+1) Driver Class 로딩한다 
+2) 물리적으로 떨어져 있는 오라클 서버와 연결통로를 확보해야한다. 
+실제 코드는 Connection 이라는 Interface(사용하는 제품이 다르기 때문에 추상 메서드/ 결정되지 않은 상태)
+(jdbc api -> 클래스, 추상클래스, 인터페이스)
+
+Connection을 위해 필요한 것
+URL 포트번호
+user(scott) pw(tiger) 집합적 사고-둘다일치해야함 → Connection 연결
+
+3)SELECT문을 ORACLE 서버까지 가져가야함
+가져가줄 Interface가 필요함 Statement/PreparedStatement // CRUD(***필수***) 8시간 안에 되도록 이거만 공부해야될 정도로 중요함
+4)ResultSet - n건
+Select와 연관된 API - List<Map> 컬럼은 map, row는 list (고정값x) , list는 인터페이스, 구현체 클래스가 필요함 <백터, 어레이리스트> 인스턴스화 
+											     벡터-멀티스레드에 안전  |	싱글스레드에 안전 
+												(카카오톡)
+
+테이블에 커서라는 애가 살고 있는데 맨 위에 가있어
+커서가 있는 위치에서 데이터 있 없? 묻고 다음행으로 넘어갈때
+rs.next()
+------------------------
+계정 정보 5회 이상 잘못 요청 잠겼을 때
+C:\Users\GDJ>sqlplus "/as sysdba"
+(계정 생성, 삭제, 권한주기)
+SQL> alter user scott identified by tiger; - 비번변경
+SQL> alter user scott account unlock; - 언락풀기
+
+----------------------------------------------------------
+
+요청 → MemberServlet → MemberDao 
+
+	  (어노테이션) ("url:경로(상대경로가 좋음)")
+e→ URL → @WebServlet("(업무이름)/(요청,기능이름)")
+	@Controller라는 어노테이션이 스프링에 있음
+	+@RequestMapping 합쳐놓은 것 
+
+
