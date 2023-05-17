@@ -1,0 +1,17 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    <%@ page import = "java.util.Map, java.util.List, java.util.ArrayList" %>
+    <%
+    List<Map<String,Object>> fruitList= new ArrayList<>();//싱글스레드에서 안전
+	Map<String,Object> rMap = new HashMap<>();
+	rMap.put("first","토마토");
+	rMap.put("second","키위");
+	fruitList.add(rMap); //fruitList.get(0) = new HashMap<>(); 들어있음
+	//System.out.println(rMap.get("first"));//토마토
+	//System.out.println(rMap);
+
+	rMap = new HashMap<>();
+	rMap.put("first","수박");
+	rMap.put("second","딸기");
+	fruitList.add(rMap);
+    %>

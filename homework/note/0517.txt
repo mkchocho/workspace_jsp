@@ -1,0 +1,202 @@
+https://nodejs.org/ko
+-------------------
+1. nodejs설치하기
+(설치시 경로건드리지않음)
+도스 창에서 node -v 엔터 버전 확인
+도스 창에서 npm -v npm버전 확인
+2. d드라이브에 vscode_web폴더 만들기
+3. vscode_web폴더 선택 후 vscode 열기
+4. 터미널 클릭
+5. npm init --yes 엔터
+:package.json생성 확인할 것
+6. npm i nodemon -g nodemon엔터
+7. npm install -g npm@9.6.6 엔터
+
+8.
+https://www.npmjs.com/package/nodemon
+https://www.npmjs.com/package/express
+npm i express
+npm i nodemon
+
+(D:\VSCODE_WEB\js-step1\hello.js)
+
+9.test
+PS D:\vscode_web> cd .\1.js-step1\
+PS D:\vscode_web\1.js-step1> node hello
+-------------------
+노드js 
+브라우저 없이 단위테스트 가능 
+
+1.
+C:\Users\GDJ>node -v
+C:\Users\GDJ>npm -v
+(npm : node package manager)
+2.
+3. 우클릭 메뉴에서 vscode열기 안보이면
+visual studio code 다시 다운 받아 (체크박스 3번째거 표시 안되어 있으면 다시 해야함)
+4.상단메뉴 터미널(단축키 ctrl+alt+T)
+
+
+node js 가 크롬의 뭔 엔진이랑 같아서 단위테스트가 가능
+package.jason 이랑 jvm의 web.xml(환경설정) 하는 기능이 필요하다.
+(jason : 데이터셋 = 집합) ←→ (List<Map>) 서로 바꿔서 만들 수 있어야함
+
+백엔드 jvm과 같은 - 프론트엔드 JavaScript / npm이 같이 설치됨, 무거워서 최근 yarn이 선호되는 경향 있음 (yarn-플러그인 있음)
+데이터를 관리하는 포맷 -jason : 데이터 셋  / 백엔드에서 List<Map>으로 만든 것을 jason으로 바꾸어줘야 아이폰등에서 같은 화면으로 출력할 수 있음
+(하이브리드 앱 : 웹과 앱을 지원 / ex. 아이폰에서, 갤럭시 폰에서 앱 설치하여 동작) 
+jar가 없는 대신 npm을 이용함 
+----------------------------------------------------------------------
+─────────────────────────────────────────
+VSCode
+
+D:\VSCODE_WEB\js-step1\hello.js
+상수를 선언할 때는 const(constant)
+변하는 let
+
+오른쪽 상단 ▷ 버튼 : 마켓플레이스 repl 
+
+-------------------
+이크마 스크립트 - ES6, ES7?
+ECMAScript
+https://www.w3schools.com/
+https://developer.mozilla.org/ko/docs/Web/JavaScript
+책사지마
+컨벤션, 약속? 지켜야할 부분 공부하기
+
+─────────────────────────────────────────
+----------------------------------------------------------------------
+Restful API
+
+GET - header - 쿼리스트링 - 노출되어 있어서 브라우저가 인터셉트를 한다 - 서버로 전달하지 않는다. (라이브가 아니라 어제날씨?)
+POST - Body - @ResponseBody - 스프링에서 제공하는 어노테이션 - 링크불가 - 포장되어 있다 - 그래서 브라우저가 인터셉트 못함.(브라우저가 아는척을 못함)
+PUT - Body - @ResponseBody
+DELETE - Body - @ResponseBody
+
+헤더와 바디 <- 패킷 
+헤더 - 패킷 700개로 쪼개서 순서 정렬 / (영화 다운 시) 영상 정보 - 바디 
+헤더 : get 방식 body 
+
+
+GET
+링크를 만들수 있다 > 쿼리스트링을 전달(URL에 작성) > &연산자 사용하여 N개 넘길 수 있음 
+URL 길이제한에 영향을 받음 - 브라우저마다 다름 : 넘길 수 있는 데이터에 제한이 있음
+
+POST
+헤더가 아닌 바디에 전달 
+링크를 걸 수 없음
+브라우저가 절대 인터셉트 할 수 없음
+
+─────────────────────────────────────────
+프론트엔드 화면구현
+>구현할 jsp 파일 작성
+\webapp\gym.jsp
+(D:\eclipse\workspace_jsp\basic0512\src\main\webapp\gym.jsp)
+
+
+------부트스트랩 css 미디어 쿼리형 ---------
+D:\eclipse\workspace_jsp\basic0512\src\main\webapp\common\bootstrap_common.jsp
+https://getbootstrap.com/docs/5.2/components/navbar/
+min있는 버전을 사용하는 것을 추천
+bootstrap 5.2 받아놔야 됨 
+cf. 구글 키워드 : css media query 반응형
+
+\webapp\include 폴더생성 - 업무 나눠
+
+----------------------
+개념설명 - 트리구조
+
+프로젝트이름
+[basic0512]
+    │
+    │
+    ├────[webapp]
+    │		  │
+    │		  ├[common]─부트스트랩공유코드
+    │		  │
+    │		  ├[include]─header,footer
+    │		  │
+    │		  ├[CSS]─main.css
+    │		  │
+    │		  ├gym.jsp(폴더안에 있으면 안됨, 배포잘못하면 404)
+    │		  │
+    │		  │
+    │		  ├★[WEB-INF]─[lib]-ojdbc6.jar
+    │		  │(framework와 lib 차이점 검색해보면 좋음 )
+    │		  │
+    │		  │
+    │		  │
+    │		  │
+    │		  │
+    │		  │
+----------------------
+\webapp\gym.jsp 한번에 다 작성하지 않고 전체 사이트에서 기능별로 파일을 나눠서 구성함 / 분업가능
+
+\webapp\common\bootstrap_common.jsp 	// bootstrap 공통적으로 사용하기 위해서 만듬 -> gym에서 include file
+\webapp\css\main.css				// 
+\webapp\include\gym_header.jsp		// 헤더 / gym에서 include file
+\webapp\include\gym_footer.jsp		// 푸터
+		flex css 정렬
+		공식문서 mdn flex
+		<nav class="navbar fixed-bottom bg-dark justify-content-cneter" >
+		ㄴ부트스트랩
+
+----카카오맵------
+브라우저에도 내장객체가 존재한다
+:객체생성 코드 없이도 바로 사용할 수 있다
+:소문자제공 - 	request.getPrameter("mem_id");
+		response.setContentType("text/html;charset=utf-8")
+		점 앞부분 : 소유주(주소번지)
+NullPointerException이 발생하지 않고 메소드가 호출될 수 있다
+//자바스크립트에서 함수는 객체이다
+//일급함수, 일급객체, 고차함수 - 중급자
+document.write("<div id='map' style='width:500px, height:400px'></div>");
+
+위 : 바닐라스크립트(순수) 다른 기술과 콜라보하기에 괜찮은 경우 있음
+
+res.setContentType("text/html; charset=utf-8");
+PrintWriter out = res.getWriter();
+out.print(); //System이 없는데 출력된다. 브라우저에
+
+------------------------------------------------------------
+<div id="map"
+tag(div) 뒤에 속성(id) =
+tags(태그 여러개)
+우리가 쓴 태그들은 브라우저에 의해서 나무 구조를 가짐 
+
+  <DOM Tree구조>
+	 html		
+	  │
+	  │
+    ┌──┴──┐
+-head		-body
+
+ html문서 전체를 닫아주는 내장객체 document
+객체는 함수를 가지고 있음 → document.getElementById() 또는 querySelector
+
+지도를 <div></div> 태그 안에 넣는 것을 랜더링이라고 할것임 - 위치 알아야 됨 
+document.getElementById() 는 
+선언을 한 다음에 접근하지 않으면 undefined 
+─────────────────────────────────────────
+List<Map> → JSON
+<MemberVO>
+	valueobject
+	setter와 getter로만 구성된 클래스이다
+
+	tomato라고 했을 때 4자리가 빔 이 공간을 반납해주는게 vachar2	→ 가변형 데이터 타입 
+	char는 스페이스바로 빈칸을 채워버림(오라클이) 			→ 고정형 데이터 타입
+
+*Java	*Oracle → 언어가 다름, 데이터타입이 다르다
+String   |	Varchar2(10) 
+─────╋─────────
+int	  │	number(5)
+double	  │	number(7,2) :콤마를 사용하여 소수점을 나타냄 소수점앞 5자리 소수점 포함 7자리
+
+관계지향형DB
+Oracle RDBMS (R : relationship) 
+join을사용해야함 
+좀 더 상세하게 정보를 조회하기 위해
+
+List<Map>이 오는 자리에 <MemberVO>가 올 수 있다. 
+			   어디에서는 DTO라고도 함 → Lombok?
+
+	
