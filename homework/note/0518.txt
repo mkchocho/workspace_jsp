@@ -1,0 +1,72 @@
+Review
+
+회원관리 앞단과 뒷단으로 나누어서
+응답화면과 관련
+화면에 요청
+html →		Servlet		→	Servlet
+		JSP				사용되는 메서드 2개(doGet, doPost)
+		(자바서버페이지)		2개로 회원관리? : if문 사용 
+		S:처리주체?서버			단위테스트가 가능한 doGet(4가지로 쪼갬)
+			↑						  └How(직접 호출? X URL)
+		Tomcat의 엔진두개					  └
+	servlet-api.jar, jsp-api.jar				  └
+		jsp→java→class					  └
+
+						key와 value 무조건 map
+
+
+(★위치와 시점의 문제-대충 현직얘기)
+
+<회원관리>
+로그인 Select
+회원가입 Insert		────────────→ 메서드 4가지필요
+비번변경 Update
+회원탈퇴 Delete
+
+───────────────────────────────────────────────
+토드로 member0518 테이블 작성
+20230518.sql 참고
+(테이블생성, INSERT, SELECT+WHERE, UPDATE, commit)
+
+-------------------------
++추가설명 : DB연동하는 4단계
+1) 드라이버 클래스 로딩 - ClassNotFoundException 방지를 위해 ojdbc6.jar 라이브러리(\WEB-INF\lib)에 추가
+				└→브라우저에서도 확인 가능 500번(백엔드쪽 예외 시 발생하는 숫자)
+2) 커넥션 연결 (물리적으로)
+물리적으로 떨어져있는 (다른 사람의) 서버에 연결하기
+필요한 것 :URL , USER(계정이름), PW(비번) [ex. scott/tiger]
+
+3)전령 - PreparedStatement
+하는 역할 : 쿼리문을 전달(java-서블릿단에서 오라클서버에게)
+이역할을 하는 게 Statement 하나 더 있는데 정적이라서 좋지 않음 
+	>쿼리문 요청<
+사용하는 메소드 : pstmt   . 	executeQuery()   →	 SELECT에만 사용(Table에 변화 없이 only 조회 → commit, rollback의 대상이 아님)
+		(┗변수 →PreparedStatement를 가리키고 있음)
+			그 외에	excuteUpdate()   →	(Insert, Update, Delete → commit, rollback을 하는 대상, 물리적 테이블에 반영)
+				메소드 : 리턴타입과 파라미터를 가짐
+				┗rs =	psmtm.executeQuery()	→ 반환타입 : ResultSet(커서조작) 
+					psmtm.excuteUpdate()	→ 반환타입 : int
+				rs.next()	:다음 ←──while(rs.next())
+				rs.previous()	:이전
+
+>PreparedStatement가 executeQuery를 선언하고 있다
+>API활용능력을 위해서 위 부연
+
+4)
+-------------------------
+20230518.sql
+(DELETE, 변수로 단위테스트, INDEX)
+----------
+-WHERE절 변수로 작성 시 =: 로 변수대입
+	WHERE mem_no=:x
+	변수로 치환하여 단위테스트
+----------
+contraints member0518_no_pk
+힌트문-인덱스-옵티마이저
+
+
+───────────────────────────────────────────────
+───────────────────────────────────────────────
+───────────────────────────────────────────────
+───────────────────────────────────────────────
+───────────────────────────────────────────────
