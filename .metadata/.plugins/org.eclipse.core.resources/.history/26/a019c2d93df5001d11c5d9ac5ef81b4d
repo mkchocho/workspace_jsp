@@ -1,0 +1,45 @@
+package com.util;
+
+import java.util.Enumeration;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+
+//내 안에는 요청객체가 없다
+
+public class HashMapBinder {
+	HttpServletRequest req = null;
+	public HashMapBinder() {} //디폴트 생성자
+	//생성자의 파라미터를 통해서 서블릿 클래스가 톰캣 서버로부터 주입받은
+	//주소번지를 인스턴스화 할 때 생성자를 호출 하니까 그 생성자의
+	//파라미터로 서블릿이 쥐고 있는 요청객체의 원본을 받아온다.
+	public HashMapBinder(HttpServletRequest req) {
+		this.req = req;
+	}
+
+
+	public void bind(Map<String,Object> pMap) {
+		pMap.clear();//이미 쥐고 있는 데이터가 있으면 비워라 
+		Enumeration<String> en = req.getParameterNames(); //mem_id, mem_pw, mem_name
+		while(en.hasMoreElements()) {
+			String key = en.nextElement();
+			pMap.put("mem_id",req.getParameter("mem_id"));
+		}
+	}
+}
+/*
+	아래 코드가  부서관리, 사원관리, 주문관리 마다 필요하다 
+	//java collection framework(List,Map)에는 읽기와 쓰기, 담기와 꺼내기에 대한인터페이스를 제공한다.
+	//Enumeration은 자료구조에 담는 역할이 아니라 꺼내기와 관련된 메소드를 제공함
+	Enumeration<String> en = req.getParameterNames();  Names
+	
+	<input type="text" name="mem_id">
+	호출 시 req.getParameter("mem_id")
+	<input type="text" name="mem_pw">
+	req.getParameter("mem_pw")
+	<input type="text" name="mem_name">
+	req.getParameter("mem_name")
+	
+
+
+ */

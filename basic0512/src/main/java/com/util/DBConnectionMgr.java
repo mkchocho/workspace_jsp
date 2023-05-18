@@ -16,7 +16,7 @@ public class DBConnectionMgr {
     //비번이 필요하다
     private final String _passwd = "tiger";
     //물리적으로 떨어져있는 서버의 정보(리소스)
-    private final String url = "jdbc:oracle:thin:@localhost:1521:xe";//xe는 SID깞이다
+    private final String url = "jdbc:oracle:thin:@localhost:1521:orcl11";//xe는 SID깞이다
     //객체 생성하는 메소드 구현 - 싱글톤 패턴으로 구현해봄 - 하나로 여러 사용자가 공유한다
     public static DBConnectionMgr getInstance() {//static붙은 메소드는 인스턴스화 없이 호출가능하다(클래스급)
        DBConnectionMgr dbMgr = null;

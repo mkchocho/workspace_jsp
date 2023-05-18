@@ -9,4 +9,5 @@
     <fullyQualifiedTypeName name="com.example.demo.member.MemberDao"/>
     <fullyQualifiedTypeName name="java.util.HashMap"/>
     <fullyQualifiedTypeName name="java.lang.Object"/>
+    <fullyQualifiedTypeName name="oracle.net.aso.d"/>
 </qualifiedTypeNameHistroy>

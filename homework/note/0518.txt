@@ -28,7 +28,7 @@ html →		Servlet		→	Servlet
 20230518.sql 참고
 (테이블생성, INSERT, SELECT+WHERE, UPDATE, commit)
 
--------------------------
+--------------------------------------------------
 +추가설명 : DB연동하는 4단계
 1) 드라이버 클래스 로딩 - ClassNotFoundException 방지를 위해 ojdbc6.jar 라이브러리(\WEB-INF\lib)에 추가
 				└→브라우저에서도 확인 가능 500번(백엔드쪽 예외 시 발생하는 숫자)
@@ -53,7 +53,7 @@ html →		Servlet		→	Servlet
 >API활용능력을 위해서 위 부연
 
 4)
--------------------------
+--------------------------------------------------
 20230518.sql
 (DELETE, 변수로 단위테스트, INDEX)
 ----------
@@ -64,7 +64,36 @@ html →		Servlet		→	Servlet
 contraints member0518_no_pk
 힌트문-인덱스-옵티마이저
 
+--------------------------------------------------
+MemberServlet doGet()메소드에 select메소드 호출을 위하여
+MemberDao.java 에 memberSelect(); 메소드 정의
 
+\webapp\member\
+memberList.jsp
+
+\webapp\css\
+member.css
+----------
+공통코드
+
+
+<input type="text" id="" name="">
+	text - varchar2로 받아야함
+	java에서는 String (VO와 연관)
+
+input 태그에서 중요한 속성 두가지 id와 name
+
+**이 중 name은 서블릿이 사용함**
+**id는 구분용**
+			┏파라미터는 input 태그 안에서 name 속성의 값을 받아옴
+req.getParameter(파라미터) 
+	┗리턴타입 : String, 파라미터 : 스트링 (getAttribute는 리턴 :스트링)
+
+req.getParameter(id)		name="id"	|    id[] →	<input type="text" id="" name="id">
+req.getParameter(pw)		name="pw"	|    pw[] →	<input type="text" id="" name="pw">	
+req.getParameter(name)	name="name"	|  name[] →	<input type="text" id="" name="name">	
+
+└→괄호안 값만 변경되고 공통되는 부분들있음 : 공통코드 작성
 ───────────────────────────────────────────────
 ───────────────────────────────────────────────
 ───────────────────────────────────────────────

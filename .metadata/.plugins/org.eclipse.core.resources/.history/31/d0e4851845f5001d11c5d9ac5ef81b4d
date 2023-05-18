@@ -1,0 +1,35 @@
+package com.util;
+abstract class Car{
+	int speed =0;
+	public abstract void go();//추상 메소드
+	public void stop() {
+		speed = speed-1;
+		if(speed>0) {
+			speed = speed -1;
+		}
+		else {
+			speed = 0;
+		}
+	}
+}
+//A is a B 소나타는 자동차이다
+//Sonata is a Car
+//520! is a Car
+
+class Sonata extends Car{
+
+	@Override
+	public void go() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+}
+
+public class CarSimulation {
+
+	public static void main(String[] args) {
+
+	}
+
+}

@@ -1,0 +1,60 @@
+package com.example.demo.member;
+
+import javax.servlet.http.HttpServlet;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.Map;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import org.apache.log4j.Logger;
+
+import oracle.net.aso.d;
+@SuppressWarnings("serial")
+@WebServlet("/member/memberCRUD")
+public class MemberServlet extends HttpServlet {
+    Logger logger = Logger.getLogger(MemberServlet.class);
+    MemberDao memberDao = new MemberDao();
+    /* ************************************************************************************
+     * 회원(CRUD)관리 구현
+     * URL 패턴 : 	업무명(폴더명) - member 
+     * 					호출이름 - memberCRUD
+     * 쿼리스트링 - 조회 : ?method=memberSelect
+     * SELECT
+     * 쿼리스트링 - 등록 : ?method=memberInsert
+     * 
+     * 쿼리스트링 - 수정 : ?method=memberUpdate
+     *  
+     * 쿼리스트링 - 삭제 : ?method=memberDelete
+     * DELETE FROM member0518 WHERE mem_no=:x;
+     ************************************************************************************ */
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+       List<Map<String,Object>> mList = null;
+       String methodName = req.getParameter("method")://memberSelect or memberInsert or memberUpdate or memberDelete
+    	if() {//회원조회
+    		memberDao.memberSelect():
+    	}else if() {//회원등록
+    		memberDao.memberInsert():
+    	}else if() {//회원수정
+    		memberDao.memberUpdate():
+    	}else if() {//회원삭제
+    		memberDao.memberDelete():
+    	}
+    	   
+       mList = memberDao.memberList();
+       req.setAttribute("mList", mList);
+       RequestDispatcher view = req.getRequestDispatcher("memberList.jsp");
+       view.forward(req, resp);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+       
+    }
+    
+}
