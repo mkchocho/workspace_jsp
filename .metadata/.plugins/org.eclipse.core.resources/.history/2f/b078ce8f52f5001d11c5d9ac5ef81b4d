@@ -62,8 +62,6 @@ public class MemberDao {
 		logger.info("memberSelect");
 		//List<Map<String, Object>> mList = null;
 		List<Map<String, Object>> mList = new ArrayList<>();//NullPointerException을 피할 수 있다
-		//memberList() 경유하지 않았다
-		logger.info(mList.size());//0
 		return mList;
 		//return null;
 	}
@@ -79,8 +77,8 @@ public class MemberDao {
 		return 0;
 	}
 	public int memberDelete(int user_no) {
-		logger.info("memberDelete");
-		logger.info("사용자가 입력한 값 : " + user_no);//1
+		logger.info("memberUpdate");
+		logger.info("사용자가 입력한 값 : " + user_no);
 		return 0;
 	}
 }////end of MemberDao

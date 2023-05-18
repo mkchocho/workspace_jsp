@@ -48,13 +48,7 @@ public class MemberServlet extends HttpServlet {
        hmb.bind(pMap);
        //회원 조회
        if("memberSelect".equals(methodName)) {//조건검색 경우라면 나도 (사용자가 입력한 정보가 )필요해
-    	   logger.info("memberSelect");
-    	   //여기에서는 mList가 null참조하는 상황-42번
-    	   logger.info("before : "+mList);//아무것도 없음 {} []
-    	   mList = memberDao.memberSelect(); //이 메소드 안에서 오라클 서버를 경유한 경우라면 더이상 null이 아님
-    	   //[] - List -> ArrayList{List인터페이스이고 ArrayList구현체 클래스임}
-    	   //{} - Map<String, Object>
-    	   logger.info("after : "+mList);//[{},{},{},{}] - 객체배열 형태임
+    	   mList = memberDao.memberSelect();
        }
        //회원 등록
        //사용자가 입력한 값을 파라미터를 통해서 넘겨야 합니다.
@@ -73,10 +67,7 @@ public class MemberServlet extends HttpServlet {
        //DELETE FROM member0518 WHERE mem_no=:x 숫자타입 number(5)
        else if("memberDelete".equals(methodName)) {
     	   //사용자가 선택한 회원일련번호
-    	   String mem_no = req.getParameter("mem_no");//문자열
-    	   int user_no =0;
-    	   user_no = Integer.parseInt(mem_no);//1저장
-    	   logger.info("사용자가 삭제를 선택한 회원 일련번호 : "+user_no);
+    	   int user_no = 0;
     	   result = memberDao.memberDelete(user_no);
     	   
        }

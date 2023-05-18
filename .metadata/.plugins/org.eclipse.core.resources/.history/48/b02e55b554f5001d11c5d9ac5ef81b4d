@@ -52,8 +52,6 @@ public class MemberServlet extends HttpServlet {
     	   //여기에서는 mList가 null참조하는 상황-42번
     	   logger.info("before : "+mList);//아무것도 없음 {} []
     	   mList = memberDao.memberSelect(); //이 메소드 안에서 오라클 서버를 경유한 경우라면 더이상 null이 아님
-    	   //[] - List -> ArrayList{List인터페이스이고 ArrayList구현체 클래스임}
-    	   //{} - Map<String, Object>
     	   logger.info("after : "+mList);//[{},{},{},{}] - 객체배열 형태임
        }
        //회원 등록

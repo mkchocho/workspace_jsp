@@ -62,8 +62,6 @@ public class MemberDao {
 		logger.info("memberSelect");
 		//List<Map<String, Object>> mList = null;
 		List<Map<String, Object>> mList = new ArrayList<>();//NullPointerException을 피할 수 있다
-		//memberList() 경유하지 않았다
-		logger.info(mList.size());//0
 		return mList;
 		//return null;
 	}
