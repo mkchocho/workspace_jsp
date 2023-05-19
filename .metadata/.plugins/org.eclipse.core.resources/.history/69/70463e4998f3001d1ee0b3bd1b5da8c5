@@ -1,7 +1,0 @@
-package com.example.demo.member;
-
-import javax.servlet.http.HttpServlet;
-
-public class MemberServlet extends HttpServlet {
-
-}

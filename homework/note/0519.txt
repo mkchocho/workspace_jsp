@@ -33,7 +33,7 @@ PK : #부서번호(DEPTNO)   →	 #사원(EMPNO)
 			1  →	n : FK(ForeignKey 외래키)
 			1:n의 관계
 
-(cf. 카다시안의 곱)
+(cf. 카다시안의 곱.. 일명 묻지마조인)
 X	→	Y
 -----------------
 	→	10
@@ -56,7 +56,106 @@ JOHN	→	20
 ------------------─→
 →경우의 수 곱 3(SMITH, KING, JOHN)	  X	4(10,20,30,40) = 12
 
+─────────────────────────────────
+
+Postman으로 doPost 단위테스트
+doPost메서드 비어있어서
+resp.setContentType("text/html;charset=utf-8"); html? 대신에
+JSON에 대하여 설명
+
+---------------
+JSON/집합
+key, value
+중복-구분 → 식별자
+
+(연상)
+jsp라고 쓰고 html이라고 읽는다
+확장자는 분명 jsp인데 화면에 보여지는 건 태그 안에 들어 있는 리소스(문자,사진,영상 등)
+
+ContentType="text/html"
+		"application/json"
+(application - doc, hwp)
+
+─────────────────────────────────
+이클립스 플러그인설치
+eclipse web developer 3.25
+whild web developer
+─────────────────────────────────
+MemberServlet.java
+-doPost -> html아니라 jason 파일로 받아오기
+-doService()
 
 
+서블릿-확장자 .java → 자바인데 어떻게 로컬이 아닌 웹 브라우저에서 작동할까?
+서블릿은 req, res를 주입받는다 - 누구로부터? : Tomcat(WAS) - 웹서비스
+				-톰캣안에 두개의 엔진 (jsp, servelt)이 객체 주입을 해줌
+				누구를 대신해 - 개발자를
 
+req -> req.getParameter(이안의 파라미터는 input 태그의 name속성값을 받아옴) 반환값은 String
+즉, String str = req.getParameter("mem_name"); 과 같은 형태
 
+우리는 doGet이라는 메소드를 직접 호출하지 않았다
+단위테스트를 생각해보면 - URL을 통해서 실행할 때 doGet메소드가 실행되어 파라미터값을 받아온다.
+		
+─────────────────────────────────
+개발 방법론
+
+MVC패턴 개요
+처음에는 화면(view계층)과 
+로직(서비스계층-Model계층 : 업무를 처리하는 곳 - 일의 순서 - 알고리즘)
+을 분리하자
+
+(개발방법론,API 읽는 습관, 생각하는 것을 표현할 수 행동력 필요)
+
+View - 응답이 나간다 - html 화면 출력함
+
+Model - XXXLogic + XXXDao
+
+Control - 서블릿 맡김 - 사용자가 입력한 값을 청취하기 - request.getParameter(" ")
+개발자 입장 - 바라보는 시선
+톰캣 입장 - 바라보는 시선
+
+두번째 역할은 응답을 담당하는 jsp호출하기
+
+페이지이동
+
+sendRedirect("b.jsp")
+
+url이 바뀐다
+그래서 유지(scope:page[화면이 너무 작음]>request>session[캐쉬메모리저장:3분]>application[서버가 너무 힘듦])가 안된다
+
+-
+url이 안바뀜
+그러나 페이지내용은 바뀜
+: 분명 주소창에는 a.jsp를 보여주는데 실제 출력된 내용은 b.jsp인 것 
+RequestDispatcher view = req.getRequestDispatcher("memberList.jsp");
+       view.forward(req, resp);
+
+페이지 이동하려면 요청객체와 응답객체가 필요하다
+응답객체만 필요해 - sendRedirect()
+요청객체도 응답객체도 둘 다 원해 - forward(reqeust, response)
+
+response.setContentType("text/xml");
+response.setContentType("application/doc");
+브라우저는 모르는 마임타입은 무조건 다운로드 함
+PrintWriter out =res.getWriter(); // 객체생성을 메소드로 하기 - 잘함
+A a = new A(); // 이렇게 하면 싱글톤은 없다
+
+forward는 select문 일때만 사용하자
+조회결과가 있다
+조회결과가 테이블구조이다.
+가로와 세로가 있다.
+
+request는 저장소이다
+
+request.setAttribute("deptList", deptList); // @param : 키값, @param : 주소번지
+request.setAttribute("empList", empList);
+request.setAttribute("memberList", memberList);
+
+request.getAttribute();
+
+─────────────────────────────────
+MemberServelt	| MemberDao(memberSelect : DB연동)
+db연동하는 메소드는 dao클래스에 있는데 
+호출은 Servlet에서 해야함 
+dao → servlet 인스턴스화

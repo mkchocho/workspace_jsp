@@ -10,8 +10,10 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="common"/>
+		<item key="selection" value="dbMgr"/>
 		<list key="findhistory">
+			<item value="dbmgr"/>
+			<item value="dis"/>
 			<item value="common"/>
 		</list>
 		<list key="replacehistory">
