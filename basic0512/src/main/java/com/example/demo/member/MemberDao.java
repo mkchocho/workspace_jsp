@@ -59,18 +59,43 @@ public class MemberDao {
 		System.out.println(mList);
 	}
     //회원 목록 조회 구현
-	public List<Map<String, Object>> memberSelect() {
+	public List<Map<String, Object>> memberSelect(HashMap<String, Object> pMap) {
 		logger.info("memberSelect");
 		//List<Map<String, Object>> mList = null;
 		List<Map<String, Object>> mList = new ArrayList<>();//NullPointerException을 피할 수 있다
 		StringBuilder sql = new StringBuilder();
 		sql.append("SELECT mem_no, mem_id, mem_pw, mem_name, mem_address");
 		sql.append(" FROM member0518");
+		// member/memberCRUD?method=memberSelect
+		//																	&gubun=(mem_id|mem_name|mem_address) - 컬럼명
+		//																	&keyword=나|tom|가산동 
+		
+		//너 분류를 선택했어?
+		if(pMap.get("gubun")!=null && !"분류선택".equals(pMap.get("gubun"))) {
+			if("mem_id".equals(pMap.get("gubun"))) {//너 뭘 찾고 싶어? 너 아이디로 검색할 거야?
+				sql.append(" WHERE mem_id LIKE '%'||?||'%'");
+			}else if("mem_name".equals(pMap.get("gubun"))) {
+				sql.append(" WHERE mem_name LIKE '%'||?||'%'");
+			}else if("mem_address".equals(pMap.get("gubun"))) {
+				sql.append(" WHERE mem_address LIKE '%'||?||'%'");
+			}
+		}else {
+			logger.info("조건 검색이 아닐 때 ");
+			//이 조건일 때는 그냥 전체 조회를 하면 되는 거야. where절이 필요 없는 거야
+		}
+		logger.info(sql.toString());
+		
 		try {
 			//물리적으로 떨어져 있는 오라클 서버에 연결하기
 			con = dbMgr.getConnection();
 			pstmt = con.prepareStatement(sql.toString());//선언 된 쿼리문을 읽기 
+			//여기서? 자리에 치환될 값을 결정해 줘야해!!! - 왜냐면?
+			if(pMap.get("gubun")!=null && !"분류선택".equals(pMap.get("gubun"))) {//너 조건검색을 원해? 그러면 ? 자리에 keyword를 치환해 줘야돼 아니면 500번 에러야 
+				pstmt.setString(1,pMap.get("keyword").toString()); //toString-Object에서 String으로 형변환 , ?는 문자열
+			}
 			rs = pstmt.executeQuery();
+			
+			
 			Map<String, Object> rmap = null;
 			while(rs.next()) {
 				rmap = new HashMap<>();

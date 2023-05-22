@@ -5,6 +5,8 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.log4j.Logger;
+
 //내 안에는 요청객체가 없다
 //공통코드를 뽑아낸다 - 초보는 아니다
 //반복되는 코드를 찾아내서...
@@ -13,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 //상속은 재사용을 위한 모범답안은 아니다 - 왜냐면 결합도가 높아서, 의존적이다
 
 public class HashMapBinder {
+	Logger logger = Logger.getLogger(HashMapBinder.class);
 	HttpServletRequest req = null;
 	public HashMapBinder() {} //디폴트 생성자
 	//생성자의 파라미터를 통해서 서블릿 클래스가 톰캣 서버로부터 주입받은
@@ -28,7 +31,8 @@ public class HashMapBinder {
 		//s가 붙으면 복수형 - 자루안에 데이터가 존재하는지 유무를 반환하는 메소드 - hasMoreElement
 		Enumeration<String> en = req.getParameterNames(); //mem_id, mem_pw, mem_name
 		while(en.hasMoreElements()) {
-			String key = en.nextElement();//mem_id, mem_pw, mem_name
+			String key = en.nextElement();//mem_id, mem_pw, mem_name, gubun, keyword
+			logger.info(req.getParameter(key));
 			pMap.put(key, req.getParameter(key));
 		}
 	}

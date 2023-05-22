@@ -61,15 +61,16 @@ public class MemberServlet extends HttpServlet {
         int result = -1;
         String methodName = req.getParameter("method");//memberSelect or memberInsert or memberUpdate or memberDelete
         //리턴타입과 파라미터 결정해 보기 -  대화 - 소스리뷰
-        HashMap<String,Object> pMap = new HashMap<>();
-        HashMapBinder hmb = new HashMapBinder(req);
-        hmb.bind(pMap);
+        //지워야 한다 - 왜냐하면 입력, 수정, 삭제, 조건 검색일 때 모두 다른 케이스 이므로 조건절로 위치를 옮겼다
         //회원 조회
         if("memberSelect".equals(methodName)) {//조건검색 경우라면 나도 (사용자가 입력한 정보가 )필요해
      	   logger.info("memberSelect");
      	   //여기에서는 mList가 null참조하는 상황-42번
      	   logger.info("before : "+mList);//아무것도 없음 {} []
-     	   mList = memberDao.memberSelect(); //이 메소드 안에서 오라클 서버를 경유한 경우라면 더이상 null이 아님
+     	  HashMap<String,Object> pMap = new HashMap<>();
+          HashMapBinder hmb = new HashMapBinder(req);
+          hmb.bind(pMap);
+     	   mList = memberDao.memberSelect(pMap); //이 메소드 안에서 오라클 서버를 경유한 경우라면 더이상 null이 아님
            req.setAttribute("mList", mList);
            RequestDispatcher view = req.getRequestDispatcher("memberList.jsp");
            view.forward(req, resp);
@@ -83,11 +84,17 @@ public class MemberServlet extends HttpServlet {
         //쿼리문을 작성한 이유는 화면은 없지만 쿼리문을 보고 사용자가 입력한 정보들을 생각(상상, 예측)해 보자
         //insert into member0518(mem_no,mem_id, mem_pw,mem_name) values(3,'banana','345','나초보');
         else if("memberInsert".equals(methodName)) {
+        	HashMap<String,Object> pMap = new HashMap<>();
+            HashMapBinder hmb = new HashMapBinder(req);
+            hmb.bind(pMap);
      	   result = memberDao.memberInsert(pMap);
      	   
         }//end of 회원등록
         //회원 수정
         else if("memberUpdate".equals(methodName)) {
+        	HashMap<String,Object> pMap = new HashMap<>();
+            HashMapBinder hmb = new HashMapBinder(req);
+            hmb.bind(pMap);
      	   result = memberDao.memberUpdate(pMap);
      	   
         }//end of 회원수정
@@ -103,6 +110,7 @@ public class MemberServlet extends HttpServlet {
      	   
         }//end of 회원삭제
         //mList = memberDao.memberList(); - CRUD를 조건문으로 분기하면서 memberSelect영역으로 이관했음
+        //forward를 연속해서 두 번 요청하게 되면 서버에러(500번을 던짐)가 발생함
 
     }
     

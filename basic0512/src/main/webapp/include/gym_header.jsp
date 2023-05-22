@@ -9,7 +9,10 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
+          <a class="nav-link active" aria-current="page" href="/gym.jsp">Home</a>
+        </li>
+                <li class="nav-item">
+          <a class="nav-link" href="/member/memberCRUD?method=memberSelect">회원관리</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">자유게시판</a>

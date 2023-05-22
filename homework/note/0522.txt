@@ -1,0 +1,83 @@
+회원목록 보기
+: 오라클 서버를 활요한 JDBC API 활용 연습 
+입력|수정|삭제|조회
+
+모방하기. 따라하기. 무작정 따라하기. 클론 코딩 
+
+DB연동 기술은 변화가 없는 편이다
+:컬럼명과 테이블명만 다르다
+:조인은 필요할 수 있다.필요한 경우가 훨씬 더 많다(부담)
+
+memberList.jsp - 회원목록(select문)보기
+memberList.jsp를 직접 요청할 때와
+
+memberCRUD?method=memberSelect → memberList.jsp 요청할 때
+MemberServlet -> jsp
+
+어떤 차이가 있을까?
+(오라클 서버 경유 유무)
+
+
+memberList.jsp (직접 요청 시)
+n명의 회원 존재할 경우
+
+scope-(page,) request, session ,( application)
+요청객체는 일종의 저장{읽고 쓰기:Object타입이면 모두다 가능}소 역할도 수행
+request.setAttribute("이름", 주소번지);
+
+List<Map<String, Objet>> mList = request.getAttribute("mList");
+
+
+
+데이터를 가져오기
+
+오라클 서버에서 데이터를 가져오기
+서로 다른 언어를 사용하므로 인터페이스가 필요하다
+자바와 오라클이 만나는 부분 
+java.sql.Connection - 물리적으로 떨어져 있는 오라클 서버와 연결통로 확보
+java.sql.PreparedStatement - 위에서 연결된 후에 개발자가 작성한 SQL문을 전달하고 처리 요청하기 : 그러한 역할을 할 수 있는 메소드를 제공한다 
+select 물리적인 테이블에 변화가 없음 - read하기
+insert updat edelete - 물리적인 테이블에 변화가 있음 - commit or rollback
+
+java.sql.ResultSet{select문에만 필요함 - why? 커서를 동작하는데 필요한 메소드가 여기에 있다 
+			next(), previous(), isFirst():true or false, isLast():true, false} 
+			boolean> if문 while문(분기문) 
+				(그림으로 생각해보기 - 순서도 추천)
+				알고리즘의 기본은 논리에 오류를 일으키지 않는 것 
+List<Map<>>
+사람 구분 - Map
+Map<String, Object> ramp = null;
+while(rs.next()){//오라클의 커서는 맨 위에 위치함 - 디폴트
+	rmap = new HashMap<>(); // 그 사람의 아이디, 그 사람의 주소...
+	mList.add(rmap); // 그 사람의 모든 정보 추가 
+}
+
+
+----------------------------
+요청 → MemberServlet → MemberDAO
+			
+   	                	↓Prepared Statement
+			      ↑ResultSet 	
+			 MyBatis, Hibernate
+				DB(Oracle)
+----------------------------							
+java → oracle 서버 경유
+
+
+
+자바기초
+변수선언 - 전변과 지변 구분하기
+초기화 및 호출하기 - 대입연산자 및 호출하기
+언스턴스화(A a = new A()) - spring 으로 가면 대신해줌 - 생략 - 의존성 주입(dependency injection)
+제어문(조건문, 반복문)
+
+가져다 쓰는 것도 알아야 가능하다
+위치,일정한 가공 필요함
+
+------------------------
+
+
+				
+
+				
+
