@@ -1,0 +1,18 @@
+package com.example.demo.member;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.vo.Member0518;
+
+public class ListStep3 {
+	List<Member0518> mList = new ArrayList<>();
+	pubilc void initList() {
+		
+	}
+	
+	public static void main(String[] args) {
+		
+	}
+
+}

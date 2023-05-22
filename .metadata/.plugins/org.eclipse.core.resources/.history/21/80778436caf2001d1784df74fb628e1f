@@ -1,8 +1,0 @@
-package com.example.demo.step1;
-
-import javax.servlet.http.HttpServlet;
-
-
-public class RestfulServlet extends HttpServlet {
-
-}

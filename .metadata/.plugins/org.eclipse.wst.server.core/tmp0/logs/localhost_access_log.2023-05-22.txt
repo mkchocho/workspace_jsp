@@ -196,3 +196,6 @@
 0:0:0:0:0:0:0:1 - - [22/May/2023:15:34:23 +0900] "GET /gym.jsp HTTP/1.1" 200 7351
 0:0:0:0:0:0:0:1 - - [22/May/2023:15:34:58 +0900] "GET /member/memberCRUD?method=memberSelect HTTP/1.1" 200 8346
 0:0:0:0:0:0:0:1 - - [22/May/2023:15:34:58 +0900] "GET /gym.jsp HTTP/1.1" 200 7351
+0:0:0:0:0:0:0:1 - - [22/May/2023:15:39:15 +0900] "GET /member/memberCRUD?method=memberSelect HTTP/1.1" 200 8346
+0:0:0:0:0:0:0:1 - - [22/May/2023:15:39:16 +0900] "GET /gym.jsp HTTP/1.1" 200 7351
+0:0:0:0:0:0:0:1 - - [22/May/2023:15:39:16 +0900] "GET /member/memberCRUD?method=memberSelect HTTP/1.1" 200 8346
