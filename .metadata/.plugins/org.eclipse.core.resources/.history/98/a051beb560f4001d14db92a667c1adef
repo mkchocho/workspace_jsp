@@ -1,7 +1,0 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<nav class="navbar fixed-bottom bg-dark">
-  <div class="container-fluid">
-    <a class="navbar-brand"  style="color:white" href="#">TerrGYM Copyright&copy;2023</a>
-  </div>
-</nav>

@@ -10,19 +10,23 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="memberSearc"/>
+		<item key="selection" value="pagePath"/>
 		<list key="findhistory">
+			<item value="pagePath"/>
+			<item value="여기야?"/>
+			<item value="pagePerBlock"/>
+			<item value="조건 검색이"/>
+			<item value="요기요"/>
+			<item value="여기여"/>
+			<item value="setter메소"/>
+			<item value="setter메소드"/>
+			<item value="회원목록 끝"/>
+			<item value="modal body"/>
+			<item value="modal"/>
+			<item value="moda"/>
+			<item value="form"/>
+			<item value="es6"/>
 			<item value="memberSearc"/>
-			<item value="삭제"/>
-			<item value="히원삭제"/>
-			<item value="memberSearch"/>
-			<item value="click"/>
-			<item value="clikc"/>
-			<item value="clic"/>
-			<item value="gubun"/>
-			<item value="dbmgr"/>
-			<item value="dis"/>
-			<item value="common"/>
 		</list>
 		<list key="replacehistory">
 		</list>

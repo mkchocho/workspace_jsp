@@ -55,14 +55,18 @@ public class MemberServlet extends HttpServlet {
     // 왜냐면 HttpServlet이 제공하는 메소드에만 쓸 수 있으니까...
     //서블릿이 되기 위해서는 반드시 HttpServlet을 상속 받아야 한다 -그래야 자바가 아니라 서블릿이라고 불린다.
     //그럼 왜 서블릿이 되어야 하나요? - 웹 서비스를 제공해야 하니까
+    //doService메소드에 @Override를 붙일 수 없는 건 부모클래스가 정의하고 있지 않아서 입니다
+    
     
     public void doService(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    	//모든 요청은 doService로 들어오게 되고 입력인지 조회인지를 구분하는 건 쿼리스트링의 method키 값을 통해서 분기할 수 있다
+    	//키값 : ?method=memberSelect, method=memberInsert
     	List<Map<String,Object>> mList = null;
         int result = -1;
         String methodName = req.getParameter("method");//memberSelect or memberInsert or memberUpdate or memberDelete
         //리턴타입과 파라미터 결정해 보기 -  대화 - 소스리뷰
         //지워야 한다 - 왜냐하면 입력, 수정, 삭제, 조건 검색일 때 모두 다른 케이스 이므로 조건절로 위치를 옮겼다
-        //회원 조회
+        //회원 조회 - 전체조회만 담당함 -> 혹시 조건검색이나 상세조회할 때도 아래 if문을 사용할 수 있는 건가?
         if("memberSelect".equals(methodName)) {//조건검색 경우라면 나도 (사용자가 입력한 정보가 )필요해
      	   logger.info("memberSelect");
      	   //여기에서는 mList가 null참조하는 상황-42번
@@ -84,11 +88,24 @@ public class MemberServlet extends HttpServlet {
         //쿼리문을 작성한 이유는 화면은 없지만 쿼리문을 보고 사용자가 입력한 정보들을 생각(상상, 예측)해 보자
         //insert into member0518(mem_no,mem_id, mem_pw,mem_name) values(3,'banana','345','나초보');
         else if("memberInsert".equals(methodName)) {
+        	//자바스크립트에는 List나 Map이 없어요 → 배열
+        	//공통코드에 HashMap의 저장소 주소번지 원본(<->복사본 → 깊은복사(복사본), 얕은복사(원본이 바뀐다))
         	HashMap<String,Object> pMap = new HashMap<>();
+        	//req.getParameter반복(while문)되는 것을 해결해줌
+        	//req.getParameter("mem_id"); //<input name='mem_id'>
+        	//req.getParameter("mem_pw");//<input name='mem_pw'>
+        	//req.getParameter("mem_name");//<input name='mem_name'>
+        	//<form id="f_member" method="get" action="/member/memberCRUD?method=memberInsert"></form>
             HashMapBinder hmb = new HashMapBinder(req);
-            hmb.bind(pMap);
+            hmb.bind(pMap);//요기에 넘김
      	   result = memberDao.memberInsert(pMap);
-     	   
+     	   //위치를 선택할 수 있다-잘하는 사람
+			if(result==1) {
+				resp.sendRedirect("/member/memberCRUD?method=memberSelect");//쿼리스트링(Map처럼 key,value로 값을 전달)
+			}else {
+				System.out.println("가입 실패했어요!!!");
+			}
+     	  
         }//end of 회원등록
         //회원 수정
         else if("memberUpdate".equals(methodName)) {
@@ -111,13 +128,23 @@ public class MemberServlet extends HttpServlet {
         }//end of 회원삭제
         //mList = memberDao.memberList(); - CRUD를 조건문으로 분기하면서 memberSelect영역으로 이관했음
         //forward를 연속해서 두 번 요청하게 되면 서버에러(500번을 던짐)가 발생함
-
+        //우편번호 검색기 구현 
+        else if("zipcodeList".equals(methodName)) {//로그를 많이 출력해보기, 확인
+        	//아래 로그를 출력하려면 URL을 어떻게 작성해야 될까요? → /member/memberCRUD?method=zipcodeList
+        	logger.info("zipcodeList");
+        	
+        	
+        }
     }
     
     //Restful API에서 리소스에 대한 전송하는 방식을 제안하고 있다. - doGet, doPost 선언 해두었다.
     //파라미터를 통해서 톰캣 서버로 부터 주입 받은 요청객체와 응답 객체를 사용자 정의 메소드의 파라미터로 호출하여 넘긴다
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    	//모든 요청은 doGet혹은 doPost로 들어온다
+    	//둘 중에서도 단위테스트(디폴트로 호출)가 가능한 건 doGet이다
+    	//그 메소드 내부에서 doService호출한다
+    	//doGet의 파라미터로 주입받은 요청객체와 응답객체가 메소드의 파라미터로 (doGet이 주입받은 원본이)전달되는 것이다.
     	doService(req, resp);
     }
 

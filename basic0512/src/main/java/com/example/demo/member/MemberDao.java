@@ -8,7 +8,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import org.apache.log4j.Logger;
+
 import com.util.DBConnectionMgr;
 public class MemberDao {
     Logger logger = Logger.getLogger(MemberDao.class);
@@ -83,7 +85,7 @@ public class MemberDao {
 			logger.info("조건 검색이 아닐 때 ");
 			//이 조건일 때는 그냥 전체 조회를 하면 되는 거야. where절이 필요 없는 거야
 		}
-		logger.info(sql.toString());
+		sql.append(" ORDER BY mem_no desc");
 		
 		try {
 			//물리적으로 떨어져 있는 오라클 서버에 연결하기
@@ -104,6 +106,7 @@ public class MemberDao {
 				rmap.put("mem_name", rs.getString("mem_name"));
 				rmap.put("mem_address", rs.getString("mem_address"));
 				mList.add(rmap);
+				
 			}
 			logger.info(mList);//4사람의 정보가 출력됨				
 		} catch (Exception e) {
@@ -116,10 +119,29 @@ public class MemberDao {
 		//return null;
 	}
 	//회원 가입 구현
+	//MemberDao에는 request 객체와 response 객체가 없다
+	//나는 서블릿이 아니야 - Tomcat서버로 부터 request와 response 객체를 주입받을수가 없어...
+	//
 	public int memberInsert(HashMap<String, Object> pMap) {
 		logger.info("memberInsert");
 		logger.info("사용자가 입력한 값 : " + pMap);
-		return 0;
+		int result = 0; //1이면 입력 성공 0이면 입력 실패
+		StringBuilder sql = new StringBuilder();
+		sql.append("insert into member0518(mem_no,mem_id, mem_pw, mem_name) values(seq_member0518.nextval,?,?,?)");//insert문 삽입
+		try {
+			con = dbMgr.getConnection();//물리적으로 떨어진 서버와 연결통로 확보(myBatis생략가능함)
+			pstmt = con.prepareStatement(sql.toString());
+			pstmt.setString(1, pMap.get("mem_id").toString());
+			pstmt.setString(2, pMap.get("mem_pw").toString());
+			pstmt.setString(3, pMap.get("mem_name").toString());
+			result = pstmt.executeUpdate();
+			logger.info(result);//1이면 가입성공 0이면 가입실패
+			
+		} catch (SQLException se) {
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return result;
 	}
 	public int memberUpdate(HashMap<String, Object> pMap) {
 		logger.info("memberUpdate");
