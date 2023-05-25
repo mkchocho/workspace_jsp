@@ -81,9 +81,15 @@ public class MemberDao {
 			}else if("mem_address".equals(pMap.get("gubun"))) {
 				sql.append(" WHERE mem_address LIKE '%'||?||'%'");
 			}
+			//insert here-조건검색을 하는 코드 영역
+
 		}else {
 			logger.info("조건 검색이 아닐 때 ");
 			//이 조건일 때는 그냥 전체 조회를 하면 되는 거야. where절이 필요 없는 거야
+		}
+		//insert here
+		if (pMap.get("mem_no")!=null) {
+			sql.append(" WHERE mem_no=?");
 		}
 		sql.append(" ORDER BY mem_no desc");
 		
@@ -94,6 +100,13 @@ public class MemberDao {
 			//여기서? 자리에 치환될 값을 결정해 줘야해!!! - 왜냐면?
 			if(pMap.get("gubun")!=null && !"분류선택".equals(pMap.get("gubun"))) {//너 조건검색을 원해? 그러면 ? 자리에 keyword를 치환해 줘야돼 아니면 500번 에러야 
 				pstmt.setString(1,pMap.get("keyword").toString()); //toString-Object에서 String으로 형변환 , ?는 문자열
+			}
+			//92번 코드가 만약에 추가되었다면...?가 하나 있잖아. 그자리에 값이 치환되어야 에러가 안난데 -SQLException
+			if (pMap.get("mem_no")!=null) {
+				//여기를 경유한다면 전체조회가 아니라 상세조회이다 -> memberList.jsp로 가야하나?
+				//	아니야 memberDetail.jsp가야지? - if문 하나를 가지고 두 가지 경우를 처리하려면... 
+				//결론 - MemberServlet.java에 상세보기를 위한 if문을 추가해 줘
+				pstmt.setString(1,pMap.get("mem_no").toString()); // WHERE mem_no = ?
 			}
 			rs = pstmt.executeQuery();
 			
@@ -138,8 +151,9 @@ public class MemberDao {
 			logger.info(result);//1이면 가입성공 0이면 가입실패
 			
 		} catch (SQLException se) {
+			logger.info(se.toString());
 		} catch (Exception e) {
-			// TODO: handle exception
+			logger.info(e.toString());
 		}
 		return result;
 	}
@@ -148,9 +162,34 @@ public class MemberDao {
 		logger.info("사용자가 입력한 값 : " + pMap);
 		return 0;
 	}
+	//MemberServlet -> MemberDao
+	/************************************************************************
+	 * 회원 정보 삭제 구현하기
+	 * @param user_no - 삭제하고자 하는 회원번호 - 파라미터로 넘어오는 타입이 int이면
+	 * pstmt.setInt() 하고 파라미터로 넘어오는 타입이 String이면 pstmt.setString()한다
+	 * @return - 1이면 삭제 성공 0이면 삭제 실패
+	 *************************************************************************/
 	public int memberDelete(int user_no) {
 		logger.info("memberDelete");
 		logger.info("사용자가 입력한 값 : " + user_no);//1
-		return 0;
+		
+		
+		int result = 0; //1이면 입력 성공 0이면 입력 실패
+		StringBuilder sql = new StringBuilder();
+		sql.append("DELETE FROM member0518 WHERE mem_no =?");//insert문 삽입
+		try {
+			con = dbMgr.getConnection();//물리적으로 떨어진 서버와 연결통로 확보(myBatis생략가능함)
+			pstmt = con.prepareStatement(sql.toString());
+			pstmt.setInt(1, user_no);
+			result = pstmt.executeUpdate();//1을 반환해서 result 변수에 담아줌
+			logger.info(result);//1이면 가입성공 0이면 가입실패
+			
+		} catch (SQLException se) {
+			logger.info(se.toString());
+		} catch (Exception e) {
+			logger.info(e.toString());
+		}
+		
+		return result;//여기 주의하세요!!!
 	}
 }////end of MemberDao

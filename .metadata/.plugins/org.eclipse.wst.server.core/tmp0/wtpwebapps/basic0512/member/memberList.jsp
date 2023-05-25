@@ -48,6 +48,10 @@
     	document.querySelector("#f_member").submit();//<form id="f_member">
     	//document.getElementById("f_member").submit();
     }
+  	const memberDetail = (user_no) => {
+  		console.log(user_no);
+  		location.href="./memberCRUD?method=memberDetail&mem_no="+user_no;
+  	}
 </script>
 </head>
 <body>
@@ -128,7 +132,11 @@
 %>              
                  <tr>
                      <th><%= rmap.get("mem_no") %></th><!--  rmap=null 이라고 가정해보자 NullPointerException -->
-                     <th><%= rmap.get("mem_id") %></th>
+                     <th>
+<!-- 자바스크립트와 자바코드의 섞어쓰기가 가능함
+서버에서 실행된 결과가 텍스트로 클라이언트에 다운로드 되니까 결국은 문자열이 들어 있기 때문에 가능함 -->
+                     	<a href="javascript:memberDetail('<%=rmap.get("mem_no")%>')"><%= rmap.get("mem_id") %></a>
+                     </th>
                      <th><%= rmap.get("mem_name") %></th>
                      <th><%= rmap.get("mem_address") %></th>
                  </tr>

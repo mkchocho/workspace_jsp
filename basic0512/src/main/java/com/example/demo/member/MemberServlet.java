@@ -81,8 +81,23 @@ public class MemberServlet extends HttpServlet {
      	   //[] - List -> ArrayList{List인터페이스이고 ArrayList구현체 클래스임}
      	   //{} - Map<String, Object>
      	   logger.info("after : "+mList);//[{},{},{},{}] - 객체배열 형태임
+     	   
         }//end of 회원조회
-        
+        else if("memberDetail".equals(methodName)) {//조건검색 경우라면 나도 (사용자가 입력한 정보가 )필요해
+      	   logger.info("memberDetail");
+      	   //여기에서는 mList가 null참조하는 상황-42번
+      	   logger.info("before : "+mList);//아무것도 없음 {} []
+      	  HashMap<String,Object> pMap = new HashMap<>();
+           HashMapBinder hmb = new HashMapBinder(req);
+           hmb.bind(pMap);
+      	   mList = memberDao.memberSelect(pMap); //이 메소드 안에서 오라클 서버를 경유한 경우라면 더이상 null이 아님
+            req.setAttribute("mList", mList);
+            RequestDispatcher view = req.getRequestDispatcher("memberDetail.jsp");
+            view.forward(req, resp);
+      	   //[] - List -> ArrayList{List인터페이스이고 ArrayList구현체 클래스임}
+      	   //{} - Map<String, Object>
+      	   logger.info("after : "+mList);//[{},{},{},{}] - 객체배열 형태임
+         }//end of 회원조회
         //회원 등록
         //사용자가 입력한 값을 파라미터를 통해서 넘겨야 합니다.
         //쿼리문을 작성한 이유는 화면은 없지만 쿼리문을 보고 사용자가 입력한 정보들을 생각(상상, 예측)해 보자
@@ -121,9 +136,18 @@ public class MemberServlet extends HttpServlet {
      	   //사용자가 선택한 회원일련번호
      	   String mem_no = req.getParameter("mem_no");//문자열
      	   int user_no =0;
+     	   result=0;
      	   user_no = Integer.parseInt(mem_no);//1저장
      	   logger.info("사용자가 삭제를 선택한 회원 일련번호 : "+user_no);
      	   result = memberDao.memberDelete(user_no);
+     	   //저장 버튼을 눌렀나?
+     	   //서버를 재기동 해서 확인할 것
+     	   //MemberDao에서 리턴값으로 1을 받아오지 못하는 사람 
+     		if(result==1) {
+				resp.sendRedirect("/member/memberCRUD?method=memberSelect");//쿼리스트링(Map처럼 key,value로 값을 전달)
+			}else {
+				System.out.println("가입 실패했어요!!!");
+			}
      	   
         }//end of 회원삭제
         //mList = memberDao.memberList(); - CRUD를 조건문으로 분기하면서 memberSelect영역으로 이관했음
