@@ -9,9 +9,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.session.SqlSession;
 import org.apache.log4j.Logger;
 
 import com.util.DBConnectionMgr;
+import com.util.MyBatisCommonFactory;
 public class MemberDao {
     Logger logger = Logger.getLogger(MemberDao.class);
     //getConnection메소드를 호출하려고 선언함
@@ -55,11 +57,11 @@ public class MemberDao {
        }
        return mList;
     }//end of memberList
-    public static void main(String[] args) {
-		MemberDao mDao = new MemberDao();
-		List<Map<String,Object>> mList = mDao.memberList();
-		System.out.println(mList);
-	}
+//    public static void main(String[] args) {
+//		MemberDao mDao = new MemberDao();
+//		List<Map<String,Object>> mList = mDao.memberList();
+//		System.out.println(mList);
+//	}
     //회원 목록 조회 구현
 	public List<Map<String, Object>> memberSelect(HashMap<String, Object> pMap) {
 		logger.info("memberSelect");
@@ -157,10 +159,51 @@ public class MemberDao {
 		}
 		return result;
 	}
+	//executeQuery() : ResultSet - 커서관련있음 - select - commit이나 rollback의 대상이 아님 
+	//executeUpdate() : int - INSERT|UPDATE|DELETE - commit 혹은 rollback 대상임 
 	public int memberUpdate(HashMap<String, Object> pMap) {
 		logger.info("memberUpdate");
 		logger.info("사용자가 입력한 값 : " + pMap);
-		return 0;
+		int result=0;
+		//쿼리문을 작성하기 - UPDATE 문
+		//쿼리문 작성 시 String 사용하지 않기 - 왜냐면 원본이 바뀌지 않아서 쿼리문이 늘어날 때마다 매번 새로운 객체를 만들어야 함 - 유지
+		StringBuilder sql = new StringBuilder();//String보다는 이 클래스가 합리적임 = append 지원됨
+		//테이블이나 뷰가 존재하지 않습니다. - 오라클 서버의 ip주소와 포트번호 
+		//부적합한 식별자 - 컬럼명 오타, setInt(값);오타
+		//열인덱스가 어쩌구저쩌구 - ?갯수와 매핑되는 숫자 안맞는 것임
+		sql.append("UPDATE member0518");
+		sql.append("			SET mem_id=?");
+		sql.append("				,	mem_pw=?");
+		sql.append("				,	mem_name=?");
+		sql.append("	  WHERE mem_no=?");
+		try {
+			//Connection은 인터페이스라서 단독으로 인스턴스화 불가함 - 반드시 구현체 클래스가 있어야 함 
+			//인터페이스는 메소드의 리턴 타입으로 객체를 주입 받을수도 있다.
+			con = dbMgr.getConnection(); 
+			//PrepareStatement는 동적쿼리를 처리하는 인터페이스 이다. 그래서 ?로 치환이 되어 있다. - 바뀌는 부분들이...
+			//그러니 먼저 update문을 스캔해서 ?가 몇개 있는지 어느 자리인지 파악을 먼저 해야하지 않나?
+			pstmt=con.prepareStatement(sql.toString());//?가 몇개 있나?
+			pstmt.setString(1,pMap.get("mem_id").toString());
+			pstmt.setString(2,(String)pMap.get("mem_pw"));
+			pstmt.setString(3,pMap.get("mem_name").toString());
+			int user_no= 0;
+			if(pMap.get("mem_no")!=null) {
+				user_no=Integer.parseInt(pMap.get("mem_no").toString());
+			}
+			pstmt.setInt(4,user_no);
+			//result에 1을 왜 담아요? 피드백을 해주자 
+			result= pstmt.executeUpdate();
+		} catch (SQLException se) {
+			logger.info(se.toString());//Exception이름이 출력됨
+			logger.info(se.getMessage());//Exception이름이 출력됨
+		} catch (Exception e) {
+			//stack영역에 쌓여 있는 에러메시지를 한꺼번에 볼 수 있음 - 기억 
+			//주의할 것: print 메소드에 넣어서 출력하는게 아니다.
+			e.printStackTrace();//소개 - 예외발생의 이력을 다 출력해줌
+		}
+		
+		return result;//1이 나오거나 0이 나오거나 - n이 반환되는 경우는 드물지 않을까
+		
 	}
 	//MemberServlet -> MemberDao
 	/************************************************************************
@@ -191,5 +234,24 @@ public class MemberDao {
 		}
 		
 		return result;//여기 주의하세요!!!
+	}
+	public List<Map<String,Object>> zipcodeList(String dong){
+		List<Map<String,Object>> zList = null;
+		MyBatisCommonFactory mbcf = new MyBatisCommonFactory();
+		try {
+			SqlSession sqlSession = mbcf.getSqlSessionFactory().openSession();
+			Map<String,Object> pMap = new HashMap<>();
+			pMap.put("dong","공덕동");
+			zList = sqlSession.selectList("zipcodeList", pMap);
+			System.out.println(zList);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return zList;
+	}
+
+	public static void main(String[] args) {
+		MemberDao mdao = new MemberDao();
+		mdao.zipcodeList("당산동");
 	}
 }////end of MemberDao

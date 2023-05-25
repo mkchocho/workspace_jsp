@@ -128,6 +128,11 @@ public class MemberServlet extends HttpServlet {
             HashMapBinder hmb = new HashMapBinder(req);
             hmb.bind(pMap);
      	   result = memberDao.memberUpdate(pMap);
+     	  if(result==1) {
+				resp.sendRedirect("/member/memberCRUD?method=memberSelect");//쿼리스트링(Map처럼 key,value로 값을 전달)
+			}else {
+				System.out.println("가입 실패했어요!!!");
+			}
      	   
         }//end of 회원수정
         //회원 삭제

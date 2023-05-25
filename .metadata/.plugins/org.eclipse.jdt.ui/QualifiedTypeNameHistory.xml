@@ -4,7 +4,6 @@
     <fullyQualifiedTypeName name="java.io.InputStreamReader"/>
     <fullyQualifiedTypeName name="java.io.BufferedReader"/>
     <fullyQualifiedTypeName name="com.util.DBConnectionMgr"/>
-    <fullyQualifiedTypeName name="com.example.demo.member.MemberDao"/>
     <fullyQualifiedTypeName name="oracle.net.aso.d"/>
     <fullyQualifiedTypeName name="java.util.Map"/>
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
@@ -16,17 +15,19 @@
     <fullyQualifiedTypeName name="javax.swing.JFrame"/>
     <fullyQualifiedTypeName name="com.example.demo.member.jFrameTest"/>
     <fullyQualifiedTypeName name="com.example.demo.member.JFrameTest"/>
-    <fullyQualifiedTypeName name="java.lang.Object"/>
-    <fullyQualifiedTypeName name="java.util.HashMap"/>
     <fullyQualifiedTypeName name="org.apache.log4j.Logger"/>
     <fullyQualifiedTypeName name="com.util.HashMapBinder"/>
     <fullyQualifiedTypeName name="com.vo.Member0518"/>
-    <fullyQualifiedTypeName name="java.sql.SQLException"/>
-    <fullyQualifiedTypeName name="java.lang.StringBuilder"/>
     <fullyQualifiedTypeName name="com.example.demo.design.MallardDuck"/>
     <fullyQualifiedTypeName name="com.example.demo.design.FlyBehavior"/>
     <fullyQualifiedTypeName name="com.example.demo.design.FlyWithWings"/>
     <fullyQualifiedTypeName name="com.example.demo.design.FlyNoWay"/>
     <fullyQualifiedTypeName name="com.example.demo.design.DuckSimulation"/>
     <fullyQualifiedTypeName name="com.example.demo.design.WoodDuck"/>
+    <fullyQualifiedTypeName name="java.lang.StringBuilder"/>
+    <fullyQualifiedTypeName name="java.sql.SQLException"/>
+    <fullyQualifiedTypeName name="com.util.MyBatisCommonFactory"/>
+    <fullyQualifiedTypeName name="java.lang.Object"/>
+    <fullyQualifiedTypeName name="java.util.HashMap"/>
+    <fullyQualifiedTypeName name="com.example.demo.member.MemberDao"/>
 </qualifiedTypeNameHistroy>

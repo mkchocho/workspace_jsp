@@ -10,30 +10,30 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="pagePath"/>
+		<item key="selection" value=""/>
 		<list key="findhistory">
+			<item value="&#x09;&lt;if test=”state ! null ”&gt;"/>
+			<item value="회원수정"/>
+			<item value="prepareStatement"/>
+			<item value="수정"/>
+			<item value="위치를 선택"/>
+			<item value="result == 1"/>
+			<item value="result ==1"/>
+			<item value="memberDetail"/>
+			<item value="console"/>
+			<item value="memberSearch"/>
+			<item value="전체조회"/>
 			<item value="pagePath"/>
 			<item value="여기야?"/>
 			<item value="pagePerBlock"/>
 			<item value="조건 검색이"/>
-			<item value="요기요"/>
-			<item value="여기여"/>
-			<item value="setter메소"/>
-			<item value="setter메소드"/>
-			<item value="회원목록 끝"/>
-			<item value="modal body"/>
-			<item value="modal"/>
-			<item value="moda"/>
-			<item value="form"/>
-			<item value="es6"/>
-			<item value="memberSearc"/>
 		</list>
 		<list key="replacehistory">
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
-		<item key="DIALOG_X_ORIGIN" value="626"/>
-		<item key="DIALOG_Y_ORIGIN" value="460"/>
+		<item key="DIALOG_X_ORIGIN" value="950"/>
+		<item key="DIALOG_Y_ORIGIN" value="501"/>
 		<item key="DIALOG_WIDTH" value="322"/>
 		<item key="DIALOG_HEIGHT" value="391"/>
 		<item key="DIALOG_FONT_NAME" value="1|맑은 고딕|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|맑은 고딕"/>
