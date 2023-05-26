@@ -10,8 +10,14 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value=""/>
+		<item key="selection" value="Modal"/>
 		<list key="findhistory">
+			<item value="MODAL"/>
+			<item value="찾기"/>
+			<item value="우편번호"/>
+			<item value="memberDetail"/>
+			<item value="결과"/>
+			<item value="조회된"/>
 			<item value="&#x09;&lt;if test=”state ! null ”&gt;"/>
 			<item value="회원수정"/>
 			<item value="prepareStatement"/>
@@ -19,14 +25,8 @@
 			<item value="위치를 선택"/>
 			<item value="result == 1"/>
 			<item value="result ==1"/>
-			<item value="memberDetail"/>
 			<item value="console"/>
 			<item value="memberSearch"/>
-			<item value="전체조회"/>
-			<item value="pagePath"/>
-			<item value="여기야?"/>
-			<item value="pagePerBlock"/>
-			<item value="조건 검색이"/>
 		</list>
 		<list key="replacehistory">
 		</list>

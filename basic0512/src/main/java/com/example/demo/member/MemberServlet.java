@@ -1,7 +1,7 @@
 package com.example.demo.member;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -161,7 +161,21 @@ public class MemberServlet extends HttpServlet {
         else if("zipcodeList".equals(methodName)) {//로그를 많이 출력해보기, 확인
         	//아래 로그를 출력하려면 URL을 어떻게 작성해야 될까요? → /member/memberCRUD?method=zipcodeList
         	logger.info("zipcodeList");
+        	List<Map<String,Object>> zList = new ArrayList<>();
+        	Map<String,Object> pMap = new HashMap<>();//<input type ="text" id="dong"> pMap.put("dong",가산동);
+        	HashMapBinder hmb = new HashMapBinder(req);
+        	hmb.bind(pMap);
         	
+        	//insert here - 오라클 서버를 경유하는 코드 추가 
+        	//왜 여기인가? - 사용자가 입력한 동이름이 pMap에 담겨야 하니까...
+        	//왜 setAttribute앞에 와야 하나요?
+        	//입력받은 동 이름으로 조회된 결과를 쥐고 있어야  request객체에 담을 수 있잖아
+        	//단위테스트 하는 방법에 대해서도 말해보기 - 시간 
+        	zList = memberDao.zipcodeList(pMap);//pMap안에는 화면{zipcodeSearch}에서 입력한 dong이름이 있어야 해
+        	
+        	req.setAttribute("zList", zList);
+        	RequestDispatcher view = req.getRequestDispatcher("zipcodeSearch.jsp");
+        	view.forward(req, resp);
         	
         }
     }

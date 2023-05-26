@@ -27,6 +27,7 @@
 <title>회원관리</title>
 <%@include file="/common/bootstrap_common.jsp"%>
 <link rel="stylesheet" href="/css/member.css">
+<script type="text/javascript" src="/js/common.js"></script>
 <script type="text/javascript">
     // 검색 버튼을 눌렀을 때 호출되는 함수
     const memberSearch = () => {
@@ -52,7 +53,11 @@
   		console.log(user_no);
   		location.href="./memberCRUD?method=memberDetail&mem_no="+user_no;
   	}
-</script>
+  	const zipcodeForm = () => {
+  		//파라미터로 값을 넘길 때 싱글 혹은 더블 쿼테이션을 붙이지 않으면 변수취급을 함 - 주의
+  		cmm_window_popup('zipcodeSearch.jsp' , '700' , '600' , 'zipcodeForm' );
+  	}
+  	</script>
 </head>
 <body>
     <!-- header start -->
@@ -223,8 +228,16 @@
               <div class="form-floating mb-3 mt-3">
                 <input type="text"  class="form-control" id="mem_name" name="mem_name" placeholder="Enter 이름" />
                 <label for="mem_name">이름</label>
-              </div>          
-           </form>
+              </div>
+
+
+				<div class="input-group">
+					<input type="text" class="form-control"  id="mem_zipcode"  name="mem_zipcode"  placeholder="우편번호">
+					<input type="button" class="btn btn-success"  onclick="zipcodeForm()" value="우편번호찾기">
+				</div>
+				<div style="margin-bottom:5px;"></div>
+					<input type="text" class="form-control"  id="mem_address"  name="mem_address"  placeholder="주소">
+					</form>
           </div>
     
           <!-- Modal footer -->

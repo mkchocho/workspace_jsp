@@ -7,7 +7,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-ma
 		FROM zipcode_t
 		<where>
 			<if test='dong != null'>
-				AND dong LIKE #{dong}||'%'
+				AND dong LIKE #{dong}||'%' <!-- pMap.get("dong") -->
 			</if>
 		</where>
 		ORDER BY zipcode desc 

@@ -16,7 +16,6 @@
     <fullyQualifiedTypeName name="com.example.demo.member.jFrameTest"/>
     <fullyQualifiedTypeName name="com.example.demo.member.JFrameTest"/>
     <fullyQualifiedTypeName name="org.apache.log4j.Logger"/>
-    <fullyQualifiedTypeName name="com.util.HashMapBinder"/>
     <fullyQualifiedTypeName name="com.vo.Member0518"/>
     <fullyQualifiedTypeName name="com.example.demo.design.MallardDuck"/>
     <fullyQualifiedTypeName name="com.example.demo.design.FlyBehavior"/>
@@ -28,6 +27,8 @@
     <fullyQualifiedTypeName name="java.sql.SQLException"/>
     <fullyQualifiedTypeName name="com.util.MyBatisCommonFactory"/>
     <fullyQualifiedTypeName name="java.lang.Object"/>
-    <fullyQualifiedTypeName name="java.util.HashMap"/>
     <fullyQualifiedTypeName name="com.example.demo.member.MemberDao"/>
+    <fullyQualifiedTypeName name="com.util.HashMapBinder"/>
+    <fullyQualifiedTypeName name="java.util.HashMap"/>
+    <fullyQualifiedTypeName name="javax.servlet.RequestDispatcher"/>
 </qualifiedTypeNameHistroy>

@@ -4,3 +4,15 @@
 5월 16, 2023 10:40:45.615 [14544:4396:0516/104045.614:ERROR:interface_endpoint_client.cc(696)] Message 0 rejected by interface blink.mojom.WidgetHost
 5월 16, 2023 13:10:11.734 [14544:17760:0516/131011.734:ERROR:connection_factory_impl.cc(471)] ConnectionHandler failed with net error: -2
 5월 16, 2023 14:00:34.872 [14544:17760:0516/140034.872:ERROR:connection_factory_impl.cc(428)] Failed to connect to MCS endpoint with error -106
+
+5월 26, 2023 10:24:12.613 NEW SESSION
+5월 26, 2023 10:24:12.613 [3244:6736:0526/102412.596:ERROR:cert_issuer_source_aia.cc(34)] Error parsing cert retrieved from AIA (as DER):
+5월 26, 2023 10:24:12.615 ERROR: Couldn't read tbsCertificate as SEQUENCE
+5월 26, 2023 10:24:12.618 ERROR: Failed parsing Certificate
+5월 26, 2023 10:24:12.621 
+5월 26, 2023 10:24:12.632 [3244:6736:0526/102412.622:ERROR:cert_verify_proc_builtin.cc(679)] CertVerifyProcBuiltin for sync.hgrtb.com failed:
+5월 26, 2023 10:24:12.635 ----- Certificate i=0 (CN=sync.hgrtb.com) -----
+5월 26, 2023 10:24:12.640 ERROR: Time is after notAfter
+5월 26, 2023 10:24:12.643 
+5월 26, 2023 10:24:12.648 
+5월 26, 2023 12:20:08.496 [3244:18064:0526/122008.495:ERROR:mcs_client.cc(750)] Received close command, resetting connection.

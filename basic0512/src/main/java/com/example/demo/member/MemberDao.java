@@ -235,13 +235,16 @@ public class MemberDao {
 		
 		return result;//여기 주의하세요!!!
 	}
-	public List<Map<String,Object>> zipcodeList(String dong){
+	/**********************************************************************
+	 *우편번호를 조회하기 
+	 * @param pMap - zipcodeSearch 화면에서 사용자가 입력한 동이름을 받아서 담아둔 변수 - 주소번지
+	 * @return List<Map<>
+	 **********************************************************************/
+	public List<Map<String,Object>> zipcodeList(Map<String, Object> pMap){
 		List<Map<String,Object>> zList = null;
 		MyBatisCommonFactory mbcf = new MyBatisCommonFactory();
 		try {
 			SqlSession sqlSession = mbcf.getSqlSessionFactory().openSession();
-			Map<String,Object> pMap = new HashMap<>();
-			pMap.put("dong","공덕동");
 			zList = sqlSession.selectList("zipcodeList", pMap);
 			System.out.println(zList);
 		} catch (Exception e) {
@@ -252,6 +255,6 @@ public class MemberDao {
 
 	public static void main(String[] args) {
 		MemberDao mdao = new MemberDao();
-		mdao.zipcodeList("당산동");
+		//mdao.zipcodeList();
 	}
 }////end of MemberDao
