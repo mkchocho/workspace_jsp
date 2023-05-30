@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mybatis.mapper.noticeMapper">
+	<select id="noticeList" parameterType="map" resultType="map">
+		SELECT noticeList, address
+		FROM zipcode_t
+		<where>
+			<if test='dong != null'>
+				AND dong LIKE #{dong}||'%' <!-- pMap.get("dong") -->
+			</if>
+		</where>
+		ORDER BY zipcode desc 
+	</select>
+</mapper>
