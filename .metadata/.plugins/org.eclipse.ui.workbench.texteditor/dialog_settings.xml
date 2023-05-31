@@ -10,8 +10,10 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="Modal"/>
+		<item key="selection" value="PageBar"/>
 		<list key="findhistory">
+			<item value="pagebar"/>
+			<item value="bsp"/>
 			<item value="MODAL"/>
 			<item value="찾기"/>
 			<item value="우편번호"/>
@@ -25,8 +27,6 @@
 			<item value="위치를 선택"/>
 			<item value="result == 1"/>
 			<item value="result ==1"/>
-			<item value="console"/>
-			<item value="memberSearch"/>
 		</list>
 		<list key="replacehistory">
 		</list>
