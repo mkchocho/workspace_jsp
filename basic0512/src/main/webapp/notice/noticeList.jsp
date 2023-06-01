@@ -6,6 +6,8 @@
 	//스크립틀릿 - 지변, 메소드선언 불가함, 인스턴스화 가능함
 	int size = 0;//지변이니까 초기화를 생략하면 에러발생함.
 	List<Map<String,Object>> nList = (List<Map<String,Object>>)request.getAttribute("nList");
+	//nList가 null이 아니기 위해서는 테스트 시나리오를 어떻게 가져가야 할까?
+	//경우의 수 : 한 건도 등록되지 않았을 때 - 0 -myBatis에서 간섭(인터셉트) nList = new ArrayList<>();
 	if(nList !=null){
 		size = nList.size();	
 	} 

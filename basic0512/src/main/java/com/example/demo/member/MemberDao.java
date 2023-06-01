@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.log4j.Logger;
 
 import com.util.DBConnectionMgr;
@@ -242,9 +243,11 @@ public class MemberDao {
 	 **********************************************************************/
 	public List<Map<String,Object>> zipcodeList(Map<String, Object> pMap){
 		List<Map<String,Object>> zList = null;
-		MyBatisCommonFactory mbcf = new MyBatisCommonFactory();
+		//MyBatisCommonFactory mbcf = new MyBatisCommonFactory();
+		SqlSessionFactory sqlSessionFactory = null;
 		try {
-			SqlSession sqlSession = mbcf.getSqlSessionFactory().openSession();
+			sqlSessionFactory = MyBatisCommonFactory.getSqlSessionFactory();
+			SqlSession sqlSession = sqlSessionFactory.openSession();
 			zList = sqlSession.selectList("zipcodeList", pMap);
 			System.out.println(zList);
 		} catch (Exception e) {

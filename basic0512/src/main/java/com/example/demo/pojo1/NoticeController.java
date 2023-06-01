@@ -72,14 +72,35 @@ public class NoticeController implements Action {
 		//공지글 수정
 		else if("noticeUpdate".equals(upmu[1])) {
 			logger.info("noticeUpdate");
+			hmb.bind(pMap);
 			result = noticeLogic.noticeUpdate(pMap);
+			//성공했어?
+			if(result == 1) {
+				path.append("noticeList.pj1");//이게 좀 어렵다...
+				isRedirect = true;
+			}
+			//실패했는데..
+			else {
+				path.append("noticeError.jsp");
+				isRedirect=true;
+			}
 
 		}
-		
 		//공지글 삭제
 		else if("noticeDelete".equals(upmu[1])) {
 			logger.info("noticeDelete");
+			hmb.bind(pMap);
 			result = noticeLogic.noticeDelete(pMap);
+			//성공했어?
+			if(result == 1) {
+				path.append("noticeList.pj1");//이게 좀 어렵다...
+				isRedirect = true;
+			}
+			//실패했는데..
+			else {
+				path.append("noticeError.jsp");
+				isRedirect=true;
+			}
 
 		}
 		//공지글 조회
@@ -104,7 +125,7 @@ public class NoticeController implements Action {
 			nList = noticeLogic.noticeList(pMap);
 			path.append("noticeDetail.jsp");
 			isRedirect = false;//true이면 redirect, false이면 forward
-		
+			
 
 		}
 		//insert here

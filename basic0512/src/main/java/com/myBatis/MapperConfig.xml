@@ -15,6 +15,17 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 				<property name="password" value="tiger" />
 			</dataSource>
 		</environment>
+				<environment id="lss">
+			<transactionManager type="JDBC" />
+			<dataSource type="POOLED">
+				<property name="driver"
+					value="oracle.jdbc.driver.OracleDriver" />
+				<property name="url"
+					value="jdbc:oracle:thin:@172.16.2.3:1521:orcl11" />
+				<property name="username" value="scott" />
+				<property name="password" value="tiger" />
+			</dataSource>
+		</environment>
 	</environments>
 	<mappers>
 		<mapper resource="com/mybatis/mapper/member.xml" />

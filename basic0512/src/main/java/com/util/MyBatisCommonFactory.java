@@ -8,14 +8,14 @@ import org.apache.log4j.Logger;
 /*
  * 자바에서 제공하는 JDBC API를 사용해서 오라클 서버와 연동하는 경우 반복되는 코드로 코드양이 많아 진다.
  * 이 문제를 해결하기 위해서 MyBatis가 제공되었다
- * 오라클 서버에 대한 물리적인 정보는 MapperConfig.xml문서에 적혀 있다
+ * 오라클 서버에 대한 물리적인 정보는 MapperConfig.xml문서에 적혀 있다 - 드라이버(ojdbc6.jar), URL정보, 계정, 비번 관리됨 
  * 또한 DML구문 즉 select, insert, update, delete를 자바 코드로 작성할 때 String객체를 사용하는데
- * 이것 또한 불편하고 특히 파라미터 값을 셋팅할 때 마다 더블쿼테이션과 싱글쿼테이션을 작성해야 하므로 불편했다
- * 마이바티스의 경우 모든 쿼리문을 xml문서에 작성하므로 이러한 문제를 고민할 필요가 없다
+ * 이것 또한 불편하고 특히 파라미터 값을 셋팅할 때 마다 더블쿼테이션과 싱글쿼테이션을 작성해야 하므로 불편했다 - 왜냐면 토드에서는 모두 삭제해야 하니깐
+ * 마이바티스의 경우 모든 쿼리문을 xml문서에 작성하므로 이러한 문제를 고민할 필요가 없다-더블, 싱글, 변수처리 부분을 삭제하지 않아도 됨
  * 바로 갈무리한다음 토드나 오렌지 같은 툴을 이용해서 즉시 실행해 볼 수도 있는 것이다.
- * 마지막으로는 select의 경우 반드시 ResultSet 인터페이스를 활용하여 오라클 서버에서 꺼내온 정보를
- * 자료구조에 담아야 했는데 이것도 생략이 가능하다 
- * 다만 쿼리문 속성으로 resultType=map을 주기만 하면 알아서 조회된 결과값이 들어간다
+ * 마지막으로는 select의 경우 반드시 ResultSet 인터페이스를 활용하여 오라클 서버에서 꺼내온 정보를 - 오라클의 커서를 움직이면서 -
+ * 자료구조에 담아야 했는데 이것도 생략이 가능하다 - List(Map)자동으로 담아줌 - 그러니 30%줄어듦
+ * 다만 쿼리문 속성으로 resultType=map을 주기만 하면 알아서(자동으로) 조회된 결과값이 들어간다 - how? -> xml문서 속성값으로 map정해줌 
  * 여기에 다가 프로시저와 동적쿼리문도 제공되어서 if문이나 반복문도 사용할 수 있다.
  * 반복되는 코드 - 30%이상이 줄어든다
  * 1. 드라이버 클래스를 로딩한다 - Class.forName("oracle.jdbc.driver.OracleDriver") - 오라클 제조사에서 제공함 - ojdbc6.jar - 배포
@@ -36,12 +36,13 @@ public class MyBatisCommonFactory {
 			// xml문서 안에 계정 정보와 비번, 드라이버 클래스, 또 쿼리문을 담고 있는 member.xml문서의 물리적인 경로가 여기에 담김 -> com/mybatis/MapperConfig.xml
 			String resource = "com/mybatis/MapperConfig.xml"; // SQL매핑 오픈소스이다 - 라이브러리 
 			// 위 문서에서 필요한 정보를 수집하려면 IO클래스가 필요하다 - stream클래스, 네트워크 프로그램, 소켓통신, 멀티스레드
+			//xml문서에 서버에 대한 정보가 있으니 이 문서를 스캔해야 한다 -IO패키지 필요함 
 			Reader reader = Resources.getResourceAsReader(resource);
 			logger.info("before sqlSessionFactory : "+sqlSessionFactory);
 			//if(sqlSessionFactory == null) {
 			// build라는 메서드를 통해서 객체를 생성함(sqlSessionFactory) - 반드시 드라이버 클래스와 DB정보가 필요함 
 			// 두 번째 파라미터에 있는 development는 MapperConfig.xml에서 선언된 Id값이다
-				sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader,"development");
+				sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader,"development"); //build - SqlSession~를 메모리에 올려주는 메소드
 			//}
 			logger.info("after sqlSessionFactory : "+sqlSessionFactory);
 		} catch (Exception e) {
@@ -51,7 +52,9 @@ public class MyBatisCommonFactory {
 	public static SqlSessionFactory getSqlSessionFactory() {
 		// 직접 인스턴스화를 하지 않더라도 메서드를 경유해서 전역변수에 초기화를 진행하면
 		// 이런 방식으로도 객체를 주입할 수 있다
+		// 왜 메소드를 통해서 객체를 주입받는 걸까? if문을 사용할 수 있으니까 조건에 따라 인스턴스화 되는 상황을 제어할 수 있다. - 싱글톤패턴으로 객체관리가 가능하다.
 		init();
+		//아래에서 리턴되는 변수는 전역변수이다. - 그러니까 init메소드 경유를 통해서 객체를 생성받을 수 있따.
 		return sqlSessionFactory;
 	}
 }
