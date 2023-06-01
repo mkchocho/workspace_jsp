@@ -6,7 +6,6 @@
     <fullyQualifiedTypeName name="com.util.DBConnectionMgr"/>
     <fullyQualifiedTypeName name="oracle.net.aso.d"/>
     <fullyQualifiedTypeName name="java.util.Map"/>
-    <fullyQualifiedTypeName name="java.util.ArrayList"/>
     <fullyQualifiedTypeName name="java.lang.String"/>
     <fullyQualifiedTypeName name="java.lang.Override"/>
     <fullyQualifiedTypeName name="com.util.Car"/>
@@ -21,7 +20,6 @@
     <fullyQualifiedTypeName name="com.example.demo.design.DuckSimulation"/>
     <fullyQualifiedTypeName name="com.example.demo.design.WoodDuck"/>
     <fullyQualifiedTypeName name="java.sql.SQLException"/>
-    <fullyQualifiedTypeName name="com.util.MyBatisCommonFactory"/>
     <fullyQualifiedTypeName name="com.example.demo.member.MemberDao"/>
     <fullyQualifiedTypeName name="com.example.demo.pojo1.FrontMVC"/>
     <fullyQualifiedTypeName name="java.util.logging.Logger"/>
@@ -39,7 +37,15 @@
     <fullyQualifiedTypeName name="com.example.demo.pojo1.ActionForward"/>
     <fullyQualifiedTypeName name="javax.servlet.RequestDispatcher"/>
     <fullyQualifiedTypeName name="java.lang.StringBuilder"/>
-    <fullyQualifiedTypeName name="java.util.HashMap"/>
     <fullyQualifiedTypeName name="com.util.HashMapBinder"/>
+    <fullyQualifiedTypeName name="com.example.demo.pojo1.NoticeDao"/>
+    <fullyQualifiedTypeName name="org.apache.ibatis.session.SqlSessionFactory"/>
+    <fullyQualifiedTypeName name="com.util.MyBatisCommonFactory"/>
+    <fullyQualifiedTypeName name="java.util.ArrayList"/>
     <fullyQualifiedTypeName name="java.lang.Object"/>
+    <fullyQualifiedTypeName name="java.util.HashMap"/>
+    <fullyQualifiedTypeName name="com.example.demo.pojo1.AddressBook"/>
+    <fullyQualifiedTypeName name="javax.swing.JButton"/>
+    <fullyQualifiedTypeName name="com.example.demo.pojo1.AddressBookDialog"/>
+    <fullyQualifiedTypeName name="java.awt.event.ActionListener"/>
 </qualifiedTypeNameHistroy>
