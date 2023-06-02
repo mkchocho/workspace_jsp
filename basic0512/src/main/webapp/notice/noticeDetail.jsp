@@ -19,7 +19,18 @@
 <%@include file="/common/bootstrap_common.jsp"%>
 <link rel="stylesheet" href="/css/notice.css">
 <script type="text/javascript">
-
+const noticeList = () => {
+	window.location.href="/notice/noticeList.pj1";
+}
+const noticeDelete = () => {
+	location.href = "/notice/noticeDelete.pj1?n_no="+<%=rmap.get("N_NO")%>;
+}
+const noticeUpdate = () => {
+	//submit()호출해야 action url이 요청된다.
+	console.log("noticeUpdate");
+	document.querySelector("#f_notice").submit();//실제 전송이 일어나는 코드임
+	
+}
 </script>
 </head>
 <body>
@@ -30,7 +41,7 @@
 	<div class="container">
 		<div class="page-header">
 			<h2>공지사항 <small>공지상세보기</small></h2>
-			<hr />
+			<hr />	
 		</div>
 		
 		<!-- 공지목록 시작 -->
@@ -44,21 +55,28 @@
 				<div class="input-group mb-3">
 				<span class="input-group-text">제목</span>
 				<div style="width:500px;">
-					<input type="text" class="form-control"  value="">
+<!-- 
+만일 noticeList.jsp에서는 잘 출력이 되었는데 상세보기에서 안 된다면
+1)request객체에 담았나? - req.setAttribute("nList",nList);
+-> where? 화면으로 나가기 전에 -> 컨트롤러계층에서 결정할 일이다 - MVC
+-> 컨트롤 계층은 사용자가 입력한 값을 넘겨준다. 컨트롤 계층은 응답 페이지를 결정해줌 
+-> 컨트롤 계층에서 기능을 처리하지 않는다 - 모델계층에 맡기자
+				 -->
+					<input type="text" class="form-control"  value="<%=rmap.get("N_TITLE")%>">
 				</div>
 				</div>
 				
 				<div class="input-group mb-3">
 				<span class="input-group-text">작성자</span>
 				<div class="col-xs-3">
-					<input type="text" class="form-control"  value="">
+					<input type="text" class="form-control"  value="<%=rmap.get("N_WRITER")%>">
 				</div>
 				</div>
 				
 				<div class="input-group mb-3">
 				<span class="input-group-text">내용</span>
 				<div class="col-xs-8">
-					<textarea class="form-control" id="exampleFormControlTextarea1" rows="5" cols="80"></textarea>
+					<textarea class="form-control" id="exampleFormControlTextarea1" rows="5" cols="80"><%=rmap.get("N_CONTENT")%></textarea>
 				</div>
 				</div>
 				
@@ -71,6 +89,7 @@
 	          <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#noticeUpdateForm">
 	          	수정
 	          </button>
+	          
 	          &nbsp;
 	          <button class="btn btn-warning" onclick="noticeDelete()">
 	            삭제
@@ -104,16 +123,17 @@
 	      <!-- Modal body -->
 	      <div class="modal-body">
 	      	<form id="f_notice" method="get" action="./noticeUpdate.pj1">
+	      	<input type="hidden" name="n_no" value="<%=rmap.get("N_NO")%>">
 	          <div class="form-floating mb-3 mt-3">
-	            <input type="text"  class="form-control" id="n_title" name="n_title" placeholder="Enter 제목"  value=""/>
+	            <input type="text"  class="form-control" id="n_title" name="n_title" placeholder="Enter 제목"  value="<%=rmap.get("N_TITLE")%>"/>
 	            <label for="mem_id">제목</label>
 	          </div>	      	
 	          <div class="form-floating mb-3 mt-3">
-	            <input type="text"  class="form-control" id="n_writer" name="n_writer" placeholder="Enter 작성자"   value=""/>
+	            <input type="text"  class="form-control" id="n_writer" name="n_writer" placeholder="Enter 작성자"   value="<%=rmap.get("N_WRITER")%>"/>
 	            <label for="mem_pw">작성자</label>
 	          </div>	      		  
 	          <div class="form-floating mb-3 mt-3">
-	            <textarea rows="5" class="form-control h-25" aria-label="With textarea" id="n_content" name="n_content"></textarea>
+	            <textarea rows="5" class="form-control h-25" aria-label="With textarea" id="n_content" name="n_content"><%=rmap.get("N_CONTENT")%></textarea>
 	          </div>	      	
 	      	</form>
 	      </div>

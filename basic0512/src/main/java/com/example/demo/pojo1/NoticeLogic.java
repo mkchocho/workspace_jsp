@@ -13,9 +13,9 @@ public class NoticeLogic {
 	//이른 인스턴스화 - 미리 생성자 호출해 둘게
 	private NoticeDao noticeDao = new NoticeDao();
 	//전체 조회일때와 상세조회 일 때 공유함 - noticeList, noticeDetail -> myBatis가 동적쿼리지원하니까...
-	public List<Map<String, Object>> noticeList(Map<String, Object> pMap) {
+	public List<Map<String, Object>> noticeList(Map<String, Object> pMap) {//select -> 유지 -> forward
 		logger.info("noticeList");
-		//아래에서 왜 생성자까지 호출하나요
+		//아래에서 왜 생성자까지 호출하나요	`
 		//NoticeDao에서 생성해서 리턴타입으로 넘기면 되지 않나요?
 		//그런데 만일 조회 결과가 없으면 null반환되고 NullPointerException을 만나게 되니까...
 		List<Map<String, Object>> nList = null;
@@ -29,7 +29,7 @@ public class NoticeLogic {
 			//조회결과가 만일 없어서 null이 넘어가는 것을 방어하자
 			nList=new ArrayList<>();
 		}
-		return nList;
+		return nList;//왜냐하면 SELECT한 결과값이 존재하니
 	}//end of noticeList
 
 	public int noticeInsert(Map<String, Object> pMap) {

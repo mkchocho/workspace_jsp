@@ -44,31 +44,25 @@ public class FrontMVC extends HttpServlet {
 			req.setAttribute("upmu", upmu);//배열의 주소번지 
 			af = noticeController.execute(req, resp);
 		}
+		//꼭 필요한 부분이다 - 페이지를 출력하는데
+		///////////////////////// [[ spring에서는 ViewResolver 클래스가 지원하는 부분임 ]] ///////////////////////////
 		if(af !=null){
 			if(af.isRedirect()) {
+				//sendRedirect는 response 객체가 선언하고 있다
+				//메소드 호출앞에 .앞에 오는 변수는 인스턴스 변수이다.-소유주
+				//메소드 파라미터 자리를 채울 수 있는 상태인가?(리턴타입과 파라미터)
 				resp.sendRedirect(af.getPath());
 				//응답이 이미 커밋된 후에는 forward할 수 없습니다.
 				//redirect이 후에 return을 줘야만 JSP절차가 정상적으로 종료 됨
 				return;
-			}else {
+			}//end of redirect - insert, update, delete
+			else {
 				RequestDispatcher view = req.getRequestDispatcher(af.getPath());//상수가 아니라 변수 변수아니라 메소드 처리하는 코드
 				view.forward(req,resp);
-			}
+			}//end of forward 
 		}//end of if - ActionForward결과로 후처리하는 코드 끝나는 부분이었습니다
 		//힌트 - 업무폴더이름으로 가능한가? 아니면 페이지 이름으로 하는게 좋은가?
-		//너 전체 조회할 거야?
-		if(true) {
-		}
-		//상세보기를 원해?
-		else if(true) {
-		}
-		//글 등록?
-		else if(true) {
-		}
-		//글 수정?
-		else if(true) {
-		}
-		
+		////////////////////////////// [[]] //////////////////////////////////
 	}
 	
 	//서블릿에서 정의된 메소드를 재정의 하는 것 

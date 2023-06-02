@@ -73,6 +73,7 @@ public class NoticeController implements Action {
 		else if("noticeUpdate".equals(upmu[1])) {
 			logger.info("noticeUpdate");
 			hmb.bind(pMap);
+			logger.info("??");
 			result = noticeLogic.noticeUpdate(pMap);
 			//성공했어?
 			if(result == 1) {
@@ -116,13 +117,17 @@ public class NoticeController implements Action {
 			isRedirect = false; //true이면 redirect-유지가 안 됨, false이면 forward이다-유지됨 
 		}
 		//공지글 상세보기 - 1건만 가져오기(사용자가 하나를 선택해야함-n_no), noticeList와 메소드를 공유가능함
+		//FrontMVC경유함 - 왜냐하면 pj1으로 요청했으니깐 -> upmu[0]=notice, upmu[1]=noticeDetail -> 전처리하기
 		else if("noticeDetail".equals(upmu[1])) {
 			logger.info("noticeDetail");
 			//사용자와 소통하기
 			hmb.bind(pMap);
 			List<Map<String,Object>> nList = new ArrayList<>();
 			//전체조회와 같은 이름의 메소드를 호출해요-왜냐면 myBatis는 동적쿼리를 지원하니까...
-			nList = noticeLogic.noticeList(pMap);
+			//나는 상세조회 할 건데 왜 noticeList를 호출하나요? - myBatis는 조건절에서 if문을 쓸 수 있어요
+			//NoticeController에서는 if문이었다 - 직관적이지 않아요 - NoticeLogic에서부터는 메소드로 나누었다 - 분기하였다
+			nList = noticeLogic.noticeList(pMap); //단 pMap안에는 n_no가 있어야 해 
+			req.setAttribute("nList", nList);
 			path.append("noticeDetail.jsp");
 			isRedirect = false;//true이면 redirect, false이면 forward
 			

@@ -11,6 +11,7 @@
 	if(nList !=null){
 		size = nList.size();	
 	} 
+	out.print(nList);//[{},{},{}] -> JSON 포맷 - 하이브리드앱에서도 서비스 가능하니까...
 %>
 <!DOCTYPE html>
 <html>
@@ -21,7 +22,17 @@
 <link rel="stylesheet" href="/css/notice.css">
 <script type="text/javascript" src="/js/common.js"></script>
 <script type="text/javascript">
-
+//자바스크립트에서는 함수는 객체이다
+const noticeDetail = (n_no) => {
+	console.log(n_no);
+	location.href="/notice/noticeDetail.pj1?n_no="+n_no;//location 앞에 window. 생략 
+}
+const noticeInsert = () => {
+	//submit()호출해야 action url이 요청된다.
+	console.log("noticeInsert");
+	document.querySelector("#f_notice").submit();//실제 전송이 일어나는 코드임
+	
+}
 </script>
 </head>
 <body>
@@ -66,7 +77,23 @@
 		      		</tr>
 		    	</thead>
 		    	<tbody>
-		      		
+		      		<%
+		      		for(int i=0; i<size; i++){
+		      			Map<String, Object> rmap = nList.get(i);
+		      		%>
+		      		<tr>
+		        		<td width="10%" align="center"><%=rmap.get("N_NO")%></td>
+		        		<td width="50%" align="left">
+		        		<a href="javascript:noticeDetail('<%=rmap.get("N_NO")%>')">
+		        		<%=rmap.get("N_TITLE")%>
+		        		</a>
+		        		</td>
+		        		<td width="20%" align="center"><%=rmap.get("N_WRITER")%></td>
+		        		<td width="20%" align="center"><%=rmap.get("N_DATE")%></td>
+		      		</tr>
+		      		<%
+		      		}//end of for
+		      		%>
 		    	</tbody>
 			</table> 
     	
@@ -110,8 +137,14 @@
 	      </div>
 	      <!-- Modal body -->
 	      <div class="modal-body">
+	      <!-- form전송하기 {method, action=""} -->
 	      	<form id="f_notice" method="get" action="./noticeInsert.pj1">
-	      	  <input type="hidden" name="method" value="memberInsert">
+	      	<!-- hidden : 사용자가 입력하는 값이 아니고 개발자가 필요로 하는 값을 넘길 때 사용함-->
+	      	<!-- 화면은 존재하지 않지만 값을 서버 측으로 전달 가능함 -->
+	      	<!-- name은 method이고 값은 memberInsert임, 컨트롤 계층에서분기문으로 사용됨 -->
+	      	<!-- input에 사용되는 id값은 자바스크립트에서 사용하고, name값은 서블릿에서 사용함 -->
+	      	<!-- upmu[1] = "noticeInsert" -->
+	      	  <!-- <input type="hidden" name="method" value="memberInsert"> -->
 	          <div class="form-floating mb-3 mt-3">
 	            <input type="text"  class="form-control" id="n_title" name="n_title" placeholder="Enter 제목" />
 	            <label for="n_title">제목</label>

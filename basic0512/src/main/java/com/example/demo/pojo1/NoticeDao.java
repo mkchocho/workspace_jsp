@@ -28,7 +28,11 @@ public class NoticeDao {
 			//sqlSession.commit(), sqlSession.rollback();
 			SqlSession sqlSession = sqlSessionFactory.openSession();
 			//메소드이름과 커리문의 id를 upmu[1]="noticeList", upmu[0]="notice"->NoticeController
-			nList = sqlSession.selectList("noticeList", pMap);
+			//myBatis를 사용하면 반복문 사용이 필요없다 - 리턴타입 결정만 해주면 알아서 담아줌 
+			//n건이고 그 안에 컬럼 정보는 Map에 담김
+			//Map은 키와 값으로 처리됨 - 키를 myBatis에서 대문자로 작성해줌 -30% 포함됨
+			//결론 : 그러니까 꺼낼때 반드시 대문자로 해야함
+			nList = sqlSession.selectList("noticeList", pMap);//오라클과 만나는 곳 - notice.xml에서 id로 찾아요 - what -> 쿼리문 
 			//하나. myBatis레이어에서 간섭하여 null이면 객체를 주입해줌
 			//둘. 만일 개입이 없다면 null인 상태가 되어야 한다.
 			//결론 : selectList의 반환타입이 null인 상태이라면 myBatis가 디폴트 객체를 주입해줌
