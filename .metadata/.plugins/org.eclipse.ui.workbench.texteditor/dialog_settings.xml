@@ -10,8 +10,14 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="PageBar"/>
+		<item key="selection" value="수정"/>
 		<list key="findhistory">
+			<item value="수정"/>
+			<item value="f_notice"/>
+			<item value="modal"/>
+			<item value="&lt;%=rmap.get(&quot;N_WRITER&quot;)%&gt;"/>
+			<item value="공지목록 시작"/>
+			<item value="공지목록"/>
 			<item value="pagebar"/>
 			<item value="bsp"/>
 			<item value="MODAL"/>
@@ -21,12 +27,6 @@
 			<item value="결과"/>
 			<item value="조회된"/>
 			<item value="&#x09;&lt;if test=”state ! null ”&gt;"/>
-			<item value="회원수정"/>
-			<item value="prepareStatement"/>
-			<item value="수정"/>
-			<item value="위치를 선택"/>
-			<item value="result == 1"/>
-			<item value="result ==1"/>
 		</list>
 		<list key="replacehistory">
 		</list>
