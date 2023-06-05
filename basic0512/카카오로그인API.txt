@@ -1,0 +1,60 @@
+카카오 로그인 실습 노트
+웹서버 주소 : http://localhost:9000 - 톰캣서버 포트번호 -> spring project : 8000번 사용합니다.
+클라이언트키(REST API 키) : 본인키 / e1653c977ff9fd8b703e6844097d7f36
+──────────────────────────
+---------------------------
+카카오로그인 버튼을 누른다
+카카오로그인 화면이 열린다
+카카오계정을 입력한다 - 회원가입
+카카오측에서 확인을 한다 - 백엔드측
+
+변수 	→ 배열(같은 타입) →	 객체 배열(DataSet을 클래스로) / News[]	 →   List, Map 	 →	세션, 쿠키
+				class News{				     시간제어X		크기가커서 중요부위만 담는다
+					String title						세션은 캐시, 서버에 담김
+					String name						쿠키는 로컬에 담김 -공유가 안 됨(클라우드X)
+					String date						클라우드 제공위해서는 AWS등에 서버설치
+				} 같은 클래스 안에 여러가지 데이터를 선언 
+				 News[] : [News][News][News]
+				 넣었다 뺐다 불가능
+
+
+---------------------------
+──────────────────────────
+카카오 로그인요청 콜백 주소 : 	
+http://localhost:9000/auth/kakao/callback - 토큰을 줄 게 - 누가? 카카오서버측에서 응답으로 내려줌 
+단, 이메일 계정과 비번이 일치하면 내려줌 
+카카오 로그아웃요청 콜백주소 :
+──────────────────────────
+이미지캡쳐본 - 엑셀 필기 파일
+──────────────────────────
+http://localhost:9000/auth/kakao/logout
+User 오브젝트 : id(번호),	 username, password, email
+카카오로부터 받을 정보 : profile정보(필수),  email(선택)
+로그인요청 주소 - 이 요청으로 응답을 받아온다
+:그런데 응답을 받아올 URL 주소를 먼저 등록(오타, 존재하지 않음: 404번)해두어야 한다. - 왜냐면? 카카오가 정할 수 없잖아
+https://kauth.kakao.com/oauth/authorize?client_id=e1653c977ff9fd8b703e6844097d7f36&redirect_uri=http://localhost:9000/auth/kakao/callback&response_type=code
+로그인 콜백
+──────────────────────────
+-----------------------------
+콜백 주소를 통해서 쿼리스트링으로 넘겨줌
+String code = request.getParameter("code");//카카오서버에서 응답으로 내려보낸 토큰을 담음 - 매번 바뀐다 - 보안
+-----------------------------
+──────────────────────────
+http://localhost:9000/auth/kakao/callback?code=vmBgoNrwpoNRTnuTjh4ruwebtG7YWtdmR-7qFyi8iXZ3gbSyiYS4pZlXA0a0uBr1Ih1Wzgo9dRoAAAGG9NW0ZA
+토큰 발급 요청 주소 (POST) - http body에 데이터를 전달(5가지 데이터를 담아야함)
+(마임타입이 application/x-www-form-urlencoded;charset=utf-8이면 key=value형태로 전달하라는 의미임)
+https://kauth.kakao.com/oauth/token
+"grant_type", "authorization_code"
+"client_id", "e1653c977ff9fd8b703e6844097d7f36"
+"redirect_uri", "http://localhost:9000/auth/kakao/callback"
+"code", code
+client_secret은 생략가능함
+토큰을 받아오는 요청 다음에 프로필 정보 받아오기 위한 요청임
+URL url2 =new URL("https://kapi.kakao.com/v2/user/me");
+//Stream 연결
+HttpsURLConnection tconn=(HttpsURLConnection)url2.openConnection();
+System.out.println("tconn 연결완료");
+//http header 값 넣기
+tconn.setRequestMethod("POST");
+tconn.setRequestProperty("Authorization", "Bearer "+ oauthToken.getAccess_token());//받아온 토큰
+tconn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");

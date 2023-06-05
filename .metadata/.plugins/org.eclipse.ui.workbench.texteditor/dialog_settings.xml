@@ -10,8 +10,12 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="수정"/>
+		<item key="selection" value=""/>
 		<list key="findhistory">
+			<item value="String path = null;"/>
+			<item value="context"/>
+			<item value="토큰"/>
+			<item value="본인키"/>
 			<item value="수정"/>
 			<item value="f_notice"/>
 			<item value="modal"/>
@@ -23,12 +27,9 @@
 			<item value="MODAL"/>
 			<item value="찾기"/>
 			<item value="우편번호"/>
-			<item value="memberDetail"/>
-			<item value="결과"/>
-			<item value="조회된"/>
-			<item value="&#x09;&lt;if test=”state ! null ”&gt;"/>
 		</list>
 		<list key="replacehistory">
+			<item value="e1653c977ff9fd8b703e6844097d7f36"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
