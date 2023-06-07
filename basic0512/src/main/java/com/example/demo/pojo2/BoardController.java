@@ -58,7 +58,7 @@ public class BoardController implements Controller {
 		//너 전체 조회를 원해? - forward
 		//->/board/boardList.pj2
 		if("boardList".equals(upmu[1])) {
-			logger.info("boardList");
+			logger.info("boardList");//콘솔에 문자열 출력이 안되었다면 오라클 서버를 경유하지 않았다.
 			List<Map<String,Object>> bList = null;
 			//파라미터로 들어오는 값이 담김 - pMap
 			//XXX.pj2? b_no=5&b_title=제목
@@ -66,48 +66,70 @@ public class BoardController implements Controller {
 			//pMap.put("b_title","입력받은 제목...")
 			hmb.bind(pMap);
 			bList = boardLogic.boardList(pMap);
+			//요청이 유지되는 동안에는 사용할 수 있다. - 조회 결과를 가진 주소번지
+			//첫번째 파라미터는 문자열값이고
+			//두번째 파라미터는 주소번지다
+			req.setAttribute("bList", bList);
 			page = "forward:boardList.jsp"; //-> pageMove[0]=forward, pageMove[1]=boardList.jsp
 		}
 		//상세내용 보고싶다 - forward
 		else if("boardDetail".equals(upmu[1])) {
 			logger.info("boardDetail");	
-			page = "forward:board/boardDetail";
+			List<Map<String,Object>> bList = null;
+			hmb.bind(pMap);
+			bList = boardLogic.boardList(pMap);//pMap.get("b_no") => 1
+			req.setAttribute("bList", bList);
+			page = "forward:boardDetail.jsp";
 		}
 		//글 등록할거야? - redirect
 		else if("boardInsert".equals(upmu[1])) {
 			logger.info("boardInsert");
+			//사용자가 입력한 값 만큼 req.getParameter가 반복되므로 이 코드를 줄여줌
+			hmb.bind(pMap); //HashMapBinder의 bind메소드 호출함 - 사용자가 입력한 값을 담아줄 주소번지 넘겨줌 
+			//javascript에서 제공하는 API를 사용해서 JSON다루게 됩니다.
+			logger.info(pMap);//한글처리된 값 출력해 보기{키=값, 키2=값2, } -> JSON형식으로 변경처리
+			//result변수는 어떤 역할이지? - 오라클 서버에 insert문 요청하면 오라클 서버가 리턴해주는 값을 담아요
 			result = 0;
+			result = boardLogic.boardInsert(pMap);
 			if(result==1) {//입력 성공한 경우
-				page = "redirect:board/boardList.pj2";//pj2가 붙는 이유는 오라클을 경유하니까
+				page = "redirect:boardList.pj2";//pj2가 붙는 이유는 오라클을 경유하니까
 			}
 			//실패했을 때
 			else {
-				page ="redirect:board/boardError.jsp";
+				page ="redirect:boardError.jsp";
 			}
 			
 		}
-		//수정하고 싶어요 - redirect
+		//수정하고 싶어요 - POST방식
 		else if("boardUpdate".equals(upmu[1])) {
 			logger.info("boardUpdate");
+			hmb.bind(pMap);//사용자가 입력한 값을 담아줌
+			logger.info(pMap);//확인하는 곳
 			result = 0;
+			result = boardLogic.boardUpdate(pMap);
 			if(result==1) {//입력 성공한 경우
-				page = "redirect:board/boardList.pj2";//pj2가 붙는 이유는 오라클을 경유하니까
+				page = "redirect:boardList.pj2";//pj2가 붙는 이유는 오라클을 경유하니까
 			}
 			//실패했을 때
 			else {
-				page ="redirect:board/boardError.jsp";
+				page ="redirect:boardError.jsp";
 			}
 		}
 		//이젠 삭제할게요 - redirect
 		else if("boardDelete".equals(upmu[1])) {
 			logger.info("boardDelete");
+			hmb.bind(pMap);//사용자가 입력한 값을 담아줌
+			logger.info(pMap);//확인하는 곳
 			result = 0;
+			//inserthere - 비교하기 전에 미리 해야한다
+			result = boardLogic.boardDelete(pMap);//pMap.get("b_no")
 			if(result==1) {//입력 성공한 경우
-				page = "redirect:board/boardList.pj2";//pj2가 붙는 이유는 오라클을 경유하니까
+				page = "redirect:boardList.pj2";//pj2가 붙는 이유는 오라클을 경유하니까
 			}
+			//insert not here - 여기는 왜 안되지? result==1 비교하는 if문 앞에 와야함
 			//실패했을 때
 			else {
-				page ="redirect:board/boardError.jsp";
+				page ="redirect:boardError.jsp";
 			}
 		}
 		return page;

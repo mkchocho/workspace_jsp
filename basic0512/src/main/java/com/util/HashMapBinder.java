@@ -32,8 +32,8 @@ public class HashMapBinder {
 		Enumeration<String> en = req.getParameterNames(); //mem_id, mem_pw, mem_name
 		while(en.hasMoreElements()) {
 			String key = en.nextElement();//mem_id, mem_pw, mem_name, gubun, keyword
-			logger.info(req.getParameter(key));
-			pMap.put(key, req.getParameter(key));
+			logger.info(req.getParameter(key));//한글 깨짐을 출력한 코드
+			pMap.put(key, req.getParameter(key));//한글처리 끝 HangulConversion.toUTF() - POST방식 
 		}
 	}
 }

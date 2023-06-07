@@ -40,6 +40,7 @@ public class NoticeDao {
 			logger.info(nList.size());//하나 - 0, 만일 하나가 아닌경우라면 NullPointerException 발동 
 			System.out.println(nList);
 		} catch (Exception e) {
+			//stack영역에 쌓여있는 에러메시지 모두를 라인번호와 함께 찍어줌 - 디버깅하는데 도움이 됨
 			e.printStackTrace();
 		}
 		
