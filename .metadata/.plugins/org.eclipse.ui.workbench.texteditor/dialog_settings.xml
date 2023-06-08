@@ -10,8 +10,11 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="Connector connection"/>
+		<item key="selection" value="#1"/>
 		<list key="findhistory">
+			<item value="#1"/>
+			<item value="notice"/>
+			<item value="&quot;redirect:boardList.pj2&quot;"/>
 			<item value="connector connection"/>
 			<item value="String path = null;"/>
 			<item value="context"/>
@@ -24,11 +27,9 @@
 			<item value="공지목록 시작"/>
 			<item value="공지목록"/>
 			<item value="pagebar"/>
-			<item value="bsp"/>
-			<item value="MODAL"/>
-			<item value="찾기"/>
 		</list>
 		<list key="replacehistory">
+			<item value="board"/>
 			<item value="e1653c977ff9fd8b703e6844097d7f36"/>
 		</list>
 	</section>

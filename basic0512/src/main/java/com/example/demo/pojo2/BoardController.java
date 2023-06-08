@@ -72,6 +72,15 @@ public class BoardController implements Controller {
 			req.setAttribute("bList", bList);
 			page = "forward:boardList.jsp"; //-> pageMove[0]=forward, pageMove[1]=boardList.jsp
 		}
+		else if("jsonBoardList".equals(upmu[1])) {//Front-end, Vew.js, React.js, jEasyUI
+			//board/boardList.jsp
+			logger.info("boardList");//콘솔에 문자열 출력이 안되었다면 오라클 서버를 경유하지 않았다.
+			List<Map<String,Object>> bList = null;
+			hmb.bind(pMap);
+			bList = boardLogic.boardList(pMap);
+			req.setAttribute("bList", bList);
+			page = "forward:jsonBoardList.jsp"; //-> pageMove[0]=forward, pageMove[1]=boardList.jsp
+		}
 		//상세내용 보고싶다 - forward
 		else if("boardDetail".equals(upmu[1])) {
 			logger.info("boardDetail");	
@@ -85,7 +94,7 @@ public class BoardController implements Controller {
 		else if("boardInsert".equals(upmu[1])) {
 			logger.info("boardInsert");
 			//사용자가 입력한 값 만큼 req.getParameter가 반복되므로 이 코드를 줄여줌
-			hmb.bind(pMap); //HashMapBinder의 bind메소드 호출함 - 사용자가 입력한 값을 담아줄 주소번지 넘겨줌 
+			hmb.multiBind(pMap); //HashMapBinder의 bind메소드 호출함 - 사용자가 입력한 값을 담아줄 주소번지 넘겨줌 
 			//javascript에서 제공하는 API를 사용해서 JSON다루게 됩니다.
 			logger.info(pMap);//한글처리된 값 출력해 보기{키=값, 키2=값2, } -> JSON형식으로 변경처리
 			//result변수는 어떤 역할이지? - 오라클 서버에 insert문 요청하면 오라클 서버가 리턴해주는 값을 담아요

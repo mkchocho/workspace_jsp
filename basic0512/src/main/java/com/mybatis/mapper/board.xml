@@ -17,7 +17,7 @@
 	
 	<select id="boardList" parameterType="java.util.HashMap" resultType="map">
 		SELECT
-		        b_no, b_writer, b_title, b_content, b_date, b_hit
+		        b_no, b_writer, b_title, b_content, b_date, b_hit, b_file
 		  FROM board230527
 		<where>
 			<if test="b_no!=null">AND b_no=#{b_no}</if>		
@@ -39,10 +39,10 @@
 	</select>	 	
 
 	<insert id="boardInsert" parameterType="map" >
-		INSERT INTO board230527(b_no, b_writer , b_title ,b_content, b_hit , b_date) 
+		INSERT INTO board230527(b_no, b_writer , b_title ,b_content, b_hit , b_date, b_file) 
 		              VALUES(seq_board230527_no.nextval
 		                           ,#{b_writer},#{b_title},#{b_content}, 0
-		                          , TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS'))
+		                          , TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS'),#{b_file})
 	</insert>		
 
 </mapper>
