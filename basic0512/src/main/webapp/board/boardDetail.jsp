@@ -22,7 +22,7 @@
     	out.print(rmap); // {키=값, 키1=값1, 키2=값2}
     }
     // if문 밖에는 조회결과가 없으면 null인 상황
-    out.print(bList);
+    //out.print(bList); 브라우저에 쓰기 - 서버사이드 결정된 문자열 출력 - 데이터셋 역할(JSON포맷 - Gson 외부 API, 단순문자열포맷)
    // rmap = bList.get(0); // 인덱스 0인 값이 없어서 500번 오류남
     out.print(rmap); // {} 아무것도 없음
     //List<Map<>> -> [{},{},{},.....] -> JSON -> IOS, 안드로이드서비스 가능함, Vue.js, ReactJS
@@ -39,14 +39,14 @@
 <link rel="stylesheet" href="/css/board.css">
 <script type="text/javascript">
     const boardDelete = () => {
-       window.location.href="/board/boardDelete.pj2?b_no=3";    
+       window.location.href="/board/boardDelete.pj2?b_no=<%=rmap.get("B_NO")%>";    
     }
     const boardList = () => {
        window.location.href="/board/boardList.pj2";
     }
     const boardUpdate = () => {
        document.querySelector("#f_board").submit();
-    }  
+    }
 </script>
 </head>
 <body>
@@ -71,21 +71,21 @@
              <div class="input-group mb-3">
              <span class="input-group-text">제목</span>
              <div style="width:500px;">
-                <input type="text" class="form-control"  value="제목" readonly>
+                <input type="text" class="form-control"  value="<%=rmap.get("B_TITLE")%>" readonly>
              </div>
              </div>
              
              <div class="input-group mb-3">
              <span class="input-group-text">작성자</span>
              <div class="col-xs-3">
-                <input type="text" class="form-control"  value="작성자" readonly>
+                <input type="text" class="form-control"  value="<%=rmap.get("B_WRITER")%>" readonly>
              </div>
              </div>
              
              <div class="input-group mb-3">
              <span class="input-group-text">내용</span>
              <div class="col-xs-8">
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" cols="80" readonly><%= "내용" %></textarea>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" cols="80" readonly><%=rmap.get("B_CONTENT")%></textarea>
              </div>
              </div>
              
@@ -132,19 +132,20 @@
           <!-- 기존에 있는 레코드를 변경하는 것이다. pk(b_no)가 있어야만 한다 -->
           <!-- b_no는 사용자로부터 입력받은 값이 아니다.{시퀀스} 개발자가 필요로 하는 값(파악) -->
           <div class="modal-body">
-           <form id="f_board" method="get" action="./boardUpdate.pj2">
-             <input type="hidden" name="method" value="boardUpdate">
-             <input type="hidden" name="b_no" value="3">
+           <form id="f_board" method="post" action="./boardUpdate.pj2">
+             <!-- <input type="hidden" name="method" value="boardUpdate"> -->
+             <!-- hidden 속성은 화면 없이 서버측에 값을 넘길 때 사용함 -->
+             <input type="hidden" name="b_no" value="<%=rmap.get("B_NO")%>">
               <div class="form-floating mb-3 mt-3">
-                <input type="text"  class="form-control" id="b_title" name="b_title" placeholder="Enter 제목"  value="수정할 제목"/>
+                <input type="text"  class="form-control" id="b_title" name="b_title" placeholder="Enter 제목"  value="<%=rmap.get("B_TITLE")%>"/>
                 <label for="mem_id">제목</label>
               </div>          
               <div class="form-floating mb-3 mt-3">
-                <input type="text"  class="form-control" id="b_writer" name="b_writer" placeholder="Enter 작성자"   value="수정할 작성자"/>
+                <input type="text"  class="form-control" id="b_writer" name="b_writer" placeholder="Enter 작성자"   value="<%=rmap.get("B_WRITER")%>"/>
                 <label for="mem_pw">작성자</label>
               </div>               
               <div class="form-floating mb-3 mt-3">
-                <textarea rows="5" class="form-control h-25" aria-label="With textarea" id="b_content" name="b_content"><%="수정할 내용"%></textarea>
+                <textarea rows="5" class="form-control h-25" aria-label="With textarea" id="b_content" name="b_content"><%=rmap.get("B_CONTENT")%></textarea>
               </div>          
            </form>
           </div>

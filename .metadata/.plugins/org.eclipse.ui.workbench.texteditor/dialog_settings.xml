@@ -10,8 +10,9 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="#1"/>
+		<item key="selection" value="Delete"/>
 		<list key="findhistory">
+			<item value="delete"/>
 			<item value="#1"/>
 			<item value="notice"/>
 			<item value="&quot;redirect:boardList.pj2&quot;"/>
@@ -26,7 +27,6 @@
 			<item value="&lt;%=rmap.get(&quot;N_WRITER&quot;)%&gt;"/>
 			<item value="공지목록 시작"/>
 			<item value="공지목록"/>
-			<item value="pagebar"/>
 		</list>
 		<list key="replacehistory">
 			<item value="board"/>

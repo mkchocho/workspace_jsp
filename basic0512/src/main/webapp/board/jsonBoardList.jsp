@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ page import = "java.util.List, java.util.Map"%>
 <%@ page import ="com.google.gson.Gson" %>
-
+1
 <%
 List<Map<String,Object>> bList=(List)request.getAttribute("bList");
 Gson g = new Gson();

@@ -23,11 +23,26 @@ public class KakaoSupport extends HttpServlet {
 		logger.info(contextPath);
 		String command = requestURI.substring(contextPath.length()+1);
 		logger.info(command);
+		String result ="";
 		if("auth/kakao/callback".equals(command)) {
 			logger.info("카카오 로그인 콜백URL요청시 호출");
-			//KakaoController kakaoController = new KakaoController();
+			KakaoController kakaoController = new KakaoController();
+			result = kakaoController.kakaoCallback(req, resp);
+			logger.info(result);//gym.jsp, 카카오컨트롤계층에서 반환하는 값 출력해 보기
+			try {
+				resp.sendRedirect("/"+result);
+				return;//하나의 요청 종료하기
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
 		}else {
-			System.out.println("요청한 URL이 존재하지 않습니다.");
+			System.out.println("kakao callback 요청이 아닙니다.");
+			try {
+				resp.sendRedirect(requestURI);
+				return;//하나의 요청 종료하기
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
 		}
 	}//end of doService
 	@Override
