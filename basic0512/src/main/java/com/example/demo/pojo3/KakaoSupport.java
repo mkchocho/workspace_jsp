@@ -1,6 +1,7 @@
 package com.example.demo.pojo3;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -29,8 +30,14 @@ public class KakaoSupport extends HttpServlet {
 			KakaoController kakaoController = new KakaoController();
 			result = kakaoController.kakaoCallback(req, resp);
 			logger.info(result);//gym.jsp, 카카오컨트롤계층에서 반환하는 값 출력해 보기
+			resp.setContentType("text/plain;charset=UTF-8");
 			try {
-				resp.sendRedirect("/"+result);
+				//출력을 담당하는 객체를 생성하기 전에 마임타입을 결정해줄것 - 왜냐면 장치에 있는 브라우저를 이용할거니까
+				PrintWriter out = resp.getWriter();//출력객체 PrintWriter는 응답으로 나가는 정보 출력해야함
+				//객체를 생성할 때 response 객체가 반드시 필요함 -> 인스턴스화 가능함 -> 왜냐면 로컬 PC설치된 브라우저를 통해 내보내야하기때문에
+				out.print(result);
+				//res.setContentType("text/html;charset=UTF-8")
+				//resp.sendRedirect("/"+result); //요청에 대한 응답이 페이지로 출력되는 경우도 있고 (페이지-html)
 				return;//하나의 요청 종료하기
 			} catch (Exception e) {
 				// TODO: handle exception

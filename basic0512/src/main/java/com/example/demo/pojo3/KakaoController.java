@@ -10,8 +10,11 @@ import java.util.Map;
 import javax.net.ssl.HttpsURLConnection;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 //카카오 컨트롤러도 서블릿이 아니어도 좋다.
 //카카오로그인 버튼 클릭 -> https://kauth.kakao.com/oauth/authorize?client_id=REST ful 키&redirect_uri(콜백부분)=http://localhost:9000/auth/kakao/callback&response_type=code
@@ -33,6 +36,8 @@ public class KakaoController {
 		
 		//카카오 서버측에서 응답으로 보내주는 토큰값 읽어오기
 		BufferedReader br = null; //filter 스트림 클래스이고 네트워크 요청에 대한 응답을 읽기위해
+		//카카오로그인 서버에서 인증코드를 넘겨서 돌려받은 토큰값을 담을 객체
+		OAuthToken oauthToken = null;
 		try {
 			URL url = new URL(tokenURL);
 			Map<String,Object> pMap = new HashMap<>();
@@ -78,9 +83,66 @@ public class KakaoController {
 			String jsonStr = sb.toString();
 			//아래서 출력되는 값은 인증코드를 POST방식으로 카카오 측에 요청하면 응답으로 보내주는 토큰값을 받기 위해서 작성함
 			logger.info(jsonStr); //카카오 서버측에서 콜백 URL을 등록한 경우 그 경로로 응답메시지를 전송하고 그 값을 출력함
+			ObjectMapper mapper = new ObjectMapper();			
+			try {
+				oauthToken = mapper.readValue(jsonStr, OAuthToken.class);
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+			//카카오서버에서 넘겨준 토큰을 가지고 카카오 로그인 서버측에 프로필을 받아오는 URI 다시 요청해야 함 
+			//그래서 미리 확인해 본다
+			logger.info(oauthToken.getAccess_token());
+			
+			//토큰을 받아오는 요청 다음에 프로필 정보 받아오기 위한 요청임
+			URL url2 =new URL("https://kapi.kakao.com/v2/user/me");
+			//Stream 연결
+			HttpsURLConnection tconn=(HttpsURLConnection)url2.openConnection();
+			System.out.println("tconn 연결완료");
+			//http header 값 넣기
+			tconn.setRequestMethod("POST");
+			tconn.setRequestProperty("Authorization", "Bearer "+ oauthToken.getAccess_token());//받아온 토큰
+			tconn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
+			tconn.setDoOutput(true);
+			//토큰을 넘겨서 세 번째 요청{카카오 등록된 프로필 정보를 받아오는}을 함
+			br = null;
+			//아래에서 다시 생성하면 기존에 참조하던 객체는 Candidate 상태로 빠짐 (쓰레기값이 됨)
+			br = new BufferedReader(new InputStreamReader(tconn.getInputStream(),"UTF-8"));
+			String inputLine2 = null;
+			StringBuilder sb2 = new StringBuilder();
+			while((inputLine2=br.readLine()) != null) {
+				sb2.append(inputLine2);
+			}//end of while - 네트워크 통해서 넘어오는 패킷을 읽어서 StringBuuilder에 담기
+			String jsonStr2 = sb2.toString();
+			//아래서 출력되는 값은 토큰을 POST방식으로 카카오 측에 요청하면 응답으로 보내주는 프로필을 받기 위함
+			logger.info(jsonStr2); //토큰을 주고 응답으로 받아온 개인 프로필을 출력함
+			
+			//JSON형태 반환값을 처리하기
+			ObjectMapper mapper2 = new ObjectMapper();
+			KakaoProfile kakaoProfile = null;
+			try {
+				kakaoProfile = mapper2.readValue(jsonStr2, KakaoProfile.class);
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+			//사용자 정보 가져오기
+			logger.info("카카오 아이디(번호)"+kakaoProfile.getId());
+			logger.info("카카오 이메일"+kakaoProfile.getKakao_account().getEmail());
+			logger.info("카카오 유저네임"+kakaoProfile.getProperties().nickname);
+			//약속된 시간동안 유지하고 싶다면 세션에 담아주세요
+			//scope : page > request > session > application
+			HttpSession session = req.getSession();
+			session.setAttribute("nickname", kakaoProfile.getProperties().nickname);
+			//return jsonStr;
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-		return "카카오로그인콜백";
+		try {
+			res.sendRedirect("/gym.jsp");
+		
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		return null;//"카카오로그인콜백.jsp"
 	}
 }

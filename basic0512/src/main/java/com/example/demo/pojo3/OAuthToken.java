@@ -1,6 +1,8 @@
 package com.example.demo.pojo3;
 
 public class OAuthToken {
+	//jackson-databind-2.15.2.jar 빌드패스 등록함 - ObjectMapper사용함
+	//ObjectMapper사용해서 OAuthToken.java에 담았다
     public String access_token;
     public String token_type;
     public String refresh_token;
