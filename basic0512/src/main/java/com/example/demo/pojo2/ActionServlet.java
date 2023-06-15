@@ -28,9 +28,28 @@ public class ActionServlet extends HttpServlet {
 		upmu = command.split("/");
 		// 요청객체에다가 upmu배열의 주소번지를 저장하자
 		// 왜냐하면 BoardController에서 if문으로 5가지 경우를 나눠야 한다
-		// 
 		Controller controller = null;
 		String page = null;
+		//테스트 시나리오
+		//http:localhost:9000/member2/memberList.pj2
+		//http:localhost:9000/member2/memberInsert.pj2
+		//http:localhost:9000/member2/memberUpdate.pj2
+		//http:localhost:9000/member2/memberDelete.pj2
+		if("member2".equals(upmu[0])) {
+			logger.info("member2");
+			controller = new Member2Controller();
+			//메소드이름을 가질 수는 없지만 if문으로 5가지 경우를 나눌 수 있다.
+			//그래서 나는 execute메소드를 호출할 때 넘기는 request객체에다가 upmu배열을 저장한다
+			req.setAttribute("upmu", upmu); //저장하기
+			//오버라이드 된 execute메소드 호출하기
+			//컨트롤 클래스는 Controller 인터페이스를 implements하고 있다 - 추상메소드를 재정의해야 함
+			//각 컨트롤러 클래스가 서블릿이 아니어도 되는 건 execute메소드의 파라미터로 요청객체와 응답객체를 받을 수 있어서 그렇다
+			page = controller.execute(req,resp);
+		}
+		//http:localhost:9000/board/boardList.pj2
+		//http:localhost:9000/board/boardInsert.pj2
+		//http:localhost:9000/board/boardUpdate.pj2
+		//http:localhost:9000/board/boardDelete.pj2
 		if("board".equals(upmu[0])) {
 			controller = new BoardController();
 			//요청객체에 String 배열의 주소번지를 담음

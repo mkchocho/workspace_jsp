@@ -10,8 +10,9 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value=""/>
+		<item key="selection" value="memberInsert"/>
 		<list key="findhistory">
+			<item value="memberInsert"/>
 			<item value="doService"/>
 			<item value="delete"/>
 			<item value="#1"/>
@@ -26,7 +27,6 @@
 			<item value="f_notice"/>
 			<item value="modal"/>
 			<item value="&lt;%=rmap.get(&quot;N_WRITER&quot;)%&gt;"/>
-			<item value="공지목록 시작"/>
 		</list>
 		<list key="replacehistory">
 			<item value="board"/>
