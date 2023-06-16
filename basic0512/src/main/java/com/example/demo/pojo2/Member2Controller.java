@@ -33,11 +33,15 @@ public class Member2Controller implements Controller {
 		HashMapBinder hmb = new HashMapBinder(req);
 		logger.info(upmu[0]+","+upmu[1]);
 		//회원목록 조회
-		//SELECT*FROM member0518
+		//SELECT*FROM member0518 WHERE mem_name LIKE ?||'%' AND mem_hp =? -> 조회결과는 0건, 1건, n건
+		//										pMap : 조건이 여러개일 때 받아올 값이 여러개여서
+		//그러니까 리턴타입은 List<Map<>>
 		if("memberList".equals(upmu[1])) {
 			logger.info("회원목록조회");
 			List<Map<String,Object>> mList = null;
-			mList = memberLogic.memberList();
+			//아래는 조건검색시에 사용자가 선택한 조건을 담아줌 - pMap -> 
+			hmb.bind(pMap);
+			mList = memberLogic.memberList(pMap);
 			page="forward:memberList"; //응답페이지 이름, select결과가 유지되어야 하니까 forward로 한다
  		}
 		
@@ -48,7 +52,7 @@ public class Member2Controller implements Controller {
 			//pMap.get("mem_no")=>2
 			hmb.bind(pMap);
 			List<Map<String,Object>> mList = null;
-			mList = memberLogic.memberList();
+			mList = memberLogic.memberList(pMap);
 			page="forward:memberDetail"; //응답페이지 이름, select결과가 유지되어야 하니까 forward로 한다
 		}
 		//회원가입

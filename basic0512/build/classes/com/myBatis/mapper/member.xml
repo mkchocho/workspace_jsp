@@ -2,6 +2,17 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mybatis.mapper.memberMapper">
+	<select id="memberList" resultType="map" parameterType="java.util.Map">
+		SELECT
+			mem_no, mem_name, mem_zipcode, mem_address
+		FROM member0518
+		<where>
+			<if test='mem_name != null'>
+				AND mem_name LIKE #{mem_name}||'%'
+			</if>
+		</where>
+	</select>
+
 	<select id="zipcodeList" parameterType="map" resultType="map">
 		SELECT zipcode, address
 		FROM zipcode_t
@@ -10,6 +21,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-ma
 				AND dong LIKE #{dong}||'%' <!-- pMap.get("dong") -->
 			</if>
 		</where>
-		ORDER BY zipcode desc 
+		ORDER BY zipcode desc
 	</select>
 </mapper>

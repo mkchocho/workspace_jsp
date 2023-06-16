@@ -12,12 +12,17 @@ import org.apache.log4j.Logger;
 //파라미터의 타입과 갯수를 마음대로 결정해도 됨
 //기능 구현에 집중하는 클래스임
 //모델계층입니다. - 업무에 대한 절차, 규칙지키면서 업무처리가 되어야 함 - 선택(if문, switch)과 결정(업무처리)
+//3번째 관전포인트 
+//객체 주입시 후 호출되는 메소드의 파라미터와 리턴타입 결정하기
 public class Member2Logic {
 	Logger logger = Logger.getLogger(Member2Logic.class);
 	Member2Dao memberDao = new Member2Dao();
-	public List<Map<String, Object>> memberList() {
+	public List<Map<String, Object>> memberList(Map<String, Object> pMap) {
 		logger.info("memberList");
-		return null;
+		List<Map<String,Object>> mList = null;
+		//리턴타입 Controller - 회원목록조회 if문 안에서
+		mList = memberDao.memberList(pMap);//배달사고 체크, 리턴타입 체크
+		return mList;
 	}
 	public int memberInsert(Map<String, Object> pMap) {
 		logger.info("memberInsert");
