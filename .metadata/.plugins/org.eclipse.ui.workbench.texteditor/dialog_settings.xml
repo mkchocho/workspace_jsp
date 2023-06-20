@@ -10,8 +10,12 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="map"/>
+		<item key="selection" value="전체조회"/>
 		<list key="findhistory">
+			<item value="전체조회"/>
+			<item value="memberlist"/>
+			<item value="rmap.get"/>
+			<item value="post"/>
 			<item value="map"/>
 			<item value="memberInsert"/>
 			<item value="doService"/>
@@ -23,10 +27,6 @@
 			<item value="String path = null;"/>
 			<item value="context"/>
 			<item value="토큰"/>
-			<item value="본인키"/>
-			<item value="수정"/>
-			<item value="f_notice"/>
-			<item value="modal"/>
 		</list>
 		<list key="replacehistory">
 			<item value="board"/>

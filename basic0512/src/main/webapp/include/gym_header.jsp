@@ -22,7 +22,7 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="/auth2/loginForm.jsp">로그인</a>
         </li>
-                <li class="nav-item">
+        <li class="nav-item">
           <a class="nav-link" href="/member/memberCRUD?method=memberSelect">회원관리</a>
         </li>
 		<li class="nav-item">
@@ -31,6 +31,9 @@
         
         <li class="nav-item">
           <a class="nav-link" href="/board/boardList.pj2">자유게시판</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/member2/memberList.pj2">회원관리2</a>
         </li>
         <li class="nav-item">
        		<a class="nav-link" href="#">QnA게시판</a>

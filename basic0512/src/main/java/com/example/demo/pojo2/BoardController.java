@@ -70,7 +70,7 @@ public class BoardController implements Controller {
 			//첫번째 파라미터는 문자열값이고
 			//두번째 파라미터는 주소번지다
 			req.setAttribute("bList", bList);
-			page = "forward:boardList.jsp"; //-> pageMove[0]=forward, pageMove[1]=boardList.jsp
+			page = "forward:board/boardList"; //-> pageMove[0]=forward, pageMove[1]=boardList.jsp
 		}
 		else if("jsonBoardList".equals(upmu[1])) {//Front-end, Vew.js, React.js, jEasyUI
 			//board/boardList.jsp
@@ -88,7 +88,7 @@ public class BoardController implements Controller {
 			hmb.bind(pMap);
 			bList = boardLogic.boardList(pMap);//pMap.get("b_no") => 1
 			req.setAttribute("bList", bList);
-			page = "forward:boardDetail.jsp";
+			page = "forward:board/boardDetail";
 		}
 		//글 등록할거야? - redirect
 		else if("boardInsert".equals(upmu[1])) {

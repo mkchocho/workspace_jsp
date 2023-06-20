@@ -42,7 +42,13 @@ public class Member2Controller implements Controller {
 			//아래는 조건검색시에 사용자가 선택한 조건을 담아줌 - pMap -> 
 			hmb.bind(pMap);
 			mList = memberLogic.memberList(pMap);
-			page="forward:memberList"; //응답페이지 이름, select결과가 유지되어야 하니까 forward로 한다
+			logger.info("이거타니");
+			//아래가 없으면 500번 발동 -> 원인 : NullPointerException
+			req.setAttribute("mList", mList);
+			// pageMove[0] - forward, pageMove[1] -memberList > /memberList.jsp
+			// pageMove[0] - forward, pageMove[1] -memberList > /member2/memberList.jsp
+			// pageMove[0] - forward, pageMove[1] -memberList > //member2/memberList.jsp < page="forward:/member2/memberList";
+			page="forward:member2/memberList"; //응답페이지 이름, select결과가 유지되어야 하니까 forward로 한다
  		}
 		
 		//회원정보 보기
@@ -53,7 +59,7 @@ public class Member2Controller implements Controller {
 			hmb.bind(pMap);
 			List<Map<String,Object>> mList = null;
 			mList = memberLogic.memberList(pMap);
-			page="forward:memberDetail"; //응답페이지 이름, select결과가 유지되어야 하니까 forward로 한다
+			page="forward:member2/memberDetail"; //응답페이지 이름, select결과가 유지되어야 하니까 forward로 한다
 		}
 		//회원가입
 		//INSERT INTO member0518 VALUES(?,?,?,......)
@@ -96,9 +102,7 @@ public class Member2Controller implements Controller {
 				page="redirect:memberError";
 			}
 		}
-		
-		
-		return null;
+		return page;
 	}
 
 }

@@ -41,4 +41,57 @@ public class Member2Dao {
 		}
 		return mList;
 	}//end of memberList
+	//회원가입 처리
+	/****************************************************************
+	 * 
+	 * @param pMap - 화면에서 사용자가 입력한 회원정보를 받아옴
+	 * @return - 회원가입 성공 시 1, 실패 0
+	 * 작성자 : 나신입
+	 * 작성일 : 2023년 6월 19일
+	 * 내용 : 어떤 기능 구현하는 것인지 적음
+	 ***************************************************************/
+	public int memberInsert(Map<String, Object> pMap) {
+		logger.info("memberInsert");
+		int result = 0;
+		sqlSession = sqlSessionFactory.openSession();
+		try {
+			result = sqlSession.insert("memberInsert", pMap);
+			sqlSession.commit();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return result;
+	}//end of memberInsert
+	public int memberUpdate(Map<String, Object> pMap) {
+		logger.info("memberUpdate");
+		int result = 0;
+		//myBatis가 제공하는 SqlSessionFactory는 물리적으로 떨어져 있는 오라클 서버와 연결
+		sqlSession = sqlSessionFactory.openSession();
+		try {
+			//sqlSession객체는 SqlSessionFactory가 먼저 생성되어야 생성가능
+			//역할 : selectList, insert, update, delete 제공
+			result = sqlSession.update("memberUpdate", pMap);
+			//insert, update, delete는 커밋과 롤백의 대상이므로 반드시 커밋을 요청해야 물리적인 테이블에 반영됨
+			sqlSession.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}//end of memberUpdate
+	public int memberDelete(Map<String, Object> pMap) {
+		logger.info("memberDelete");
+		int result = 0;
+		//myBatis가 제공하는 SqlSessionFactory는 물리적으로 떨어져 있는 오라클 서버와 연결
+		sqlSession = sqlSessionFactory.openSession();
+		try {
+			//sqlSession객체는 SqlSessionFactory가 먼저 생성되어야 생성가능
+			//역할 : selectList, insert, update, delete 제공
+			result = sqlSession.delete("memberDelete", pMap);
+			//insert, update, delete는 커밋과 롤백의 대상이므로 반드시 커밋을 요청해야 물리적인 테이블에 반영됨
+			sqlSession.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}//end of memberDelete
 }

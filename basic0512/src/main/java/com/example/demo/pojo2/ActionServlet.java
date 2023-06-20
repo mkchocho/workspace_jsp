@@ -12,7 +12,6 @@ import org.apache.log4j.Logger;
 
 @SuppressWarnings("serial")
 public class ActionServlet extends HttpServlet {
-	
 	Logger logger = Logger.getLogger(ActionServlet.class);
 	// http://localhost:9000/board/boardList.pj2
 	// http://localhost:9000/XXX.pj2
@@ -22,8 +21,10 @@ public class ActionServlet extends HttpServlet {
 		logger.info(uri);
 		String context = req.getContextPath(); 
 		String command = uri.substring(context.length()+1);
+		logger.info("context:"+context+","+"command:"+command);
 		int end = command.lastIndexOf("."); 
-		command = command.substring(0, end); 
+		command = command.substring(0, end); // command = "member2/memberList" 
+		logger.info("command:"+command);
 		String upmu[] = null;	
 		upmu = command.split("/");
 		// 요청객체에다가 upmu배열의 주소번지를 저장하자
@@ -73,19 +74,23 @@ public class ActionServlet extends HttpServlet {
 				logger.info("내 안에 콜론없어요");
 				pageMove = page.split("/");
 			}//end of if -> 응답문자열을 배열에 담기
+			logger.info(pageMove[0]+","+pageMove[1]);
 			//insert here - 아직 sendRedirect이나 forward에 대한 코드가 없다.
 			if(pageMove != null) {//요청에 대해 응답문자열이 나왔어
-				String path = pageMove[1];
+				String path = pageMove[1];//page[0]-forward, page[1]-member2/memberList
 				//너 안에 redirect야?
 				if("redirect".equals(pageMove[0])) {
+					logger.info("redirect");
 					resp.sendRedirect(path);
 					//아래 리턴을 반드시 붙여 줄 것 - '응답이 커밋된 후에는 forward할 수 없습니다.' 라는 오류가 발생하면 return 누락
 					return;
 				}
 				//forward를 가진거야?
 				else if("forward".equals(pageMove[0])) {
-					RequestDispatcher view = req.getRequestDispatcher(path);
-					view.forward(req, resp);
+					logger.info("forward");
+					// -> /memberList.jsp
+					RequestDispatcher view = req.getRequestDispatcher("/"+path+".jsp");// path = memberList
+					view.forward(req, resp); 					  // "/"의 의미
 				}else {
 					//redirect도 없고 forward도 없어 - 스프링지원 - 수요일날
 				}
