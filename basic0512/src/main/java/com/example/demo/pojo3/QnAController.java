@@ -90,5 +90,10 @@ public class QnAController implements Controller3{
 		// TODO Auto-generated method stub
 		return null;
 	}
+	@Override
+	public Object boardList(HttpServletRequest req, HttpServletResponse res) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

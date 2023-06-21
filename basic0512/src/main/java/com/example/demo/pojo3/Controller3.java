@@ -26,6 +26,9 @@ public interface Controller3 {//log4j가 동일한 이름으로 제대로 인식
 	public Object qnaInsert(HttpServletRequest req, HttpServletResponse res);
 	public Object qnaUpdate(HttpServletRequest req, HttpServletResponse res);
 	public Object qnaDelete(HttpServletRequest req, HttpServletResponse res); 
+	//자유게시판일 때
+	//인터페이스는 추상메소드만 가질 수 있어서 abstract 생략이 가능함 
+	public Object boardList(HttpServletRequest req, HttpServletResponse res);
 }
 /*
 * 다른 것들을 나열해 보자

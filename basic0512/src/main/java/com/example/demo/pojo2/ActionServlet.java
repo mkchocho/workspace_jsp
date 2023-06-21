@@ -92,7 +92,7 @@ public class ActionServlet extends HttpServlet {
 					RequestDispatcher view = req.getRequestDispatcher("/"+path+".jsp");// path = memberList
 					view.forward(req, resp); 					  // "/"의 의미
 				}else {
-					//redirect도 없고 forward도 없어 - 스프링지원 - 수요일날
+					//redirect도 없고 forward도 없어 - 스프링지원 - 수요일날 - ViewResolver
 				}
 			}////////////////end of 후처리///////////////////////
 			
