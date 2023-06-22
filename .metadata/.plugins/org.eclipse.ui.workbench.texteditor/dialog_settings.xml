@@ -10,23 +10,23 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="전체조회"/>
+		<item key="selection" value="memberDetail"/>
 		<list key="findhistory">
+			<item value="memberDetail"/>
+			<item value="basic0512"/>
+			<item value="basic"/>
+			<item value="Context doc"/>
+			<item value="Context"/>
+			<item value="docbase"/>
+			<item value="dobase"/>
+			<item value="path"/>
+			<item value="context path"/>
+			<item value="context"/>
 			<item value="전체조회"/>
 			<item value="memberlist"/>
 			<item value="rmap.get"/>
 			<item value="post"/>
 			<item value="map"/>
-			<item value="memberInsert"/>
-			<item value="doService"/>
-			<item value="delete"/>
-			<item value="#1"/>
-			<item value="notice"/>
-			<item value="&quot;redirect:boardList.pj2&quot;"/>
-			<item value="connector connection"/>
-			<item value="String path = null;"/>
-			<item value="context"/>
-			<item value="토큰"/>
 		</list>
 		<list key="replacehistory">
 			<item value="board"/>

@@ -93,8 +93,8 @@ public class HashMapBinder {
 			logger.info(req.getParameter(key));//한글 깨짐을 출력한 코드
 			//GET방식의 한글처리 - server.xml -> URIencoding = "utf-8"
 			//POST방식의 한글 처리 -> HangulConversion.java -> toUTF
-			pMap.put(key, HangulConversion.toUTF(req.getParameter(key)));//한글처리 끝 HangulConversion.toUTF() - POST방식
-//			pMap.put(key, req.getParameter(key));//GET방식
+//			pMap.put(key, HangulConversion.toUTF(req.getParameter(key)));//한글처리 끝 HangulConversion.toUTF() - POST방식
+			pMap.put(key, req.getParameter(key));//GET방식
 		}
 	}
 }

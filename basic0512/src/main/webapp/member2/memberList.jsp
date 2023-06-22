@@ -54,8 +54,9 @@
     }
   	const memberDetail = (user_no) => {
   		console.log(user_no);
-  		location.href="./memberDetail.pj2&mem_no="+user_no;
+  		location.href="./memberDetail.pj2?mem_no="+user_no;
   	}
+  	
   	const zipcodeForm = () => {
   		//파라미터로 값을 넘길 때 싱글 혹은 더블 쿼테이션을 붙이지 않으면 변수취급을 함 - 주의
   		cmm_window_popup('zipcodeSearch.jsp' , '700' , '600' , 'zipcodeForm' );

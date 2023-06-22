@@ -21,7 +21,7 @@
 <%@include file="/common/bootstrap_common.jsp"%>
 <script type = "text/javascript">
 const memberDelete = () => {
-	location.href="./memberCRUD?method=memberDelete&mem_no=<%=rmap.get("mem_no")%>";
+	window.location.href="./memberCRUD?method=memberDelete&mem_no=<%=rmap.get("mem_no")%>";
 }
 const memberUpdate = () => {
 	//폼 전송을 통해서 사용자가 수정한 정보를 톰캣 서버로 전송하기

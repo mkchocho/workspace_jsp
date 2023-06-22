@@ -22,7 +22,7 @@
 	<select id="deptList" resultType="java.util.Map" parameterType="map">
 		SELECT deptno, dname, loc FROM dept
 		<where>
-			<if test="deptno!=0">
+			<if test="deptno!=null">
 				AND deptno = #{deptno}
 			</if>
 		</where>

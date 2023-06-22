@@ -21,7 +21,15 @@
   <servlet-name>FrontMVC2</servlet-name>
   <url-pattern>*.pj2</url-pattern>
   </servlet-mapping>
-   <servlet>
+  <servlet>
+  <servlet-name>FrontMVC3</servlet-name>
+  <servlet-class>com.example.demo.pojo3.ActionSupport</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  <servlet-name>FrontMVC3</servlet-name>
+  <url-pattern>*.pj3</url-pattern>
+  </servlet-mapping>
+  <servlet>
   <servlet-name>KakaoAPI</servlet-name>
   <servlet-class>com.example.demo.pojo3.KakaoSupport</servlet-class>
   </servlet>
@@ -29,5 +37,5 @@
   <servlet-name>KakaoAPI</servlet-name>
   <url-pattern>/auth/*</url-pattern>
   </servlet-mapping>
-  
+
 </web-app>

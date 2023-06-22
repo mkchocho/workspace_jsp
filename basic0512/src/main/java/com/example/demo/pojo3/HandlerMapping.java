@@ -3,6 +3,8 @@ package com.example.demo.pojo3;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+
 /*
  * if문을 대신 할거야 - 왜냐면 직관적이지가 않으니까...
  * Controller controller = new MemberController();
@@ -11,13 +13,14 @@ import javax.servlet.http.HttpServletResponse;
  * 처리를 한다는 건 메소드를 정의하라
  */
 public class HandlerMapping {
-
+	static Logger logger = Logger.getLogger(HandlerMapping.class);
 	//메소드 파라미터 자리는 지변이다
 	//메소드의 파라미터를 통해서 주소번지 즉 원본을 사용할 수 있다. - 생성자에서도 동일함 
 	public static Object getController(String[] upmu, HttpServletRequest req, HttpServletResponse res) {
 		Object obj = null;
 		Controller3 controller = null;
-		if("board".equals(upmu[0])) {
+		if("board3".equals(upmu[0])) {
+			logger.info("게시판 1-3");
 			//insert here{위치잡기} - 인스턴스화
 			controller = new Board3Controller();
 			//위에서 이번 요청에 대한 컨트롤러 클래스가 결정되었으니

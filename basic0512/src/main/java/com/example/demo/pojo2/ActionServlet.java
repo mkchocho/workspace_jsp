@@ -89,6 +89,7 @@ public class ActionServlet extends HttpServlet {
 				else if("forward".equals(pageMove[0])) {
 					logger.info("forward");
 					// -> /memberList.jsp
+					logger.info(path);
 					RequestDispatcher view = req.getRequestDispatcher("/"+path+".jsp");// path = memberList
 					view.forward(req, resp); 					  // "/"의 의미
 				}else {

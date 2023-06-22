@@ -33,7 +33,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-ma
 		from member0518
 		<where>
 			<if test='mem_no != null '>
-				AND mem_no like #{mem_no}||'%'
+				AND mem_no=#{mem_no}||'%'
 			</if>
 			<if test='mem_name !=null'>
 				AND mem_name LIKE #{mem_name}||'%'

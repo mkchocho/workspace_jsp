@@ -16,6 +16,15 @@
 				</props>
 			</property>
 	</bean>				
+	<!-- DeptController는 스프링컨테이너가 객체주입을 관리해줌[dependency injection]
+		 spring-servlet.xml 문서에 등록을 해두면 필요한 시점에 스프링엔진이 객체를 주입해줘서
+		 NullPointerException이 발생하지 않음 
+		 xml을 모름 -> 자바코딩 -> 자바도 안 친함 -> 어노테이션을 제공하게 되었음
+		 spring2.5 어노테이션 갯수가 제한적 -> spring3.0 어노테이션의 갯수가 늘어남 -> 
+		 서블릿 없이도 개발이 가능해짐
+		 프레임워크는 잘 못하는 사람, 신입개발자를 배려함 - F/W - 일정을 관리 - 패널티
+		 ReactJS -> NextJS 프레임워크 우대
+	 -->  
   	<bean id="dept-controller" class="com.erp.DeptController">
 		<property name="methodNameResolver" ref="dept-resolver"/>
 		<property name="deptLogic" ref="dept-logic"/>

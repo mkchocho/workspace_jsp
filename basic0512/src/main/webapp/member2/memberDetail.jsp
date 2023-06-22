@@ -24,7 +24,7 @@
 	const memberDelete = () => {
 		//상대경로: 점이 하나이면 member2 - 내가 현재 바라보는 경로
 		//점이 두개이면 하나 위에 경로 ->webapp
-		location.href="./memberDelete.pj2?mem_no=<%=rmap.get("MEM_NO")%>";
+		window.location.href="./memberDelete.pj2?mem_no=<%=rmap.get("MEM_NO")%>";
 	}
 	const memberUpdate = () => {
 		//폼 전송을 통해서 사용자가 수정한 정보를 톰캣 서버로 전송하기

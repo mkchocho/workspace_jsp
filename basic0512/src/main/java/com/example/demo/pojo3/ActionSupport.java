@@ -13,7 +13,7 @@ import org.apache.log4j.Logger;
 @SuppressWarnings("serial")
 public class ActionSupport extends HttpServlet {
 	Logger logger = Logger.getLogger(ActionSupport.class);
-	
+
 	protected void doService(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		logger.info("doService");
 		String uri = req.getRequestURI();// => /board3/boardList.pj3
@@ -24,21 +24,21 @@ public class ActionSupport extends HttpServlet {
 		String upmu[] = null;	
 		upmu = command.split("/");
 		Object obj = null; //HandlerMapping에 return타입이 Object인 메소드 getController
-		
+
 		//insert here - HandlerMapping과 비벼보기 //HandpleMapping - 페이지처리
 		obj = HandlerMapping.getController(upmu,req,resp);//객체생성하지 않고 싱글톤으로 사용할려고 HandlerMapping의 메소드를 static으로 변경함
-//여기 핸들러 매핑이 가지고 있는 코드 때문에 필요 없어졌어 핸들러 매핑은 obj를 리턴함 		
-//		if("member2".equals(upmu[0])) {
-//			logger.info("member2");
-//			controller = new Member2Controller();
-//			req.setAttribute("upmu", upmu); //저장하기
-//			page = controller.execute(req,resp);
-//		}
-//		if("board".equals(upmu[0])) {
-//			controller = new BoardController();
-//			req.setAttribute("upmu", upmu); //배열의 주소번지
-//			page = controller.execute(req, resp);
-//		}//내려 갈 때 전처리 코드
+		//여기 핸들러 매핑이 가지고 있는 코드 때문에 필요 없어졌어 핸들러 매핑은 obj를 리턴함 		
+		//		if("member2".equals(upmu[0])) {
+		//			logger.info("member2");
+		//			controller = new Member2Controller();
+		//			req.setAttribute("upmu", upmu); //저장하기
+		//			page = controller.execute(req,resp);
+		//		}
+		//		if("board".equals(upmu[0])) {
+		//			controller = new BoardController();
+		//			req.setAttribute("upmu", upmu); //배열의 주소번지
+		//			page = controller.execute(req, resp);
+		//		}//내려 갈 때 전처리 코드
 		if(obj!=null) {
 			String pageMove[] = null;
 			ModelAndView mav = null;
@@ -67,35 +67,46 @@ public class ActionSupport extends HttpServlet {
 			////////////////////////////////////////////////////////////////////////////////////////
 			/////////////////////////////////////[[ViewResolver]]//////////////////////////////////스프링할땐 필요없는 부분
 			//insert here
+			//pageMove 원소의 갯수가 2개일 때 - 백엔드 처리된 결과를 화면으로 처리할 때
+			if(pageMove!=null && pageMove.length==2) {
+				logger.info("pageMove 원소의 갯수가 2개 일때");
+				String path = pageMove[1];
+				//redirect로 할까?
+				if("redirect".equals(pageMove[0])) {//return "redirect:dept/getDeptList"
+					resp.sendRedirect(path);
+				}
+				//forward로 해야돼?
+				else if("forward".equals(pageMove[0])) {//return "forward:dept/getDeptList"
+					RequestDispatcher view = req.getRequestDispatcher("/"+path+".jsp");
+					view.forward(req,resp);
+				}
+				//보안때문에 WEB-INF로 보내줄까
+				else {//redirect도 없고 forward도 없는 경우야?
+					RequestDispatcher view = req.getRequestDispatcher("/WEB-INF/views/"+path+".jsp");
+					view.forward(req,resp);
+				}
+			}/////////////////////end of pageMove원소의 개수가 2개일 때///////////////////////
+			//pageMove의 원소의 갯수가 1개일 때 - 화면이 아닌 경우를 처리하기 위해서 설계함 - 단순문자열이거나 JSON포맷(React 배려하는 설계임) 
+			else if(pageMove!=null && pageMove.length==1) {
+				logger.info("pageMove 원소의 갯수가 1개 일때");
+
+			}////////////////////////end of pageMove 갯수가 1개일 때 - 화면이 아닌 문자열이나 JSON 포맷지원할 때 (spring - @RestController대신 해줌)
+			//원시적인 방법 또는 레거시 시스템을 공부하는 건 자동으로 처리하다가 문제가 발생하거나 해당 프레임워크가 지원을 안해주더라도
+			//표준적인 방법을 알고 있으면 해결할 수 있다.(실마리, 컨벤션, 힌트, 아이디어 제공...)
 			
 			/////////////////////////////////////[[ViewResolver]]/////////////////////////////////
 
-			logger.info(pageMove[0]+","+pageMove[1]);
-			if(pageMove != null) {//요청에 대해 응답문자열이 나왔어
-				String path = pageMove[1];//page[0]-forward, page[1]-member2/memberList
-				if("redirect".equals(pageMove[0])) {
-					logger.info("redirect");
-					resp.sendRedirect(path);
-					return;
-				}
-				else if("forward".equals(pageMove[0])) {
-					logger.info("forward");
-					RequestDispatcher view = req.getRequestDispatcher("/"+path+".jsp");// path = memberList
-					view.forward(req, resp); 					  // "/"의 의미
-				}else {
-				}
-			}////////////////end of 후처리///////////////////////
 		}//page가 null이 아니면 후처리 
 	} // end of doService
-	
+
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		super.doGet(req, resp);
+		doService(req, resp);
 	}
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		super.doPost(req, resp);
+		doService(req, resp);
 	}
 }
