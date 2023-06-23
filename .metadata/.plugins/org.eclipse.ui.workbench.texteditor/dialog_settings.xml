@@ -10,8 +10,16 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="memberDetail"/>
+		<item key="selection" value="memberDelete"/>
 		<list key="findhistory">
+			<item value="memberDelete"/>
+			<item value="memberList"/>
+			<item value="memberSearch"/>
+			<item value="전체조회"/>
+			<item value="modal"/>
+			<item value="230527"/>
+			<item value="board"/>
+			<item value="b_"/>
 			<item value="memberDetail"/>
 			<item value="basic0512"/>
 			<item value="basic"/>
@@ -19,23 +27,18 @@
 			<item value="Context"/>
 			<item value="docbase"/>
 			<item value="dobase"/>
-			<item value="path"/>
-			<item value="context path"/>
-			<item value="context"/>
-			<item value="전체조회"/>
-			<item value="memberlist"/>
-			<item value="rmap.get"/>
-			<item value="post"/>
-			<item value="map"/>
 		</list>
 		<list key="replacehistory">
+			<item value=""/>
+			<item value="qna"/>
+			<item value="q_"/>
 			<item value="board"/>
 			<item value="e1653c977ff9fd8b703e6844097d7f36"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
-		<item key="DIALOG_X_ORIGIN" value="950"/>
-		<item key="DIALOG_Y_ORIGIN" value="501"/>
+		<item key="DIALOG_X_ORIGIN" value="1203"/>
+		<item key="DIALOG_Y_ORIGIN" value="485"/>
 		<item key="DIALOG_WIDTH" value="322"/>
 		<item key="DIALOG_HEIGHT" value="391"/>
 		<item key="DIALOG_FONT_NAME" value="1|맑은 고딕|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|맑은 고딕"/>

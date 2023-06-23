@@ -59,7 +59,10 @@ public class Member2Controller implements Controller {
 			hmb.bind(pMap);
 			List<Map<String,Object>> mList = null;
 			mList = memberLogic.memberList(pMap);
+			logger.info(mList);
+			req.setAttribute("mList", mList);
 			page="forward:member2/memberDetail"; //응답페이지 이름, select결과가 유지되어야 하니까 forward로 한다
+			
 		}
 		//회원가입
 		//INSERT INTO member0518 VALUES(?,?,?,......)

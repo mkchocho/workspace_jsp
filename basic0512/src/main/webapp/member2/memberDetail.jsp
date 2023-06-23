@@ -34,6 +34,9 @@
 		//이벤트 버블링 효과가 있어서 이벤트가 하위 컴포넌트에 전이되는 것을 막아야 줘야 한다- 버튼을 눌렀는데 화면이 새로고침되거나 깜빡한다면 의심해봄
 		document.querySelector("#f_member").submit();
 	}
+	const memberList = () => {
+		window.location.href="/member2/memberList.pj2";
+	}
 </script>
 </head>
 <body>

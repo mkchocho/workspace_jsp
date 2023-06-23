@@ -39,6 +39,22 @@ public class HandlerMapping {
 				//pageMove[1] = board/boardList
 				//-> http://localhost:9000/board/boardList.jsp -> ViewResolver가 해줌 
 			}////////////////end of boardList()///////////////////////////
+			
+			else if ("jsonBoardList".equals(upmu[1])) {
+				//insert here
+				obj = controller.jsonBoardList(req,res);
+				logger.info(obj);
+				//위 메소드의 리턴타입으로 List<Map>을 받게 됨 - 왜냐하면 select이니깐 - 전체조회
+				if(obj instanceof ModelAndView) {
+					logger.info("ModelAndView");
+					return (ModelAndView)obj;
+				}//boardList메소드 실행 후에 리턴타입을 비교함 
+				else if(obj instanceof String) {
+					logger.info("String");
+					return (String)obj;
+				}
+			}//end of jsonBoardList - 리액트와 비벼보기
+			
 		}////////////////////end of 자유게시판/////////////////////////////
 		else if("qna".equals(upmu[0])) {
 			//insert here{위치잡기} - 인스턴스화

@@ -1,5 +1,7 @@
 package com.example.demo.pojo3;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -7,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
+
+import com.google.gson.Gson;
 
 public class Board3Controller implements Controller3 {
 	Logger logger = Logger.getLogger(Board3Controller.class);
@@ -84,6 +88,35 @@ public class Board3Controller implements Controller3 {
 		// -> WEB-INF/views/board3/boardList.jsp.jsp > .jsp가 두번 붙으면 안됨
 		mav.setViewName("board3/boardList");
 		return mav;
+	}
+	
+	@Override
+	public String jsonBoardList(HttpServletRequest req, HttpServletResponse res) {
+		logger.info("boardList");
+		List<Map<String,Object>> bList = null;
+//		bList = boardLogic.boardList();
+		bList = new ArrayList<Map<String,Object>>();
+		Map<String,Object> rmap = new HashMap<String, Object>();
+		rmap.put("b_no",1);
+		rmap.put("b_title","제목1");
+		rmap.put("b_content","내용1");
+		bList.add(rmap);
+		rmap=new HashMap<String, Object>();
+		rmap.put("b_no",2);
+		rmap.put("b_title","제목2");
+		rmap.put("b_content","내용2");
+		bList.add(rmap);
+		rmap=new HashMap<String, Object>();
+		rmap.put("b_no",3);
+		rmap.put("b_title","제목3");
+		rmap.put("b_content","내용3");
+		bList.add(rmap);
+		logger.info(bList);//여기서는 그냥 String이 출력 됨. 그래서 =연산자가 있다.
+		Gson g = new Gson();
+		String temp=g.toJson(bList);
+		//그러나 아래서는 :이 들어간다. 왜냐면 JSON 포맷으로 변경되었으니까...
+		logger.info(temp);
+		return temp;
 	}
 
 

@@ -33,10 +33,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-ma
 		from member0518
 		<where>
 			<if test='mem_no != null '>
-				AND mem_no=#{mem_no}||'%'
+				AND mem_no=#{mem_no}
 			</if>
-			<if test='mem_name !=null'>
-				AND mem_name LIKE #{mem_name}||'%'
+			<if test="gubun!=null">
+				<choose>
+					<when test='gubun.equals("mem_id")'>
+						AND (mem_id LIKE '%'||#{keyword}||'%')
+					</when>
+					<when test='gubun.equals("mem_name")'>
+						AND (mem_name LIKE '%'||#{keyword}||'%')
+					</when>
+					<when test='gubun.equals("mem_address")'>
+						AND (mem_address LIKE '%'||#{keyword}||'%')
+					</when>
+				</choose>
 			</if>
 		</where>
 	</select>

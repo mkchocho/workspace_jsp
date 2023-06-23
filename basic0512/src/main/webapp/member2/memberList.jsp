@@ -38,7 +38,7 @@
     	// window.location은 location도 window객체의 자손을 뜻하는 것
     	//조건검색을 요청하는 URL매핑이다
     	//URL매핑값으로 분길르 함(BoardController, MemberController 호출할지 유무 판단)
-    	window.location.href="/member2/memberList.pj2&gubun="+gubun+"&keyword="+keyword;
+    	window.location.href="/member2/memberList.pj2?gubun="+gubun+"&keyword="+keyword;
     	//window.location.href="http://localhost:9000/member2/memberCRUD?method=memberSelect&gubun="+gubun+"&keyword="+keyword;
     }
     const searchEnter = (event) => {

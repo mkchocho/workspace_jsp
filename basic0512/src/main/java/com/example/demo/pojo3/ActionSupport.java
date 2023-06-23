@@ -1,6 +1,7 @@
 package com.example.demo.pojo3;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -95,6 +96,13 @@ public class ActionSupport extends HttpServlet {
 				logger.info("pageMove 원소의 갯수가 1개 일때");
 
 			}////////////////////////end of pageMove 갯수가 1개일 때 - 화면이 아닌 문자열이나 JSON 포맷지원할 때 (spring - @RestController대신 해줌)
+			else {
+				logger.info("리턴결과가 JSON포맷이라서 pageMove의 갯수가 2개 이상인 경우가 나옴");
+				resp.setContentType("text/plain;utf-8");
+				PrintWriter out = resp.getWriter();
+				out.print(obj);
+				return;
+			}
 			//원시적인 방법 또는 레거시 시스템을 공부하는 건 자동으로 처리하다가 문제가 발생하거나 해당 프레임워크가 지원을 안해주더라도
 			//표준적인 방법을 알고 있으면 해결할 수 있다.(실마리, 컨벤션, 힌트, 아이디어 제공...)
 			

@@ -45,7 +45,7 @@ public class ActionServlet extends HttpServlet {
 			//오버라이드 된 execute메소드 호출하기
 			//컨트롤 클래스는 Controller 인터페이스를 implements하고 있다 - 추상메소드를 재정의해야 함
 			//각 컨트롤러 클래스가 서블릿이 아니어도 되는 건 execute메소드의 파라미터로 요청객체와 응답객체를 받을 수 있어서 그렇다
-			page = controller.execute(req,resp);
+			page = controller.execute(req,resp);//page = "forward:member2/memberDetail"
 		}
 		//http:localhost:9000/board/boardList.pj2
 		//http:localhost:9000/board/boardInsert.pj2
