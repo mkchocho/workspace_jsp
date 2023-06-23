@@ -1,48 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.mybatis.mapper.boardMapper">
-	<update id="boardUpdate" parameterType="map">
-		UPDATE 	board230527
+<mapper namespace="com.mybatis.mapper.qnaMapper">
+	<update id="qnaUpdate" parameterType="map">
+		UPDATE 	qna
 		SET
-			b_writer = #{b_writer},
-			b_title = #{b_title},
-			b_content = #{b_content},
-			b_date = TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS')
+			q_writer = #{q_writer},
+			q_title = #{q_title},
+			q_content = #{q_content},
+			q_date = TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS')
 		WHERE 
-			b_no = #{b_no}
+			q_no = #{q_no}
 	</update>
-	<delete id="boardDelete" parameterType="map">
-		delete from board230527 where b_no=#{b_no}
+	<delete id="qnaDelete" parameterType="map">
+		delete from qna where q_no=#{q_no}
 	</delete>
 	
-	<select id="boardList" parameterType="java.util.HashMap" resultType="map">
+	<select id="qnaList" parameterType="java.util.HashMap" resultType="map">
 		SELECT
-		        b_no, b_writer, b_title, b_content, b_date, b_hit, b_file
-		  FROM board230527
+		        q_no, q_writer, q_title, q_content, q_date, q_hit, q_file
+		  FROM qna
 		<where>
-			<if test="b_no!=null">AND b_no=#{b_no}</if>		
+			<if test="q_no!=null">AND q_no=#{q_no}</if>		
 			<if test="gubun!=null">
 				<choose>
-					<when test='gubun.equals("b_title")'>
-						AND (b_title LIKE '%'||#{keyword}||'%')
+					<when test='gubun.equals("q_title")'>
+						AND (q_title LIKE '%'||#{keyword}||'%')
 					</when>
-					<when test='gubun.equals("b_writer")'>
-						AND (b_writer LIKE '%'||#{keyword}||'%')
+					<when test='gubun.equals("q_writer")'>
+						AND (q_writer LIKE '%'||#{keyword}||'%')
 					</when>
-					<when test='gubun.equals("b_content")'>
-						AND (b_content LIKE '%'||#{keyword}||'%')
+					<when test='gubun.equals("q_content")'>
+						AND (q_content LIKE '%'||#{keyword}||'%')
 					</when>
 				</choose>
 			</if>				
 		</where>
-		ORDER BY b_no desc
+		ORDER BY q_no desc
 	</select>	 	
 
-	<insert id="boardInsert" parameterType="map" >
-		INSERT INTO board230527(b_no, b_writer , b_title ,b_content, b_hit , b_date, b_file) 
-		              VALUES(seq_board230527_no.nextval
-		                           ,#{b_writer},#{b_title},#{b_content}, 0
-		                          , TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS'),#{b_file})
+	<insert id="qnaInsert" parameterType="map" >
+		INSERT INTO qna(q_no, q_writer , q_title ,q_content, q_hit , q_date, q_file) 
+		              VALUES(seq_qna_no.nextval
+		                           ,#{q_writer},#{q_title},#{q_content}, 0
+		                          , TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS'),#{q_file})
 	</insert>		
 
 </mapper>

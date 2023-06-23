@@ -1,15 +1,21 @@
 package com.example.demo.pojo3;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
+
+import com.google.gson.Gson;
+import com.util.HashMapBinder;
 // Controller3의 구현체 클래스가 된다는 건 추상메소드를 오버라이딩 해야함
 // 내가 다 필요하지 않아도 반드시 오버라이딩 해야 함 - 제약조건 - 명세서이다.
 public class QnAController implements Controller3{
 	Logger logger = Logger.getLogger(QnAController.class);
+	private QnALogic qnaLogic=new QnALogic();
 /********************************************************************************
  * 조회결과 JSON형식으로 꺼내오기 - 페이지가 아니라...{리액트 비벼보기}
  * 리턴타입은 String으로 한다
@@ -18,7 +24,14 @@ public class QnAController implements Controller3{
 	@Override
 	public Object jsonQnaList(HttpServletRequest req, HttpServletResponse res) {
 		logger.info("jsonQnaList");
-		return null;
+		List<Map<String,Object>> qList = null;
+		Map<String,Object> pMap = new HashMap<String, Object>();
+		HashMapBinder hmb = new HashMapBinder(req);
+		hmb.bind(pMap);
+		qList = qnaLogic.qnaList(pMap);
+		Gson g = new Gson();
+		String temp = g.toJson(qList);
+		return temp;
 	}
 	/********************************************************************************
 	 * 조회결과 JSP 페이지에 출력하기

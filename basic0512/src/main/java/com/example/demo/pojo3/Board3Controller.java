@@ -78,6 +78,10 @@ public class Board3Controller implements Controller3 {
 		List<Map<String,Object>> bList = null;
 		bList = boardLogic.boardList();
 		ModelAndView mav = new ModelAndView(req);
+		//아래에서 화면이름을 줄때 뒤에 .jsp를 붙이면 안된다
+		//왜냐하면 접두어가 WEB-INF/views가 붙고
+		//화면이름.jsp가 붙는다g
+		// -> WEB-INF/views/board3/boardList.jsp.jsp > .jsp가 두번 붙으면 안됨
 		mav.setViewName("board3/boardList");
 		return mav;
 	}

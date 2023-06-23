@@ -18,6 +18,7 @@ public class ActionSupport extends HttpServlet {
 		logger.info("doService");
 		String uri = req.getRequestURI();// => /board3/boardList.pj3
 		String context = req.getContextPath();//=> / <Context docBase="basic0512" path="/" 
+		logger.info(uri);
 		String command = uri.substring(context.length()+1);
 		int end = command.lastIndexOf("."); // .pj3이 있는 위치 정보를 가져옴
 		command = command.substring(0, end); // command = "member2/memberList" 
@@ -61,15 +62,16 @@ public class ActionSupport extends HttpServlet {
 			else if(obj instanceof ModelAndView) {
 				mav = (ModelAndView)obj;
 				pageMove = new String[2];
-				pageMove[0]="forward"; // 상수처리 : spring의 방식 모방 중
-				pageMove[1]="페이지이름";//boardList or memberList or noticeList(확장자빼고)
+				//스프링에서는 리턴타입이 ModelAndView이면 페이지 경로를 WEB-INF 아래에서 찾는다
+				pageMove[0]="modelandview"; // 상수처리 : spring의 방식 모방 중
+				pageMove[1] = mav.getViewName(); // boardList or memberList or noticeList
 			}
 			////////////////////////////////////////////////////////////////////////////////////////
 			/////////////////////////////////////[[ViewResolver]]//////////////////////////////////스프링할땐 필요없는 부분
 			//insert here
 			//pageMove 원소의 갯수가 2개일 때 - 백엔드 처리된 결과를 화면으로 처리할 때
-			if(pageMove!=null && pageMove.length==2) {
-				logger.info("pageMove 원소의 갯수가 2개 일때");
+		if(pageMove!=null && pageMove.length==2) {
+			/*	logger.info("pageMove 원소의 갯수가 2개 일때");
 				String path = pageMove[1];
 				//redirect로 할까?
 				if("redirect".equals(pageMove[0])) {//return "redirect:dept/getDeptList"
@@ -84,7 +86,9 @@ public class ActionSupport extends HttpServlet {
 				else {//redirect도 없고 forward도 없는 경우야?
 					RequestDispatcher view = req.getRequestDispatcher("/WEB-INF/views/"+path+".jsp");
 					view.forward(req,resp);
-				}
+				}*/
+				//insert here - 스프링에서는 요청에 대한 응답 URL을 완성해 주는 ViewResolver클래스가 제공됨 
+				new ViewResolver(req,resp,pageMove);
 			}/////////////////////end of pageMove원소의 개수가 2개일 때///////////////////////
 			//pageMove의 원소의 갯수가 1개일 때 - 화면이 아닌 경우를 처리하기 위해서 설계함 - 단순문자열이거나 JSON포맷(React 배려하는 설계임) 
 			else if(pageMove!=null && pageMove.length==1) {
