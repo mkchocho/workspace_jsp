@@ -23,13 +23,21 @@ import com.util.HashMapBinder;
  * 개발자 입장에서 보면 get 방식이든 post방식이든
  * 처리를 해주어야 하는 것은 같다
  * 
+ * 첫번째 방법 - MVC패턴이 배제된 방식
+ * WebServlet이라는 어노테이션으로 URL매핑을 처리함 
+ * 
  */
 
 @SuppressWarnings("serial")
 @WebServlet("/member/memberCRUD")
 public class MemberServlet extends HttpServlet {
     Logger logger = Logger.getLogger(MemberServlet.class);
-    MemberDao memberDao = new MemberDao();
+    //MemberLogic이 없이 바로 Dao[Data Access Object - ORM솔루션 or JTa]클래스로 조립함 
+    //업무가 복잡해 지면 서비스 계층에서 여러개의 Dao메소드를 호출해야 한다.
+    //Dao 클래스를 직접 인스턴스화 함 - 객체에 대한 라이프사이클 관리도 개발자가 가져가야함 
+    //직접 관리하지 않으면 어떻게 선언하나요? - 직접 new를 하지 않음 - 제어역전, 역제어, IoC
+    // MemberDao memberDao = null;
+    MemberDao memberDao = new MemberDao();//전역변수 위치 - 이른인스턴스화라함 
     /* ************************************************************************************
      * 회원(CRUD)관리 구현
      * URL 패턴 : 	업무명(폴더명) - member 
@@ -73,9 +81,14 @@ public class MemberServlet extends HttpServlet {
      	   logger.info("before : "+mList);//아무것도 없음 {} []
      	  HashMap<String,Object> pMap = new HashMap<>();
           HashMapBinder hmb = new HashMapBinder(req);
-          hmb.bind(pMap);
+          hmb.bind(pMap);//반복
+          //MVC패턴을 적용한 개발 방법론에서는 뭔가 코딩을 하는 느낌을 받으면 안됨
+          //인간 복사기인듯한 뭔가 개발하는 느낌이 별로 안드는 상태 - F/W 괜찮다
+          //바뀌는 건 뭐지? - 테이블명, 컬럼명, 변수명 --끝--
+          //만일 한 가지를 추가한다면 응답페이지 이름 - 반복되는 패턴이 보임 -> 규칙적이다.
      	   mList = memberDao.memberSelect(pMap); //이 메소드 안에서 오라클 서버를 경유한 경우라면 더이상 null이 아님
-           req.setAttribute("mList", mList);
+           req.setAttribute("mList", mList);//forward이다 -> select임 
+           //아래에서 forward를 호출하고 있음 - 응답페이지가 나갈때 메소드 파라미터로 request가 넘어감
            RequestDispatcher view = req.getRequestDispatcher("memberList.jsp");
            view.forward(req, resp);
      	   //[] - List -> ArrayList{List인터페이스이고 ArrayList구현체 클래스임}
@@ -92,6 +105,7 @@ public class MemberServlet extends HttpServlet {
            hmb.bind(pMap);
       	   mList = memberDao.memberSelect(pMap); //이 메소드 안에서 오라클 서버를 경유한 경우라면 더이상 null이 아님
             req.setAttribute("mList", mList);
+            //1-3에서는 ViewResolver설계됨 
             RequestDispatcher view = req.getRequestDispatcher("memberDetail.jsp");
             view.forward(req, resp);
       	   //[] - List -> ArrayList{List인터페이스이고 ArrayList구현체 클래스임}

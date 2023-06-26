@@ -51,7 +51,7 @@ public class ActionServlet extends HttpServlet {
 		//http:localhost:9000/board/boardInsert.pj2
 		//http:localhost:9000/board/boardUpdate.pj2
 		//http:localhost:9000/board/boardDelete.pj2
-		if("board".equals(upmu[0])) {
+		else if("board".equals(upmu[0])) {
 			controller = new BoardController();
 			//요청객체에 String 배열의 주소번지를 담음
 			req.setAttribute("upmu", upmu); //배열의 주소번지
@@ -60,6 +60,19 @@ public class ActionServlet extends HttpServlet {
 			//request가 저장소의 역할도 가능한 건가요? - yes
 			page = controller.execute(req, resp);
 		}//내려 갈 때 전처리 코드
+		//->http://localhost:9000/order/orderList.pj2
+		//->http://localhost:9000/order/orderInsert.pj2
+		//->http://localhost:9000/order/orderUpdate.pj2
+		//->http://localhost:9000/order/orderDelete.pj2
+		else if("order".equals(upmu[0])) {
+			logger.info("주문관리");
+			controller = new OrderController();//생성부의 이름으로 자바는 객체를 주입해줌  - 메모리에 로딩해줌
+			//질문: execute메소드를 호출할 때 왜 upmu배열을 보내야 하나요?
+			//질문: 요청객체에 담는 이유는 뭔가요? - 요청이 유지되는 동안에는 재사용이 가능함.
+			//request내장객체는 동시에 저장소이기도 하다
+			req.setAttribute("upmu", upmu);
+			page = controller.execute(req, resp);//얕은복사 - 원본의 주소번지를 파라미터로 보냄 
+		}//스프링에서라면 HandlerMapping의 역할 
 		//아래 코드는 BoardController -> BoardLogic -> BoardDao 그리고 나서 실행되는 구간이 됨
 		//올라올 때 후처리 코드 - 출력페이지
 		//page에 담긴 문자여른 어떤 형태인가요?
