@@ -1,14 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="com.example.demo.pojo1.NoticeController"/>
-    <fullyQualifiedTypeName name="com.example.demo.pojo1.ActionForward"/>
-    <fullyQualifiedTypeName name="java.lang.StringBuilder"/>
-    <fullyQualifiedTypeName name="com.example.demo.pojo1.NoticeDao"/>
-    <fullyQualifiedTypeName name="com.example.demo.pojo1.AddressBook"/>
-    <fullyQualifiedTypeName name="javax.swing.JButton"/>
-    <fullyQualifiedTypeName name="com.example.demo.pojo1.AddressBookDialog"/>
-    <fullyQualifiedTypeName name="java.awt.event.ActionListener"/>
-    <fullyQualifiedTypeName name="java.lang.Exception"/>
     <fullyQualifiedTypeName name="java.util.logging.Logger"/>
     <fullyQualifiedTypeName name="com.example.demo.pojo3.KakaoSupport"/>
     <fullyQualifiedTypeName name="com.example.demo.pojo2.BoardLogic"/>
@@ -59,5 +50,14 @@
     <fullyQualifiedTypeName name="lombok.Data"/>
     <fullyQualifiedTypeName name="com.example.demo.pojo2.OrderController"/>
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="com.example.demo.BoardService"/>
+    <fullyQualifiedTypeName name="com.example.demo.BoardWriteServlet"/>
+    <fullyQualifiedTypeName name="com.example.pattern.Sonata"/>
+    <fullyQualifiedTypeName name="java.sql.DriverManager"/>
+    <fullyQualifiedTypeName name="com.util.JDBCTemplate"/>
+    <fullyQualifiedTypeName name="java.sql.ResultSet"/>
+    <fullyQualifiedTypeName name="java.lang.StringBuilder"/>
+    <fullyQualifiedTypeName name="java.sql.PreparedStatement"/>
     <fullyQualifiedTypeName name="org.apache.log4j.Logger"/>
+    <fullyQualifiedTypeName name="com.example.demo.BoardDao"/>
 </qualifiedTypeNameHistroy>

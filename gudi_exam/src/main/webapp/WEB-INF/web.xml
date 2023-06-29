@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
   <display-name>gudi_exam</display-name>
+  <!-- 
+  로그 설정하기
+	:log4.jar배포함다 -WEB-INF/lib/log4j.jar
+  왜 여기에 배포해야하죠? 운영서버에 배포할 때 포함되어야 하니까 / 운영서버<->테스트서버
+  	:web.xml문서 등록하기 - <context-param> : 톰캣 서버가 기동할 때 한번 읽어서 서버가 기동되어 있는 동안에 유지됨
+  	:배치 서술자(deployment descriptor)
+  실제 배포된 위치는 src인데 context-param에 등록하는 위치는 왜 classes이죠?
+  심지어 classes라는 폴더가 없는데 왜 이렇게 설정하나요?
+  	:표준은 /WEB-INF/classes 가 맞지만 이클립스에서 dynamicproject(표준x)로 생성하면 build라는 폴더에 컴파일된 내용을 배포함											
+  -->
+  <context-param>
+  <param-name>log4jConfigLocation</param-name>
+  <param-value>/WEB-INF/classes/log4j.properties</param-value>
+  </context-param>
   <servlet>
   <servlet-name>BoardSelect</servlet-name>
   <servlet-class>com.example.demo.BoardSelectServlet</servlet-class>
@@ -9,7 +23,6 @@
   <servlet-name>BoardSelect</servlet-name>
   <url-pattern>/board/boardList</url-pattern>
   </servlet-mapping>
-  
   <servlet>
   <servlet-name>BoardInsert</servlet-name>
   <servlet-class>com.example.demo.BoardWriteServlet</servlet-class>
@@ -18,5 +31,4 @@
   <servlet-name>BoardInsert</servlet-name>
   <url-pattern>/board/boardInsert</url-pattern>
   </servlet-mapping>
- 
 </web-app>

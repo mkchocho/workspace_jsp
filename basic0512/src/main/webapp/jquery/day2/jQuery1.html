@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript">
+        const addIMG=()=>{
+            $(".class1").html("<img src='../../images/gudi.png' />")
+
+        }
+        const login = () => {
+            console.log($("#mem_id").val());
+        }
+    </script>
+</head>
+<body>
+    <div id ="unique2">제이쿼리입니다.</div>
+    <script>
+        /* const 상수선언, let 변수선언*/
+        const unique2 = document.getElementById("unique2");
+        console.log(unique2)
+        const unique3 = $("#unique2");
+        /* text함수로 하면 태그도 문자로 출력하고 html로 하면 인터프리터된 결과 출력됨*/
+        unique3.html("<h2>테스트</h2>")
+        </script>
+        <div class="class1"></div>
+        <div class="class1"></div>
+        <!-- onclick은 이벤트 핸들러 이름이다(정해짐)-->
+        <input type="button" value="이미지추가" onclick="addIMG()"/>
+        <input type=""text" id="mem_id" />
+        <input type="button" value="로그인" onclick="login()" />
+
+</body>
+</html>
