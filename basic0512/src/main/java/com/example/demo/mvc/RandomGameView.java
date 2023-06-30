@@ -14,6 +14,7 @@ public class RandomGameView extends JFrame {
 	//this는 RandomGameView를 가리킨다 - 생성자도 메소드 오버로딩의 규칙을 따른다
 	//같은 이름의 생성자가 있다 하더라도 파라미터 타입이 다르거나 갯수가 다르면 다른 생성자로 인식함 
 	RandomGameEvent rgEvent = new RandomGameEvent(this);
+	RandomGameLogic rgLogic = new RandomGameLogic(this);
 	JTextField jf_input = new JTextField("");
 	JTextArea jta_display = new JTextArea(5, 30);
 	int dap = -1;//정답을 담을 변수 선언
@@ -41,8 +42,8 @@ public class RandomGameView extends JFrame {
 		this.setSize(WIDTH, HEIGHT);
 		this.setVisible(bool);//true이면 보여줘, false이면 숨겨줄래
 		jta_display.append("새로운 게임이 시작됩니다. ==> "+dap+"\n");
-
 	}
+	
 	public static void main(String[] args) {
 		RandomGameView rgv = new RandomGameView();
 		rgv.initDisplay(300,400,true,"숫자맞추기게임");
