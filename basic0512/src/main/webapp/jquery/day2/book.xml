@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<records>
+	<record>
+		<title>해리포터</title>
+		<author>저자명</author>
+		<publish>에이콘출판사</publish>
+	</record>
+	<record>
+		<title>자바의정석</title>
+		<author>남궁성</author>
+		<publish>도우출판사</publish>
+	</record>
+</records>
+<!-- 
+xml선언문이 반드시 있어야 xml문서로 판독
+이클립스 뿐 아니라 브라우저도 xml parser가 있다
+:그래서 문법체크를 한다
+:브라우저 안에 xml 파서가 내장됨
+:개발툴이 없을 때는 브라우저 만으로 기본적인 문법체크 가능함
+-xml은 확장된 마크업언어임 
+-문법체크 뿐 아니라 유효성 검사까지 진행되므로 html 보다 까다로움
+
+xml은 maven 방식에서 외부 라이브러리 추가와 MVC패턴 조립시 pom.xml문서 참조함
+
+ -->

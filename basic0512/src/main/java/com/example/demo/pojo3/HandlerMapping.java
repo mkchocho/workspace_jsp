@@ -17,12 +17,15 @@ public class HandlerMapping {
 	//메소드 파라미터 자리는 지변이다
 	//메소드의 파라미터를 통해서 주소번지 즉 원본을 사용할 수 있다. - 생성자에서도 동일함 
 	public static Object getController(String[] upmu, HttpServletRequest req, HttpServletResponse res) {
+		logger.info(upmu[0]+","+upmu[1]); // qna, qnaList / qna, qnaInsert / qna, qnaUpdate / qna, qnaDelete 
 		Object obj = null;
-		Controller3 controller = null;
+		//인터페이스가 먼저오고 생성부에 구현체 클래스가 온다 → 폴리모피즘, 다형성 (객체지향 프로그래밍 전개하기)
+		//다형성? 같은 메서드를 호출하더라도 그 기능이 생성부에 오는 클래스에 따라서 바뀐다  
+		Controller3 controller = null;//인터페이스
 		if("board3".equals(upmu[0])) {
 			logger.info("게시판 1-3");
 			//insert here{위치잡기} - 인스턴스화
-			controller = new Board3Controller();
+			controller = new Board3Controller();//24번 인터페이스 → 드디어 구현체 클래스가 결정됨
 			//위에서 이번 요청에 대한 컨트롤러 클래스가 결정되었으니
 			//그 다음에는 메소드 이름을 결정해야 한다.
 			if("boardList".equals(upmu[1])) {
@@ -58,7 +61,33 @@ public class HandlerMapping {
 		}////////////////////end of 자유게시판/////////////////////////////
 		else if("qna".equals(upmu[0])) {
 			//insert here{위치잡기} - 인스턴스화
-			controller = new QnAController();
+			controller = new QnAController(); // 구현체 클래스가 결정됨 
+			//Qna 글목록 메소드 호출
+			if("qnaList".equals(upmu[1])) {//배열의 두번째 방에 있는 문자열 - 페이지이름, 메소드이름, myBatis id
+				obj = controller.qnaList(req, res);
+				if(obj instanceof ModelAndView) {//컨트롤러 클래스가 ActionSupport에게 돌려주는 객체이다 
+					return (ModelAndView)obj;//배포위치 → /WEB-INF/views/qna
+				}else if(obj instanceof String) {//String타입으로 돌려줌 
+					//return "rediirect:qnaList.jap" → 배포위치 → webapp>qna
+					//return "forward:qnaList.jsp" → 배포위치 → webapp>qna
+					return(String)obj;
+				}
+			}//end of qnaList
+			else if ("qnaDetail".equals(upmu[1])) {//상세보기
+				logger.info("qnaDetail - 상세보기");
+			}// end of qnaDetail
+			else if ("qnaInsert".equals(upmu[1])) {//글등록
+				logger.info("qnaInsert - 글등록");
+			}// end of qnaInsert
+			//http://localhost:9000/qna/qnaUpdate.pj3
+			else if ("qnaUpdate".equals(upmu[1])) {//글수정
+				logger.info("qnaUpdate - 글수정");
+			}// end of qnaUpdate
+			//http://localhost:9000/qna/qnaDelete.pj3
+			else if ("qnaDelete".equals(upmu[1])) {//글삭제
+				logger.info("qnaDelete - 글삭제");
+			}// end of qnaDelete
+
 		}/////////////////////end of QnA게시판//////////////////////////////
 		return obj;
 	}

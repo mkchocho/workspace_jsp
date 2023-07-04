@@ -1,72 +1,101 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>보드판매량 집계</title>
-	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <script src="../../js/jsutil.js"></script>
-    <script>
-        const getBoardSold= ()=> {
-            $.ajax({
-                type:"get", 
-                url:"boardTotal.jsp",
-                //파라미터로 판매된 보드갯수가 저장
-                success:function(result){
-                    console.log(result)//25
-                    $("#boardSold").text(result)
-                    const costEl = document.getElementById("cost");
-                    const cost = getText(costEl);
-                    console.log(cost)
-              
-                },
-                error:function(error){
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>보드판매량 집계</title>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="../../js/jsutil.js"></script>
 
-                }
-            })
+<style>
+body {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: medium;
+	text-align: center;
+}
 
-        }
-    </script>
-    <style>
-        body{
-            font-family: Arial, Helvetica, sans-serif;
-            font-size : medium;
-            text-align: center;
-        }
-        table{
-            margin-left: auto;
-            margin-right: auto;
-            border:1px solid gray;
-        }
-        th, td{
-            border: thin dotted pink;
-            padding : 5px;
-        }
-        th {
-            background-color:azure;
-        }
-    </style>
+table {
+	margin-left: auto;
+	margin-right: auto;
+	border: 1px solid gray;
+}
+
+th, td {
+	border: thin dotted pink;
+	padding: 5px;
+}
+
+th {
+	background-color: azure;
+}
+</style>
 </head>
 <body>
-    <table width="300px" height="80px">
-        <tr>
-            <td align="center" colspan="2">보드판매집계</td>
-        </tr>
-        <tr>
-            <th width="120px">보드판매량</th>
-            <!-- 텍스트노드는 태그이름은 없고 태그값만 있다. -->
-            <td width="180px"><span id="boardSold">10</span></td>
-        </tr>
-        <tr>
-            <th width="120px">구매가</th>
-            <td width="180px"><span id="cost">700000</span></td>
-        </tr>
-        <tr> 
-            <th width="120px">소비자가</th>
-            <td width="180px"><span id="price">850000</span></td>
-        </tr>        
-    </table>
-    <h2>마진금액 : <span id="cash">1500000</span></h2>
-    <button onclick="getBoardSold()">마진금액은?</button>
+	<table width="300px" height="80px">
+		<tr>
+			<td align="center" colspan="2">보드판매집계</td>
+		</tr>
+		<tr>
+			<th width="120px">보드판매량</th>
+			<!-- 텍스트노드는 태그이름은 없고 태그값만 있다. -->
+			<td width="180px"><span id="boardSold">10</span></td>
+		</tr>
+		<tr>
+			<th width="120px">구매가</th>
+			<td width="180px"><span id="cost">700000</span></td>
+		</tr>
+		<tr>
+			<th width="120px">소비자가</th>
+			<td width="180px"><span id="price">850000</span></td>
+		</tr>
+	</table>
+	<h2>
+		마진금액 : <span id="cash">1500000</span>
+	</h2>
+	<button onclick="getBoardSold()">마진금액은?</button>
+	<script>
+		function getBoardSold() {
+			//ajax함수는 제이쿼리에서 제공하는 함수이다
+			//비동기 처리를 지원함 
+			//비동기로 처리한다는 건 순서가 바뀌어서 진행될 수도 있다.
+			$.ajax({
+				type : "get", //전송방식 - get방식 -> Restful API에 대해서 설명하시오.
+				async : true, //비동기처리여부에 대한 옵션값 true: 비동기(default값 : 생략가능), false:동기
+				data:{mem_id:"tomato"}, //post방식일 때 사용함
+				dataType:"text",
+				url : "boardTotal.jsp",//요청을 처리할 페이지 URL 작성 - 스프링URL or qna/qnaList.pj3
+				success : function(result) { //boardTotal.jsp 요청의 결과로 200번 메시지가 돌아왔을 때 호출 됨
+					//파라미터 자리에 result변수명은 다른 변수 이름으로 바꾸어도 됨
+					//실제로 출력되는 값은 boardTotal.jsp에서 출력으로 내보내지는 값이 출력됨 
+					//파라미터로 판매된 보드갯수가 저장
+					console.log(result)//25
+					$("#boardSold").text(result)//테이블 상단에 실시간 보드판매갯수 자리에 변경 처리됨
+					//const costEl = document.getElementById("cost");
+					//const cost = getText(costEl);
+					// console.log(cost)
+					//구매가 가져오기
+					//ES6버전부터는 변수 사용시 var를 사용하지 않는다 - 호이스팅 이슈가 있어서
+					//const(상수느낌-for문 망함), let(변하는값 - for문)
+					//const는 재할당 불가함 
+					const cost = $("#cost").text();//text도 제이쿼리에서 제공함수
+					console.log(cost);
+					//소비자가 가져오기
+					const price = $("#price").text();
+					console.log(price);
+					//보드 한개당 마진 계산하기(소비자가-구매가)
+					const cashperBoard = price - cost;
+					console.log(cashperBoard);
+					//총마진 구하기
+					const cash = cashperBoard * result;
+					//위에서 구한 총마진 금액을 cash엘리먼트에 덮어쓰기 해줌
+					$("#cash").text(cash);
+				},
+				error : function(error) {
+
+				}
+			})
+
+		}
+	</script>
 </body>
 </html>

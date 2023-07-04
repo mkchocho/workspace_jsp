@@ -12,7 +12,7 @@ public class RandomGameEvent implements ActionListener {
 	//생성자 파라미터 자리에 변수는 생성자 영역안에서만 사용가능함 
 	public RandomGameEvent(RandomGameView randomGameView) {
 		this.rgView = randomGameView;
-		System.out.println("RandomGameEvent:"+randomGameView.jf_input);
+		System.out.println("RandomGameEvent");
 	}
 
 	@Override

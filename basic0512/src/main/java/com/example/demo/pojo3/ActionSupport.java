@@ -22,9 +22,10 @@ public class ActionSupport extends HttpServlet {
 		logger.info(uri);
 		String command = uri.substring(context.length()+1);
 		int end = command.lastIndexOf("."); // .pj3이 있는 위치 정보를 가져옴
-		command = command.substring(0, end); // command = "member2/memberList" 
-		String upmu[] = null;	
-		upmu = command.split("/");
+		command = command.substring(0, end); // .pj3이 잘려나간 문자열만 남음 → command = "member2/memberList" 
+		String upmu[] = null; //upmu[0] = qna, upmu[1] = qnaList
+		//왜 pj3은 upmu[1]에 들어가지 않나요?
+		upmu = command.split("/");//배열 초기화 upmu[0]=qna, upmu[1]=xxx 
 		Object obj = null; //HandlerMapping에 return타입이 Object인 메소드 getController
 
 		//insert here - HandlerMapping과 비벼보기 //HandpleMapping - 페이지처리
