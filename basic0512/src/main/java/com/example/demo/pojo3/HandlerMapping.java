@@ -60,10 +60,13 @@ public class HandlerMapping {
 			
 		}////////////////////end of 자유게시판/////////////////////////////
 		else if("qna".equals(upmu[0])) {
+			logger.info("upmu[0]=qna");
 			//insert here{위치잡기} - 인스턴스화
 			controller = new QnAController(); // 구현체 클래스가 결정됨 
 			//Qna 글목록 메소드 호출
+			//POJO1-3에서는 upmu[1]방에 있는 정보가 @GetMapping("qnaList");
 			if("qnaList".equals(upmu[1])) {//배열의 두번째 방에 있는 문자열 - 페이지이름, 메소드이름, myBatis id
+				logger.info("qnaList - 회원조회");
 				obj = controller.qnaList(req, res);
 				if(obj instanceof ModelAndView) {//컨트롤러 클래스가 ActionSupport에게 돌려주는 객체이다 
 					return (ModelAndView)obj;//배포위치 → /WEB-INF/views/qna
@@ -75,10 +78,18 @@ public class HandlerMapping {
 			}//end of qnaList
 			else if ("qnaDetail".equals(upmu[1])) {//상세보기
 				logger.info("qnaDetail - 상세보기");
-			}// end of qnaDetail
+				}
+			// end of qnaDetail
 			else if ("qnaInsert".equals(upmu[1])) {//글등록
 				logger.info("qnaInsert - 글등록");
-			}// end of qnaInsert
+				obj = controller.qnaInsert(req, res);
+				if(obj instanceof ModelAndView) {//컨트롤러 클래스가 ActionSupport에게 돌려주는 객체이다 
+					return (ModelAndView)obj;//배포위치 → /WEB-INF/views/qna
+				}else if(obj instanceof String) {//String타입으로 돌려줌 
+					//return "rediirect:qnaList.jap" → 배포위치 → webapp>qna
+					//return "forward:qnaList.jsp" → 배포위치 → webapp>qna
+					return(String)obj;
+				}}// end of qnaInsert
 			//http://localhost:9000/qna/qnaUpdate.pj3
 			else if ("qnaUpdate".equals(upmu[1])) {//글수정
 				logger.info("qnaUpdate - 글수정");
@@ -87,7 +98,6 @@ public class HandlerMapping {
 			else if ("qnaDelete".equals(upmu[1])) {//글삭제
 				logger.info("qnaDelete - 글삭제");
 			}// end of qnaDelete
-
 		}/////////////////////end of QnA게시판//////////////////////////////
 		return obj;
 	}

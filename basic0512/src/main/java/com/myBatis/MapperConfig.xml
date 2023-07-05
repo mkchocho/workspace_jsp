@@ -31,5 +31,6 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<mapper resource="com/mybatis/mapper/member.xml" />
 		<mapper resource="com/mybatis/mapper/notice.xml" />
 		<mapper resource="com/mybatis/mapper/board.xml" />
+		<mapper resource="com/mybatis/mapper/qna.xml" />
 	</mappers>
 </configuration>

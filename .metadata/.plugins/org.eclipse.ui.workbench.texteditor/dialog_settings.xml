@@ -10,23 +10,23 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="memberDelete"/>
+		<item key="selection" value="action"/>
 		<list key="findhistory">
+			<item value="action"/>
+			<item value="qnaList"/>
+			<item value="전체조회"/>
+			<item value="0527"/>
+			<item value="encoding"/>
+			<item value="form"/>
+			<item value="get"/>
+			<item value="commit"/>
+			<item value="file"/>
+			<item value="qnaInsert"/>
+			<item value="uriencoding"/>
+			<item value="uri"/>
 			<item value="memberDelete"/>
 			<item value="memberList"/>
 			<item value="memberSearch"/>
-			<item value="전체조회"/>
-			<item value="modal"/>
-			<item value="230527"/>
-			<item value="board"/>
-			<item value="b_"/>
-			<item value="memberDetail"/>
-			<item value="basic0512"/>
-			<item value="basic"/>
-			<item value="Context doc"/>
-			<item value="Context"/>
-			<item value="docbase"/>
-			<item value="dobase"/>
 		</list>
 		<list key="replacehistory">
 			<item value=""/>

@@ -44,7 +44,14 @@ public class QnAController implements Controller3{
 	@Override
 	public Object qnaList(HttpServletRequest req, HttpServletResponse res) {
 		logger.info("qnaList");
-		return null;
+		List<Map<String,Object>> qList = null;
+		Map<String,Object> pMap = new HashMap<String, Object>();
+		HashMapBinder hmb = new HashMapBinder(req);
+		hmb.bind(pMap);
+		qList = qnaLogic.qnaList(pMap);
+		req.setAttribute("qList", qList);
+		//"/WEB-INF/views/"+"이자리"+".jsp"
+		return "qna/qnaList";
 	}
 	/********************************************************************************
 	 * JSP 상세보기 페이지에 출력하기
@@ -57,7 +64,13 @@ public class QnAController implements Controller3{
 	@Override
 	public Object qnaDetail(HttpServletRequest req, HttpServletResponse res) {
 		logger.info("qnaDetail");
-		return null;
+		List<Map<String,Object>> qList = null;
+		Map<String,Object> pMap = new HashMap<String, Object>();
+		HashMapBinder hmb = new HashMapBinder(req);
+		hmb.bind(pMap);
+		qList = qnaLogic.qnaList(pMap);
+		req.setAttribute("qList", qList);
+		return "forward:qna/qnaDetail";
 	}
 	/********************************************************************************
 	 * 질문등록하기
@@ -70,14 +83,26 @@ public class QnAController implements Controller3{
 	 *********************************************************************************/
 	@Override
 	public Object qnaInsert(HttpServletRequest req, HttpServletResponse res) {
-		// TODO Auto-generated method stub
-		return null;
+		logger.info("qnaInsert");
+		int result =-1; //입력 성공이면 1을 돌려받고 실패이면 0을 받음(오라클 서버가 응답으로 준다)
+		Map<String,Object> pmap = new HashMap<>();
+		HashMapBinder hmb = new HashMapBinder(req);
+		//HashMapBinder 클래스가 사용자가 화면에 입력한 값들을 자동으로 파라미터 주소번지에 담아줌 
+		hmb.bind(pmap);
+		result = qnaLogic.qnaInsert(pmap);//파라미터 pmap의 주소번지를 오라클 서버에까지 전달해줌
+		return "redirect:qnaList.pj3";
 	}
 
 	@Override
 	public Object qnaUpdate(HttpServletRequest req, HttpServletResponse res) {
-		// TODO Auto-generated method stub
-		return null;
+		logger.info("qnaUpdate");
+		int result =-1; //입력 성공이면 1을 돌려받고 실패이면 0을 받음(오라클 서버가 응답으로 준다)
+		Map<String,Object> pmap = new HashMap<>();
+		HashMapBinder hmb = new HashMapBinder(req);
+		//HashMapBinder 클래스가 사용자가 화면에 입력한 값들을 자동으로 파라미터 주소번지에 담아줌 
+		hmb.bind(pmap);
+		result = qnaLogic.qnaUpdate(pmap);//파라미터 pmap의 주소번지를 오라클 서버에까지 전달해줌
+		return "redirect:qnaList.pj3";
 	}
 
 	@Override

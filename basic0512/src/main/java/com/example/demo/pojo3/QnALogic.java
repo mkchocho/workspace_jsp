@@ -16,6 +16,17 @@ public class QnALogic {
 		qList = qnaDao.qnaList(pMap);
 		return qList;
 	}
+	public int qnaInsert(Map<String, Object> pmap) {
+		logger.info("qnaInsert 호출 성공");
+		int result = -1;
+		//문장 끝에 세미콜론으로 끝나면 메소드 호출임
+		result = qnaDao.qnaInsert(pmap);
+		return result;
+	}
+	public int qnaUpdate(Map<String, Object> pmap) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 	
 	
 

@@ -37,16 +37,26 @@ public class ViewResolver {
 	public ViewResolver(HttpServletRequest req, HttpServletResponse resp, String pageMove[]) throws ServletException, IOException { 
 	String path = pageMove[1];
 	// redirect해야 되나?
+	// url이 바뀐다 -> 기존 요청이 끊어졌다가 새로운 요청으로 페이지가 열렸다
+	// 유지가 되지 않고 있다 -> req.getAttribute 해봤자 꺼내올 수 있는 값이 전혀 없다
 	if ("redirect".equals(pageMove[0])) { // return "redirect:dept/getDepList"
+		logger.info(path);
 		resp.sendRedirect(path);
+		return;
 	}
+	// 아래 if문의 공통점은 scope가 request인 것이다.
+	// 아래 if문의 차이점은 첫번째 것은 req에 직접 담는다는 점이고
+	// 아래 else문은 ModelAndView에 담는 점이다.
+	// else인 경우를 설계한 이유는 jsp문서를 WEB-INF 폴더에 감추기 위해서이다
 	// forward로 해야 되나?
 	else if ("forward".equals(pageMove[0])) { // return "forward:dept/getDepList"
+		//변수 path에는 두번째 방에 있는 값이 들어갑니다. 
 		RequestDispatcher view = req.getRequestDispatcher("/" + path + ".jsp");
 		view.forward(req, resp);
 	}
 	// 보안 때문에 WEB-INF로 해야 되나?
 	else { // redirect도 아니고 forward도 아닌 경우인가?
+		path=pageMove[0]+"/"+pageMove[1];
 		RequestDispatcher view = req.getRequestDispatcher("/WEB-INF/views/" + path + ".jsp");
 		view.forward(req, resp);
 	}

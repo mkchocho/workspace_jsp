@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.log4j.Logger;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import com.oreilly.servlet.MultipartRequest;
-import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+//import com.oreilly.servlet.MultipartRequest;
+//import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 /*
  * 텍스트 파일 처리(문자열 처리)- 숫자도 문자열 처리 -  숫자도 문자열로 처리 후 변경해서 출력
  * 바이너리 파일 처리(문자+숫자 파일) - 첨부파일은 바이너리 코드

@@ -17,7 +17,7 @@
 	
 	<select id="qnaList" parameterType="java.util.HashMap" resultType="map">
 		SELECT
-		        q_no, q_writer, q_title, q_content, q_date, q_hit, q_file
+		        q_no, q_writer, q_title, q_content, q_date, q_hit
 		  FROM qna
 		<where>
 			<if test="q_no!=null">AND q_no=#{q_no}</if>		
@@ -39,10 +39,10 @@
 	</select>	 	
 
 	<insert id="qnaInsert" parameterType="map" >
-		INSERT INTO qna(q_no, q_writer , q_title ,q_content, q_hit , q_date, q_file) 
+		INSERT INTO qna(q_no, q_writer , q_title ,q_content, q_hit , q_date) 
 		              VALUES(seq_qna_no.nextval
 		                           ,#{q_writer},#{q_title},#{q_content}, 0
-		                          , TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS'),#{q_file})
+		                          , TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS'))
 	</insert>		
 
 </mapper>

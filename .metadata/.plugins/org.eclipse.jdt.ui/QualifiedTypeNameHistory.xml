@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="org.apache.ibatis.session.SqlSession"/>
-    <fullyQualifiedTypeName name="com.util.HangulConversion"/>
     <fullyQualifiedTypeName name="com.oreilly.servlet.MultipartRequest"/>
     <fullyQualifiedTypeName name="com.oreilly.servlet.multipart.DefaultFileRenamePolicy"/>
     <fullyQualifiedTypeName name="java.util.Enumeration"/>
@@ -15,7 +13,6 @@
     <fullyQualifiedTypeName name="com.example.demo.pojo3.KakaoProfile"/>
     <fullyQualifiedTypeName name="com.example.demo.pojo3.KakaoController"/>
     <fullyQualifiedTypeName name="javax.servlet.http.HttpSession"/>
-    <fullyQualifiedTypeName name="org.apache.ibatis.session.SqlSessionFactory"/>
     <fullyQualifiedTypeName name="com.example.demo.pojo3.Controller3"/>
     <fullyQualifiedTypeName name="com.example.demo.pojo2.BoardController"/>
     <fullyQualifiedTypeName name="com.example.demo.pojo3.Board3Controller"/>
@@ -28,8 +25,6 @@
     <fullyQualifiedTypeName name="com.example.demo.pojo3.ViewResolver"/>
     <fullyQualifiedTypeName name="com.example.demo.pojo3.QnAController"/>
     <fullyQualifiedTypeName name="com.example.demo.pojo3.QnALogic"/>
-    <fullyQualifiedTypeName name="com.util.HashMapBinder"/>
-    <fullyQualifiedTypeName name="java.lang.Object"/>
     <fullyQualifiedTypeName name="java.util.HashMap"/>
     <fullyQualifiedTypeName name="java.io.PrintWriter"/>
     <fullyQualifiedTypeName name="javax.annotation.sql.DataSourceDefinition"/>
@@ -60,4 +55,9 @@
     <fullyQualifiedTypeName name="com.example.demo.mvc.RandomGameLogic"/>
     <fullyQualifiedTypeName name="com.example.demo.pojo3.ModelAndView"/>
     <fullyQualifiedTypeName name="java.lang.StringBuilder"/>
+    <fullyQualifiedTypeName name="java.lang.Object"/>
+    <fullyQualifiedTypeName name="com.util.HashMapBinder"/>
+    <fullyQualifiedTypeName name="org.apache.ibatis.session.SqlSessionFactory"/>
+    <fullyQualifiedTypeName name="com.util.MyBatisCommonFactory"/>
+    <fullyQualifiedTypeName name="com.example.demo.pojo3.QnADao"/>
 </qualifiedTypeNameHistroy>

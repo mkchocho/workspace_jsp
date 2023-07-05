@@ -23,6 +23,7 @@ public class ActionSupport extends HttpServlet {
 		String command = uri.substring(context.length()+1);
 		int end = command.lastIndexOf("."); // .pj3이 있는 위치 정보를 가져옴
 		command = command.substring(0, end); // .pj3이 잘려나간 문자열만 남음 → command = "member2/memberList" 
+		logger.info(command);
 		String upmu[] = null; //upmu[0] = qna, upmu[1] = qnaList
 		//왜 pj3은 upmu[1]에 들어가지 않나요?
 		upmu = command.split("/");//배열 초기화 upmu[0]=qna, upmu[1]=xxx 
@@ -50,6 +51,7 @@ public class ActionSupport extends HttpServlet {
 				if(((String)obj).contains(":")) {
 					logger.info("내 안에 콜론있어요");
 					pageMove = obj.toString().split(":");
+					logger.info(pageMove[0]+","+pageMove[1]);
 				}
 				else if(((String)obj).contains("/")) {
 					logger.info("내 안에 슬래쉬있어요");
@@ -65,7 +67,7 @@ public class ActionSupport extends HttpServlet {
 				mav = (ModelAndView)obj;
 				pageMove = new String[2];
 				//스프링에서는 리턴타입이 ModelAndView이면 페이지 경로를 WEB-INF 아래에서 찾는다
-				pageMove[0]="modelandview"; // 상수처리 : spring의 방식 모방 중
+				pageMove[0]= "modelandview"; // 상수처리 : spring의 방식 모방 중
 				pageMove[1] = mav.getViewName(); // boardList or memberList or noticeList
 			}
 			////////////////////////////////////////////////////////////////////////////////////////
@@ -99,10 +101,11 @@ public class ActionSupport extends HttpServlet {
 			}////////////////////////end of pageMove 갯수가 1개일 때 - 화면이 아닌 문자열이나 JSON 포맷지원할 때 (spring - @RestController대신 해줌)
 			else {
 				logger.info("리턴결과가 JSON포맷이라서 pageMove의 갯수가 2개 이상인 경우가 나옴");
-				resp.setContentType("text/plain;utf-8");
-				PrintWriter out = resp.getWriter();
-				out.print(obj);
-				return;
+//				resp.setContentType("text/plain;utf-8");
+//				PrintWriter out = resp.getWriter();
+//				out.print(obj);
+//				
+				new ViewResolver(req,resp,pageMove);
 			}
 			//원시적인 방법 또는 레거시 시스템을 공부하는 건 자동으로 처리하다가 문제가 발생하거나 해당 프레임워크가 지원을 안해주더라도
 			//표준적인 방법을 알고 있으면 해결할 수 있다.(실마리, 컨벤션, 힌트, 아이디어 제공...)
