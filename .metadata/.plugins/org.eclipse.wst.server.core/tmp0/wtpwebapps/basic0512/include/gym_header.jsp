@@ -36,7 +36,7 @@
           <a class="nav-link" href="/member2/memberList.pj2">회원관리2</a>
         </li>
         <li class="nav-item">
-       		<a class="nav-link" href="#">QnA게시판</a>
+       		<a class="nav-link" href="/qna/qnaList.pj3">QnA게시판</a>
    	 	</li>
       </ul>
       

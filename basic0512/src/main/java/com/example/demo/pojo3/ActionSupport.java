@@ -75,22 +75,6 @@ public class ActionSupport extends HttpServlet {
 			//insert here
 			//pageMove 원소의 갯수가 2개일 때 - 백엔드 처리된 결과를 화면으로 처리할 때
 		if(pageMove!=null && pageMove.length==2) {
-			/*	logger.info("pageMove 원소의 갯수가 2개 일때");
-				String path = pageMove[1];
-				//redirect로 할까?
-				if("redirect".equals(pageMove[0])) {//return "redirect:dept/getDeptList"
-					resp.sendRedirect(path);
-				}
-				//forward로 해야돼?
-				else if("forward".equals(pageMove[0])) {//return "forward:dept/getDeptList"
-					RequestDispatcher view = req.getRequestDispatcher("/"+path+".jsp");
-					view.forward(req,resp);
-				}
-				//보안때문에 WEB-INF로 보내줄까
-				else {//redirect도 없고 forward도 없는 경우야?
-					RequestDispatcher view = req.getRequestDispatcher("/WEB-INF/views/"+path+".jsp");
-					view.forward(req,resp);
-				}*/
 				//insert here - 스프링에서는 요청에 대한 응답 URL을 완성해 주는 ViewResolver클래스가 제공됨 
 				new ViewResolver(req,resp,pageMove);
 			}/////////////////////end of pageMove원소의 개수가 2개일 때///////////////////////
@@ -106,6 +90,11 @@ public class ActionSupport extends HttpServlet {
 //				out.print(obj);
 //				
 				new ViewResolver(req,resp,pageMove);
+				
+				//req.setAttribute("bList", bList);
+				//page = "forward:board/boardList";
+				//RequestDispatcher view = req.getRequestDispatcher("/"+path+".jsp");// path=board/boardList
+				//view.forward(req, resp);
 			}
 			//원시적인 방법 또는 레거시 시스템을 공부하는 건 자동으로 처리하다가 문제가 발생하거나 해당 프레임워크가 지원을 안해주더라도
 			//표준적인 방법을 알고 있으면 해결할 수 있다.(실마리, 컨벤션, 힌트, 아이디어 제공...)
@@ -114,12 +103,21 @@ public class ActionSupport extends HttpServlet {
 
 		}//page가 null이 아니면 후처리 
 	} // end of doService
-
+	//401 - 시큐리티코딩, 인증관련 이슈
+	//404 - 클라이언트가 서버에게 요청했을 때 응답으로 페이지 경로가 맞지 않거나 페이지이름이 다르면 발동
+	//405 - 오버라이드 이름이 잘못되면 405번 에러 발생함
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		//클래스 설계자가 정의한 메소드이다. 강제사항이 아니다.
+		//사용자 정의 메소드에 파라미터를 통해서 요청객체와 응답객체의 주소번지 원본을 넘김
+		//메소드를 선언할 수 있다
+		//메소드의 리턴타입과 파라미터 갯수 및 타입까지도 결정할 수 있니? - 네
+		//톰캣 서버로 부터 주입받은 request 객체와 response객체를 넘겨받는다 - 파라미터 자리
+		//얕은복사-(원본을 바라보는 것)javascript, 깊은 복사-복사본을 만드는 것 - 새로 만든다 - 느낌  
 		doService(req, resp);
+		
 	}
+	//오버라이드 이름이 잘못되면 405번 에러 발생함 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub

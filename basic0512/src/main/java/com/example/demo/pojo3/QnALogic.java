@@ -16,9 +16,11 @@ public class QnALogic {
 		qList = qnaDao.qnaList(pMap);
 		return qList;
 	}
+	//메소드의 파라미터 자리에는 사용자가 입력한 값을 쥐고 있다
 	public int qnaInsert(Map<String, Object> pmap) {
 		logger.info("qnaInsert 호출 성공");
-		int result = -1;
+		//프로그래밍 세계 -1이 End of file의미가짐 
+		int result = -1;//0이면 실패, 1이면 성공 - 등록 성공실패 유무를 확인 할 수 있다 
 		//문장 끝에 세미콜론으로 끝나면 메소드 호출임
 		result = qnaDao.qnaInsert(pmap);
 		return result;

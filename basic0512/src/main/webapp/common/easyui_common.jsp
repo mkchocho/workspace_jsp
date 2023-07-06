@@ -1,4 +1,7 @@
 <%
+//공통코드는 도메인이 바뀐다
+//경로가 달라진다 - 절대경로와 상대경로
+//server.xml 등록된 <Context path> 값을 가져오는 메소드 입니다.
 	StringBuilder path = new StringBuilder(request.getContextPath());
 	path.append("/");
 %>   

@@ -11,6 +11,29 @@ import org.apache.log4j.Logger;
  * controller = new OrderController();
  * controller = new PriceController();
  * 처리를 한다는 건 메소드를 정의하라
+ * 
+ * 클래스 설계/아키텍처 구현
+ * 하나 - getController 메소드를 선언했다 - 리턴타입과 파라미터를 결정하였다
+ * 리턴타입은 Object이고요 -> 왜요? String 이거나 ModelAndView
+ * 역할 : 어떤 업무인지에 따라서 연결되는 컨트롤러 클래스의 이름이 달라져야 하니깐..
+ * MemberController, OrderController, PriceController 
+ * 컨트롤러의 이름을 결정해 주는 단어는 member, order, price 
+ * 어디서 가져오죠? - upmu[0]
+ * 아 그래서 getController의 첫번째 파라미터 타입이 String배열이었군요...
+ * 프레임워크란? 틀, 골격 제공함
+ * 실력차이를 최소화 해주자
+ * 일관된 구조를 사용해서 먼저 끝난 사람이 아직 진행중인 사람을 좀 돕자
+ * 업무적인 depth
+ * 추상클래스 중심의 인터페이스 중심 코딩을 전개하자 -> 클래스 간의 결합도를 낮추고 독립성을 높여서 단위(통합)테스트 가능
+ * getController 안에서 일어나는 일들
+ * -Controller3선언-인터페이스
+ * -인스턴스화 -> 첫번째 if문이다 -> upmu[0] = member or order or price
+ * 				:두번째 if문에서는 메소드 이름을 결정지어요 qnaList, qnaDetail, qnaInsert, qnaUpdate, qnaDelete
+ * -메서드호출 -> 리턴타입(출력되는 페이지 이름), 파라미터 타입과 갯수
+ *
+ * 현재 설계에서 ModelAndView는 선택사항입니다.
+ * ModelAndView타입을 리턴타입으로 결정하지 않더라도 WEB-INF/views/ 페이지를 호출할 수 있따
+ * 
  */
 public class HandlerMapping {
 	static Logger logger = Logger.getLogger(HandlerMapping.class);
@@ -20,7 +43,8 @@ public class HandlerMapping {
 		logger.info(upmu[0]+","+upmu[1]); // qna, qnaList / qna, qnaInsert / qna, qnaUpdate / qna, qnaDelete 
 		Object obj = null;
 		//인터페이스가 먼저오고 생성부에 구현체 클래스가 온다 → 폴리모피즘, 다형성 (객체지향 프로그래밍 전개하기)
-		//다형성? 같은 메서드를 호출하더라도 그 기능이 생성부에 오는 클래스에 따라서 바뀐다  
+		//다형성? 같은 메서드를 호출하더라도 그 기능이 생성부에 오는 클래스에 따라서 바뀐다
+		//그래서 나는 아직 결정할 수 없었다
 		Controller3 controller = null;//인터페이스
 		if("board3".equals(upmu[0])) {
 			logger.info("게시판 1-3");
@@ -82,14 +106,23 @@ public class HandlerMapping {
 			// end of qnaDetail
 			else if ("qnaInsert".equals(upmu[1])) {//글등록
 				logger.info("qnaInsert - 글등록");
+				//첫번째 if문에서 upmu[0]있는 qna로 QnAController가 결정되었다(인스턴스화-메모리상주)
+				//둘 메소드의 파라미터로 req, res 원본을 넘겨서 QnAController 서블릿을 상속받지 않아도 됨
+				//상속을 받게 되면 자유도 떨어짐 
 				obj = controller.qnaInsert(req, res);
-				if(obj instanceof ModelAndView) {//컨트롤러 클래스가 ActionSupport에게 돌려주는 객체이다 
-					return (ModelAndView)obj;//배포위치 → /WEB-INF/views/qna
-				}else if(obj instanceof String) {//String타입으로 돌려줌 
-					//return "rediirect:qnaList.jap" → 배포위치 → webapp>qna
-					//return "forward:qnaList.jsp" → 배포위치 → webapp>qna
+				//왜 String만 비교하나요? ModelAndView는 없나요? 왜요?
+				if(obj instanceof String) {//String 타입으로 돌려줌
+					//누가 언제 리턴해 주는 정보인가요?
 					return(String)obj;
-				}}// end of qnaInsert
+				}
+				//글등록이 성공한 다음에 목록페이지로 이동합니다.
+				//오라클 서버를 경유해서 새로 등록된 글 내용도 새로 가져와야 함
+				//forward-forward 이렇게 연결은 불가함
+				//목록조회를 qnaList로 설계하였으므로 그 이름이 호출되도록 요청하면 됨 
+				//오라클 서버를 직접 요청하는 것이 아니라 오라클 서버를 경유 하는 메소드를 호출하면 됨 
+				//redirect로 처리하면 충분하다 - 메소드 호출만 해주면 나머지는 알아서 해주니까
+				
+			}// end of qnaInsert
 			//http://localhost:9000/qna/qnaUpdate.pj3
 			else if ("qnaUpdate".equals(upmu[1])) {//글수정
 				logger.info("qnaUpdate - 글수정");

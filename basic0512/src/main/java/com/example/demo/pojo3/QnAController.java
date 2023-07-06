@@ -35,6 +35,9 @@ public class QnAController implements Controller3{
 	}
 	/********************************************************************************
 	 * 조회결과 JSP 페이지에 출력하기
+	 * http//localhost:9000/WEB-INF/views/qna/qnaList.jsp로 요청하면 404번 발생함
+	 * WEB-INF아래는 절대로 접근이 불가함 - 보안상 필요한 경우에 배포하는 위치임
+	 * 그러나 톰캣과 같은 WAS컨테이너는 내부적으로 접근 가능함 
 	 * 리턴타입은 String으로 한다 (그러면 webapp 아래에 페이지를 배포할 것.)
 	 * 예시) "forward:/qna/qnaList" -> pageMove[0]=forward, pageMove[1]=qna/qnaList
 	 * {spring에서는 자동으로 지원해줌 - ViewResolver 설정이 추가됨}
@@ -45,12 +48,19 @@ public class QnAController implements Controller3{
 	public Object qnaList(HttpServletRequest req, HttpServletResponse res) {
 		logger.info("qnaList");
 		List<Map<String,Object>> qList = null;
+		//HashMapBinder는 서블릿이 아니므로 생성자의 파라미터로 넘겨줌 
 		Map<String,Object> pMap = new HashMap<String, Object>();
 		HashMapBinder hmb = new HashMapBinder(req);
 		hmb.bind(pMap);
 		qList = qnaLogic.qnaList(pMap);
 		req.setAttribute("qList", qList);
 		//"/WEB-INF/views/"+"이자리"+".jsp"
+		//아래의 리턴값은 HandlerMapping클래스로 전달됨
+		//pageMove[]에 담기게 되는데 아래와 같이 리턴값을 내보내면
+		//http://localhost:9000/qna/qna/qnaList.pj3 -> qna가 연속해서 출력됨
+		//pageMove[0]=qna, pageMove[1]=qna, pageMOve[2]=qnaList저장됨
+		//그런데 현재 배열값은 두개만 사용하는 구조로 설계가 됨
+		//앞에 redirect나 forward가 없으면 WEB-INF/views/+path+.jsp로 URL이 완성됨 
 		return "qna/qnaList";
 	}
 	/********************************************************************************
@@ -90,6 +100,7 @@ public class QnAController implements Controller3{
 		//HashMapBinder 클래스가 사용자가 화면에 입력한 값들을 자동으로 파라미터 주소번지에 담아줌 
 		hmb.bind(pmap);
 		result = qnaLogic.qnaInsert(pmap);//파라미터 pmap의 주소번지를 오라클 서버에까지 전달해줌
+		//qna를 빼도 되는 이유는 현재 내가 바라보는 경로가 qna이다
 		return "redirect:qnaList.pj3";
 	}
 
@@ -102,6 +113,7 @@ public class QnAController implements Controller3{
 		//HashMapBinder 클래스가 사용자가 화면에 입력한 값들을 자동으로 파라미터 주소번지에 담아줌 
 		hmb.bind(pmap);
 		result = qnaLogic.qnaUpdate(pmap);//파라미터 pmap의 주소번지를 오라클 서버에까지 전달해줌
+		//qna를 빼도 되는 이유는 현재 내가 바라보는 경로가 qna이다
 		return "redirect:qnaList.pj3";
 	}
 

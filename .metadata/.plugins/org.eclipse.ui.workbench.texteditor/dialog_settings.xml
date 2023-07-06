@@ -10,8 +10,9 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="action"/>
+		<item key="selection" value=""/>
 		<list key="findhistory">
+			<item value="bno"/>
 			<item value="action"/>
 			<item value="qnaList"/>
 			<item value="전체조회"/>
@@ -26,7 +27,6 @@
 			<item value="uri"/>
 			<item value="memberDelete"/>
 			<item value="memberList"/>
-			<item value="memberSearch"/>
 		</list>
 		<list key="replacehistory">
 			<item value=""/>

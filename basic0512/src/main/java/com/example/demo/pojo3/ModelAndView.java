@@ -47,7 +47,6 @@ public class ModelAndView {
 	public void setViewName(String viewName) {
 		this.viewName = viewName;
 	}
-	
 	public void addObject(String name, Object obj) {
 		logger.info(name+","+obj);
 		Map<String,Object> pMap = new HashMap<String, Object>();

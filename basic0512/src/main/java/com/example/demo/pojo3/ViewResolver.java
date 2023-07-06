@@ -40,7 +40,7 @@ public class ViewResolver {
 	// url이 바뀐다 -> 기존 요청이 끊어졌다가 새로운 요청으로 페이지가 열렸다
 	// 유지가 되지 않고 있다 -> req.getAttribute 해봤자 꺼내올 수 있는 값이 전혀 없다
 	if ("redirect".equals(pageMove[0])) { // return "redirect:dept/getDepList"
-		logger.info(path);
+		logger.info(path);//qna/qnaList.pj3
 		resp.sendRedirect(path);
 		return;
 	}
@@ -57,10 +57,10 @@ public class ViewResolver {
 	// 보안 때문에 WEB-INF로 해야 되나?
 	else { // redirect도 아니고 forward도 아닌 경우인가?
 		path=pageMove[0]+"/"+pageMove[1];
+		//리턴값으로 넘어오는 정보가 /WEB-INF/views/{{qna/qnaList}}.jsp → 받아와야 하는 정보
 		RequestDispatcher view = req.getRequestDispatcher("/WEB-INF/views/" + path + ".jsp");
 		view.forward(req, resp);
 	}
-	
   }  	
 	
 }
