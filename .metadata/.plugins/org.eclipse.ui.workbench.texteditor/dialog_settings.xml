@@ -10,8 +10,12 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value=""/>
+		<item key="selection" value="json"/>
 		<list key="findhistory">
+			<item value="json"/>
+			<item value="qna"/>
+			<item value="board"/>
+			<item value="f_board"/>
 			<item value="bno"/>
 			<item value="action"/>
 			<item value="qnaList"/>
@@ -23,10 +27,6 @@
 			<item value="commit"/>
 			<item value="file"/>
 			<item value="qnaInsert"/>
-			<item value="uriencoding"/>
-			<item value="uri"/>
-			<item value="memberDelete"/>
-			<item value="memberList"/>
 		</list>
 		<list key="replacehistory">
 			<item value=""/>

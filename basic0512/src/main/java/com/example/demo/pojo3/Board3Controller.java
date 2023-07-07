@@ -86,6 +86,8 @@ public class Board3Controller implements Controller3 {
 		//왜냐하면 접두어가 WEB-INF/views가 붙고
 		//화면이름.jsp가 붙는다g
 		// -> WEB-INF/views/board3/boardList.jsp.jsp > .jsp가 두번 붙으면 안됨
+		//req.setAttribute("bList", bList);
+//		mav.addObject("bList", bList);
 		mav.setViewName("board3/boardList");
 		return mav;
 	}

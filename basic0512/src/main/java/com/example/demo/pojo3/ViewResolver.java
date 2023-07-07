@@ -40,8 +40,8 @@ public class ViewResolver {
 	// url이 바뀐다 -> 기존 요청이 끊어졌다가 새로운 요청으로 페이지가 열렸다
 	// 유지가 되지 않고 있다 -> req.getAttribute 해봤자 꺼내올 수 있는 값이 전혀 없다
 	if ("redirect".equals(pageMove[0])) { // return "redirect:dept/getDepList"
-		logger.info(path);//qna/qnaList.pj3
-		resp.sendRedirect(path);
+		logger.info(path);//qnaList.pj3
+		resp.sendRedirect(path);// /qna/qnaList.pj3
 		return;
 	}
 	// 아래 if문의 공통점은 scope가 request인 것이다.

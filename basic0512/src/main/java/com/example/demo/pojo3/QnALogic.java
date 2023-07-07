@@ -26,8 +26,16 @@ public class QnALogic {
 		return result;
 	}
 	public int qnaUpdate(Map<String, Object> pmap) {
-		// TODO Auto-generated method stub
-		return 0;
+		logger.info("qnaUpdate 호출 성공");
+		int result = -1;//0이면 실패, 1이면 성공 - 등록 성공실패 유무를 확인 할 수 있다 
+		result = qnaDao.qnaUpdate(pmap);
+		return result;
+	}
+	public int qnaDelete(Map<String, Object> pmap) {
+		logger.info("qnaDelete 호출 성공");
+		int result = -1;//0이면 실패, 1이면 성공 - 등록 성공실패 유무를 확인 할 수 있다 
+		result = qnaDao.qnaDelete(pmap);
+		return result;
 	}
 	
 	

@@ -43,6 +43,8 @@ public class QnAController implements Controller3{
 	 * {spring에서는 자동으로 지원해줌 - ViewResolver 설정이 추가됨}
 	 * SELECT qna_no, qna_writer, qna_title, qna_content FROM qna
 	 * SELECT * FROM qna_comment - 답글에 대한 테이블을 별도로 설계해보기 
+	 * qnaList앞에 jsonQnaList이면 html이 아닌 문자열로 출력이 나가야 하고(JSON)
+	 * json접두어가 없으면 출력이 html 태그로 나가야 한다.
 	 *********************************************************************************/
 	@Override
 	public Object qnaList(HttpServletRequest req, HttpServletResponse res) {
@@ -53,7 +55,8 @@ public class QnAController implements Controller3{
 		HashMapBinder hmb = new HashMapBinder(req);
 		hmb.bind(pMap);
 		qList = qnaLogic.qnaList(pMap);
-		req.setAttribute("qList", qList);
+		logger.info(qList);//자바의 자료구조 문자열값 출력됨
+		req.setAttribute("qList", qList);//요청객체에 조회 결과를 담음
 		//"/WEB-INF/views/"+"이자리"+".jsp"
 		//아래의 리턴값은 HandlerMapping클래스로 전달됨
 		//pageMove[]에 담기게 되는데 아래와 같이 리턴값을 내보내면
@@ -62,6 +65,10 @@ public class QnAController implements Controller3{
 		//그런데 현재 배열값은 두개만 사용하는 구조로 설계가 됨
 		//앞에 redirect나 forward가 없으면 WEB-INF/views/+path+.jsp로 URL이 완성됨 
 		return "qna/qnaList";
+		//위는 누구에게 돌려주는 값? -> ActionSupport가 받아서 VeiwResolver로 보냄 
+		//어디를 보면 이 답을 찾을 수 있을까?
+		//누가 언제 나를 호출했니? - HandlerMapping or ActionSupport 
+		//어디서 부터 시작되었나? -> qna/qnaList.pj3 -> ActionSupport 경유
 	}
 	/********************************************************************************
 	 * JSP 상세보기 페이지에 출력하기
@@ -119,8 +126,13 @@ public class QnAController implements Controller3{
 
 	@Override
 	public Object qnaDelete(HttpServletRequest req, HttpServletResponse res) {
-		// TODO Auto-generated method stub
-		return null;
+		int result =-1; //입력 성공이면 1을 돌려받고 실패이면 0을 받음(오라클 서버가 응답으로 준다)
+		Map<String,Object> pmap = new HashMap<>();
+		HashMapBinder hmb = new HashMapBinder(req);
+		//HashMapBinder 클래스가 사용자가 화면에 입력한 값들을 자동으로 파라미터 주소번지에 담아줌 
+		hmb.bind(pmap);
+		result = qnaLogic.qnaDelete(pmap);//파라미터 pmap의 주소번지를 오라클 서버에까지 전달해줌
+		return "redirect:qnaList.pj3";
 	}
 
 	@Override

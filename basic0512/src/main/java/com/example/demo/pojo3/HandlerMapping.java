@@ -95,14 +95,29 @@ public class HandlerMapping {
 				if(obj instanceof ModelAndView) {//컨트롤러 클래스가 ActionSupport에게 돌려주는 객체이다 
 					return (ModelAndView)obj;//배포위치 → /WEB-INF/views/qna
 				}else if(obj instanceof String) {//String타입으로 돌려줌 
+					logger.info("qnaList가 String타입이면 if문을 탐");
 					//return "rediirect:qnaList.jap" → 배포위치 → webapp>qna
 					//return "forward:qnaList.jsp" → 배포위치 → webapp>qna
 					return(String)obj;
 				}
 			}//end of qnaList
+			else if("jsonQnaList".equals(upmu[1])) {//배열의 두번째 방에 있는 문자열 - 페이지이름, 메소드이름, myBatis id
+				logger.info("jsonQnaList - 회원조회");
+				obj = controller.jsonQnaList(req, res);
+				if(obj instanceof String) {//String타입으로 돌려줌 
+					logger.info("jsonQnaList가 String타입이면 출력");
+					//return "rediirect:qnaList.jap" → 배포위치 → webapp>qna
+					//return "forward:qnaList.jsp" → 배포위치 → webapp>qna
+					return(String)obj;
+				}
+			}//end of jsonqnaList
 			else if ("qnaDetail".equals(upmu[1])) {//상세보기
 				logger.info("qnaDetail - 상세보기");
+				obj = controller.qnaList(req, res);
+				if(obj instanceof String) {//String타입으로 돌려줌 
+					return(String)obj;
 				}
+			}
 			// end of qnaDetail
 			else if ("qnaInsert".equals(upmu[1])) {//글등록
 				logger.info("qnaInsert - 글등록");
@@ -130,6 +145,10 @@ public class HandlerMapping {
 			//http://localhost:9000/qna/qnaDelete.pj3
 			else if ("qnaDelete".equals(upmu[1])) {//글삭제
 				logger.info("qnaDelete - 글삭제");
+				obj = controller.qnaDelete(req, res);
+				if(obj instanceof String) {
+					return(String)obj;
+				}
 			}// end of qnaDelete
 		}/////////////////////end of QnA게시판//////////////////////////////
 		return obj;

@@ -15,7 +15,7 @@
 		nowPage = Integer.parseInt(request.getParameter("nowPage"));
 	}
 	//out.print(size);//0이 출력됨
-	//out.print(mList);
+	out.print(qList);
 %>
 <!DOCTYPE html>
 <html>
@@ -30,9 +30,9 @@
 		//alert('qnaList');
 		location.href="/qna/qnaList.pj3";
 	}
-	const qnaDetail = (q_bno) => {
-		console.log('qnaDetail 사용자가 선택한 글번호 : '+q_bno);
-		location.href="/qna/qnaDetail.pj3?q_bno="+q_bno;
+	const qnaDetail = (q_no) => {
+		console.log('qnaDetail 사용자가 선택한 글번호 : '+q_no);
+		location.href="/qna/qnaDetail.pj3?q_no="+q_no;
 	}
 	const qnaSearch = () => {
 	    const gubun = document.querySelector('#gubun').value;
@@ -163,7 +163,7 @@
 	      </div>
 	      <!-- Modal body -->
 	      <div class="modal-body">
-	      	<form class="form-inline" id="f_qna" method="get" action="./qnaInsert.pj3">
+	      	<form class="form-inline" id="f_qna" method="post" action="./qnaInsert.pj3">
 	          <div class="input-group mb-2">
 		            <label class="input-group-text" for="q_title">제목</label>
 	            	<input type="text" class="form-control" id="q_title" name="q_title" placeholder="Enter 제목" />

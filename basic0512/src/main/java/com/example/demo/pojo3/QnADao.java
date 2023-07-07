@@ -28,7 +28,7 @@ public class QnADao {
 			qList = sqlSession.selectList("qnaList",pMap);
 			logger.info(qList);
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 		}
 		return qList;
 	}
@@ -48,6 +48,28 @@ public class QnADao {
 		if(result==1) {
 			logger.info("입력 성공");
 			//물리적인 테이블에 반영하기 - 이걸 안하면 이미지만 가지고 있는 상태임 
+			sqlSession.commit();
+		}//0인 경우는 굳이 안적어도 될 거 같아서 코드 작성하지 않음
+		return result;
+	}
+	public int qnaUpdate(Map<String, Object> pmap) {
+		logger.info("qnaUpdate 호출 성공");
+		int result = -1;
+		sqlSession = sqlSessionFactory.openSession();
+		result = sqlSession.insert("qnaUpdate",pmap);
+		if(result==1) {
+			logger.info("수정 성공");
+			sqlSession.commit();
+		}//0인 경우는 굳이 안적어도 될 거 같아서 코드 작성하지 않음
+		return result;
+	}
+	public int qnaDelete(Map<String, Object> pmap) {
+		logger.info("qnaDelete 호출 성공");
+		int result = -1;
+		sqlSession = sqlSessionFactory.openSession();
+		result = sqlSession.insert("qnaDelete",pmap);
+		if(result==1) {
+			logger.info("삭제 성공");
 			sqlSession.commit();
 		}//0인 경우는 굳이 안적어도 될 거 같아서 코드 작성하지 않음
 		return result;
