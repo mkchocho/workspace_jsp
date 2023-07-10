@@ -6,6 +6,7 @@
   	            ,/WEB-INF/spring-data.xml
   	</param-value>
   </context-param>
+  <!-- /WEB-INF/spring-data.xml 여기에 다오, 오라클, mybatis설정 있음 -->
   	<context-param>
   		<param-name>log4jConfigLocation</param-name>
   		<param-value>/WEB-INF/classes/log4j.properties</param-value>
@@ -21,6 +22,10 @@
  읽어서 계속 유지하면 되는 것이다. 
  이 땐 context-param태그를
  서블릿 요청이 일어날때 마다 새로 초기화 해야 할 땐 init-param태그를 사용함.
+ init-param(context-param)에 설정된 내용은 sp4로 요청이 들어올 때마다 spring-servlet.xml문서를 새로 읽어 들인다
+ context-param 태그에 등록된 내용은 서버 기동시 한 번 읽어서 서버가 다운될 때까지 계속 기억해줌 
+ 공통된 관심사인 로그설정 시 사용함 
+ 
  -->	  
 	<init-param>
 		<param-name>contextConfigLocation</param-name>
