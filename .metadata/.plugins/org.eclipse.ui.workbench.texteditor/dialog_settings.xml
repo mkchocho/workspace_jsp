@@ -10,8 +10,10 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="json"/>
+		<item key="selection" value="qna-resolver"/>
 		<list key="findhistory">
+			<item value="qna-resolver"/>
+			<item value="qna-controller"/>
 			<item value="json"/>
 			<item value="qna"/>
 			<item value="board"/>
@@ -25,8 +27,6 @@
 			<item value="form"/>
 			<item value="get"/>
 			<item value="commit"/>
-			<item value="file"/>
-			<item value="qnaInsert"/>
 		</list>
 		<list key="replacehistory">
 			<item value=""/>

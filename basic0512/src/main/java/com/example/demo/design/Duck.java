@@ -4,10 +4,14 @@ package com.example.demo.design;
 //추상메소드인 경우 일반메소드와 구분하기 위해서 abstract생략하면 안 돼
 //어떤 관계일 때 혹은 어떤 기준으로 상속관계를 정하면 되나요?
 // A is B 관계가 성립되면 서로 상속관계로 정의한다.
+//추상클래스는 단독으로 인스턴스화가 불가하다 - 구현체클래스가 반드시 존재해야함
+//단독으로 인스턴스화를 못하는 건 그 객체가 구체적이지 않다. 결정되지 못함.
 
 public abstract class Duck {
 	FlyBehavior flyBehavior = null;
 	//추상메소드 - 결정되지 않았다. 결정할 수 없다. 잘 모르겠다
+	//추상케소드에는 좌줄괄호와 우중괄호가 없다
+	//실행문(변수선언, 제어문사용, 로직처리{사칙연산,공식}을 적을 곳이 없음 의미 
 	public abstract void display();//나는 추상메소드라고 해
 	public void swimming() {//일반메소드다 왜냐면 좌줄괄호 우중괄호가 있는 것만으로 구현이다.
 		System.out.println("모든 오리는 물 위에 뜬다");
