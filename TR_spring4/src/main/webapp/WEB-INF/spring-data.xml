@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
+	<!--
+	bean태그는 class를 의미함
+	id는 인스턴스변수로 생각하기
+	bean태그의 아이디는 다른 bean태그의 ref자리에 사용됨
+	해당 빈이 다른 빈의 의존관계에 있다
+	 -->
+	
 	<bean id="data-source-target" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName">
 			<value>oracle.jdbc.driver.OracleDriver</value>

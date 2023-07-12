@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+</head>
+<body>
+<div id="d_search"></div>
+<script>
+//$("#d_search").text("여기");
+$(document).ready(function(){
+	//$("#d_search").text("요기");
+ const settings = {
+		  "url": "https://www.googleapis.com/youtube/v3/search?part=snippet&key=AIzaSyBJovcqOkt-G4CLmJmFFsn_5pLUsSZpwDA&type=video&q=손흥민",
+		  "method": "GET",
+		  "timeout": 0,
+		};
+//내가 만든 서버가 아닌 곳으로 부터 요청한 결과 데이터도 내 화면에 출력할 수 있다.
+//JSON의 변종이 여러가지가 있다 - 한가지 방법만 고집하지 말자
+//UI라이브러리, 솔루션에 상관없이 모두 적용가능함 
+		$.ajax(settings).done(function (response) {
+		  console.log(response);//[object, Object] - 자바스크립트의 Object(일급객체, 일급함수)
+		  $("#d_search").text(response.items); //[object Object],[object Object],[object Object],[object Object],[object Object]
+		  const imsi = JSON.stringify(response.items);
+		  //console.log(imsi); Object배열이 아닌 직관적인 값
+		  const obj = JSON.parse(imsi);
+		  console.log(obj);
+		  for(let i=0; i<obj.length;i++){
+			  console.log(obj[i].snippet.title);
+			  console.log(obj[i].snippet.description);
+		  }
+		  //공공데이터포털(버스관련, 교통편, 캠핑장, 극장...)ㅣ
+		});
+})
+</script>
+</body>
+</html>

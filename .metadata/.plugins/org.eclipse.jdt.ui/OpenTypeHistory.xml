@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <typeInfoHistroy>
     <typeInfo handle="=basic0512/src\/main\/java&lt;com.example.demo.design{FlyBehavior.java[FlyBehavior" modifiers="513" timestamp="1684908771771"/>
-    <typeInfo handle="=basic0512/src\/main\/java&lt;com.example.demo.design{Duck.java[Duck" modifiers="1025" timestamp="1684909203174"/>
+    <typeInfo handle="=basic0512/src\/main\/java&lt;com.example.demo.design{Duck.java[Duck" modifiers="1025" timestamp="1689034287308"/>
     <typeInfo handle="=basic0512/C:\/javatools\/jdk17.0.6_10\/lib\/jrt-fs.jar`java.desktop=/module=/true=/=/javadoc_location=/https:\/\/docs.oracle.com\/en\/java\/javase\/17\/docs\/api\/=/&lt;javax.swing(JFrame.class[JFrame" modifiers="33" timestamp="1679443853673"/>
     <typeInfo handle="=basic0512/C:\/javatools\/jdk17.0.6_10\/lib\/jrt-fs.jar`java.desktop=/module=/true=/=/javadoc_location=/https:\/\/docs.oracle.com\/en\/java\/javase\/17\/docs\/api\/=/&lt;javax.swing(JDialog.class[JDialog" modifiers="33" timestamp="1679443853673"/>
     <typeInfo handle="=basic0512/C:\/javatools\/jdk17.0.6_10\/lib\/jrt-fs.jar`java.base=/module=/true=/=/javadoc_location=/https:\/\/docs.oracle.com\/en\/java\/javase\/17\/docs\/api\/=/&lt;java.lang(ModuleLayer$Controller.class[Controller" modifiers="25" timestamp="1679443853673"/>
