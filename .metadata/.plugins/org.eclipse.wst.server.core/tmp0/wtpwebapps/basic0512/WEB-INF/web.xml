@@ -1,10 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
   <display-name>basic0512</display-name>
+  <!-- 톰캣 서버가 바라보는 물리적인 프로젝트마다 추가
+  공통된 관심사 관한 설정 추가 됨 - 인증처리 모듈 배포되면 인증 처리 관련 코드를 적용 
+  프레임워크 지원을 받을 수 없는 상황 -->
   <context-param>
   <param-name>log4jConfigLocation</param-name>
   <param-value>/WEB-INF/classes/log4j.properties</param-value>
   </context-param>
+  <!-- 
+  web.xml안에서 서블릿 클래스를 선언하였다.
+  web.xml안에서 URL 패턴을 등록하였다.
+  /qna
+  /qnaList.pj1, pj2, pj3 -> upmu[1] -> if문 분기(그런데 서블릿이 아니라서, req,res) -> 메소드 선언
+  메소드 이름, myBatis DML id값, 화면 이름("redirect:XXX.jsp" or setViewName("XXX.jsp");)
+  public String qnaList(){return "redirect:qnaList.jsp"}
+  public ModelAndView qnaList(){return mav;} //
+  ModelAndView mav = new ModelAndView(req);
+  WEB-INF/views/ - 접두어
+  .jsp - 접두어
+  mav.setViewName("qna/qnaList") // WEB-INF/views/qna/qnaList.jsp
+   -->
   <servlet>
   <servlet-name>FrontMVC1</servlet-name>
   <servlet-class>com.example.demo.pojo1.FrontMVC</servlet-class>
@@ -32,11 +48,22 @@
   <servlet>
   <servlet-name>KakaoAPI</servlet-name>
   <servlet-class>com.example.demo.pojo3.KakaoSupport</servlet-class>
+  <!--  
+  DI, IoC 에대한 설명 못함 - 경험없음 - 프로젝트 - 기술면접 준비 - 잔디심기, 프레임워크
+  www.google.com 쳤을 때 일어나는 일들을 설명하시오. maven, gradle 차이점 기술하시오.
+  자료구조 질문(List, Map) - FIFO, FILO(Frist In Last Out), CS(큐와 스택의 차이점) : C언어, pointer, 포인터연산-포기자속출
+  정보처리기사 시험준비 - 취업에 당락을 결정하지는 않음 - 정부기관 - 금융, 해외취업 - 비자발급
+  <init-param>
+  <param-name>fronController</param-name>
+  <param-value>전처리를 위한 서블릿</param-value>
+  </init-param>
+  -->
   </servlet>
   <servlet-mapping>
   <servlet-name>KakaoAPI</servlet-name>
   <url-pattern>/auth/*</url-pattern>
   </servlet-mapping>
+  <!-- 세션은 시간동안 유지 해줌 - 데이터 셋을 30분동안 유지해준다 -->
   <session-config>
   <session-timeout>30</session-timeout>
   </session-config>

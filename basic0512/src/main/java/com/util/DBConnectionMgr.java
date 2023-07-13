@@ -10,13 +10,13 @@ import org.apache.log4j.Logger;
 public class DBConnectionMgr {
     Logger logger = Logger.getLogger(DBConnectionMgr.class);
     //각 제조사가 제공하는 드라이버 클래스를 로딩해야 한다. -ojdbc6.jar, ojdbc8.jar
-    private final String driver = "oracle.jdbc.driver.OracleDriver";
+    private final String driver = "com.mysql.cj.jdbc.Driver";
     //사용자 계정이 필요하다
-    private final String _user = "scott";
+    private final String _user = "root";
     //비번이 필요하다
-    private final String _passwd = "tiger";
+    private final String _passwd = "mysqlpassword";
     //물리적으로 떨어져있는 서버의 정보(리소스)
-    private final String url = "jdbc:oracle:thin:@localhost:1521:orcl11";//xe는 SID깞이다
+    private final String url = "jdbc:mysql://localhost:3306/scott";//xe는 SID깞이다
     //객체 생성하는 메소드 구현 - 싱글톤 패턴으로 구현해봄 - 하나로 여러 사용자가 공유한다
     public static DBConnectionMgr getInstance() {//static붙은 메소드는 인스턴스화 없이 호출가능하다(클래스급)
        DBConnectionMgr dbMgr = null;

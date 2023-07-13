@@ -11,6 +11,14 @@
   		<param-name>log4jConfigLocation</param-name>
   		<param-value>/WEB-INF/classes/log4j.properties</param-value>
   	</context-param>  
+  	<!-- 
+  	메이븐 방식이 아닌 그레이들도 아닌 개발자가 원하는 대로 xml문서를 관리하려면
+  	반드시 아래 listener 클래스를 등록해줌
+  	SI - SM(운영팀 - 지방 - 기존시스템-레거시 - 칼퇴,버퍼링) - 솔루션 - 스타트업
+  	필터추가 - 한글처리 필터, CORS이슈 
+  	CORS(Cross Origin Resource Sharring) - 교차출처 금지 - 포트번호가 다른 것 끼리 서비스 불가 
+  	리액트(:3000)와 스프링(:8000) 비빌때
+  	 -->
   <listener>
   	<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
   </listener>
@@ -25,7 +33,7 @@
  init-param(context-param)에 설정된 내용은 sp4로 요청이 들어올 때마다 spring-servlet.xml문서를 새로 읽어 들인다
  context-param 태그에 등록된 내용은 서버 기동시 한 번 읽어서 서버가 다운될 때까지 계속 기억해줌 
  공통된 관심사인 로그설정 시 사용함 
- 
+ init-param은 톰캣 서버 안 web.xml에 설정되어 있는 default 서블릿 대신 요청을 받아오게 해줌 
  -->	  
 	<init-param>
 		<param-name>contextConfigLocation</param-name>
