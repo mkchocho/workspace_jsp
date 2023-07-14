@@ -10,8 +10,10 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="qna-resolver"/>
+		<item key="selection" value="Con"/>
 		<list key="findhistory">
+			<item value="con"/>
+			<item value="list"/>
 			<item value="qna-resolver"/>
 			<item value="qna-controller"/>
 			<item value="json"/>
@@ -25,8 +27,6 @@
 			<item value="0527"/>
 			<item value="encoding"/>
 			<item value="form"/>
-			<item value="get"/>
-			<item value="commit"/>
 		</list>
 		<list key="replacehistory">
 			<item value=""/>
