@@ -11,8 +11,12 @@
 	</bean>
 	<bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
 	    <property name="defaultLocale" value="ko">
-	</property></bean>	
+	</property></bean>
+	<!-- 하위태그에 property가 왔다
+	의존성 주입 - 생성자 객체주입법(xml파일-이종간에 사용가능), setter 객체주입법(자바코드:이종간에는 사용 어렵다 : DeptDao와 SqlSessionTemplate 연동 할 때)  -->	
 	<bean id="dept-logic" class="com.erp.DeptLogic">
-		<property name="deptDao" ref="dept-dao"/> 
+	<!-- DeptLogic클래스에서 DeptDao클래스의 주입이 필요함 -->
+	<!-- DeptLogic클래스에서 setter 메소드를 선언할 것 -->
+		<property name="deptDao" ref="dept-dao"/> <!-- 여기 사용한 name값이 setter 메소드의 이름을 결정함 : 필요한 시점에 객체 주입을 해줌 setter메서드에 --> 
 	</bean>
 </beans>

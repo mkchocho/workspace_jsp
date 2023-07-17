@@ -22,6 +22,14 @@
 		</property>
 	</bean>
     <!-- Transaction manager for a single JDBC DataSource -->
+    <!-- 스프링에서는 클래스를 선언할 때 bean태그를 사용함
+    bean 태그의 id 값은 다른 클래스와의 관계에서 참조되어야 하는 경우 ref 속성값으로 사용 됨
+    즉 의존관계에 놓여 있는 경우에 사용 됨
+    만일 스프링을 사용하지 않을 때는 SqlSessionFactory를 사용함
+	myBatis-spring.jar : 스프링 f/w에 사용하는 것은 myBatis가 필요한 클래스를 지원해야 하니까.
+    myBatis에서 물리적으로 떨어져 있는 오라클 서버에 연결통로를 생성하는 클래스 SqlSessionFactoryBean임 
+    xml과 xml문서 사이에서도 의존성 주입이 가능하다 - 관찰해보기 
+    -->
 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="data-source-target"/>
 	</bean>

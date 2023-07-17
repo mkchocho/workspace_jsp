@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
+  <!-- *.xml 과 같이 쓰는 것은 추천하지 않음 왜냐하면 줄이면 직관적이지가 않음 -->
   <context-param>
   	<param-name>contextConfigLocation</param-name>
   	<param-value>/WEB-INF/spring-service.xml
   	            ,/WEB-INF/spring-data.xml
+  	            ,/WEB-INF/spring-*.xml 
   	</param-value>
   </context-param>
   <!-- /WEB-INF/spring-data.xml 여기에 다오, 오라클, mybatis설정 있음 -->

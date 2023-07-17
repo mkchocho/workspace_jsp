@@ -2,10 +2,17 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
+<!-- insert, update, delete 사용시 파라미터값이 null값이 넘어올 때 에러방지코드
+만일 여기서 하지 않으면 dml 구문마다 널 체크하는 코드를 추가해야하므로 더 불편함 -->
 	<settings>
 	    <setting name="cacheEnabled" value="false" />
-	    <setting name="jdbcTypeForNull" value="NULL" />
+	    <setting name="jdbcTypeForNull" value="VARCHAR" />
 	</settings>
+	<!--
+	조인 시에는 MAP을 사용하는 것이 편리하고 조인을 하지 않는 경우라면 VO도 괜찮다
+	추가적으로 Map은 리턴타입이 Object이지만 VO경우에는 타입을 정확히 추가하니까
+	CastingException 관련된 에러를좀 더 피할 수 있겠다. 
+	 -->
 	<typeAliases>
 		<typeAlias alias="eVO" type="com.vo.EmpVO"/>
 		<typeAlias alias="dVO" type="com.vo.DeptVO"/>
