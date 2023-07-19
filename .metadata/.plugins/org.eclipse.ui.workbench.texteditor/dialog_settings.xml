@@ -10,8 +10,12 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="Con"/>
+		<item key="selection" value=""/>
 		<list key="findhistory">
+			<item value="refresh"/>
+			<item value="iterator"/>
+			<item value="while"/>
+			<item value="dtm"/>
 			<item value="con"/>
 			<item value="list"/>
 			<item value="qna-resolver"/>
@@ -23,10 +27,6 @@
 			<item value="bno"/>
 			<item value="action"/>
 			<item value="qnaList"/>
-			<item value="전체조회"/>
-			<item value="0527"/>
-			<item value="encoding"/>
-			<item value="form"/>
 		</list>
 		<list key="replacehistory">
 			<item value=""/>
