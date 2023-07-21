@@ -13,7 +13,6 @@
     <fullyQualifiedTypeName name="com.example.demo.pojo3.ViewResolver"/>
     <fullyQualifiedTypeName name="com.example.demo.pojo3.QnAController"/>
     <fullyQualifiedTypeName name="com.example.demo.pojo3.QnALogic"/>
-    <fullyQualifiedTypeName name="java.util.HashMap"/>
     <fullyQualifiedTypeName name="java.io.PrintWriter"/>
     <fullyQualifiedTypeName name="javax.annotation.sql.DataSourceDefinition"/>
     <fullyQualifiedTypeName name="lombok.Setter"/>
@@ -52,12 +51,13 @@
     <fullyQualifiedTypeName name="org.springframework.web.servlet.mvc.AbstractController"/>
     <fullyQualifiedTypeName name="org.springframework.web.servlet.ModelAndView"/>
     <fullyQualifiedTypeName name="javax.xml.crypto.dsig.XMLObject"/>
-    <fullyQualifiedTypeName name="java.lang.String"/>
-    <fullyQualifiedTypeName name="java.util.ArrayList"/>
-    <fullyQualifiedTypeName name="java.lang.Object"/>
     <fullyQualifiedTypeName name="java.util.Set"/>
     <fullyQualifiedTypeName name="javax.swing.JFrame"/>
     <fullyQualifiedTypeName name="javax.swing.table.DefaultTableModel"/>
     <fullyQualifiedTypeName name="javax.swing.JScrollPane"/>
     <fullyQualifiedTypeName name="javax.swing.JButton"/>
+    <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="java.util.HashMap"/>
+    <fullyQualifiedTypeName name="java.lang.String"/>
+    <fullyQualifiedTypeName name="java.lang.Object"/>
 </qualifiedTypeNameHistroy>
