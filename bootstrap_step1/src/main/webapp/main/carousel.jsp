@@ -32,7 +32,7 @@
         <div class="carousel-inner">
           <div class="carousel-item active">
             <img
-              src="./img/camera_comp.jpg"
+              src="./img/banner1.png"
               class="d-block w-100"
               alt="one"
             />
@@ -45,7 +45,7 @@
           </div>
           <div class="carousel-item">
             <img
-              src="./img/man-person.jpg"
+              src="./img/banner2.png"
               class="d-block w-100"
               alt="two"
             />
@@ -58,7 +58,7 @@
           </div>
           <div class="carousel-item">
             <img
-              src="./img/beach-daylight.jpg"
+              src="./img/banner3.png"
               class="d-block w-100"
               alt="three"
             />

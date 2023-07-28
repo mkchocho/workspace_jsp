@@ -10,23 +10,23 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value=""/>
+		<item key="selection" value="#"/>
 		<list key="findhistory">
+			<item value="#"/>
+			<item value="noticeList()"/>
+			<item value="form-control"/>
+			<item value="haha"/>
+			<item value="img"/>
+			<item value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;"/>
+			<item value="form actiron"/>
+			<item value="Form"/>
+			<item value="form"/>
 			<item value="refresh"/>
 			<item value="iterator"/>
 			<item value="while"/>
 			<item value="dtm"/>
 			<item value="con"/>
 			<item value="list"/>
-			<item value="qna-resolver"/>
-			<item value="qna-controller"/>
-			<item value="json"/>
-			<item value="qna"/>
-			<item value="board"/>
-			<item value="f_board"/>
-			<item value="bno"/>
-			<item value="action"/>
-			<item value="qnaList"/>
 		</list>
 		<list key="replacehistory">
 			<item value=""/>

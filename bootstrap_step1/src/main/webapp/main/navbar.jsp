@@ -21,16 +21,13 @@
               <a class="nav-link active" aria-current="page" href="./index.jsp">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="./index.jsp?menu=menu1">메뉴1</a>
+              <a class="nav-link" href="./index.jsp?menu=menu1">공지사항</a>
             </li>
 	        <li class="nav-item">
-	          <a class="nav-link" href="./index.jsp?menu=menu2">메뉴2</a>
+	          <a class="nav-link" href="./index.jsp?menu=menu2">회원관리</a>
 	        </li>
 	        <li class="nav-item">
-	          <a class="nav-link" href="./index.jsp?menu=menu3">메뉴3</a>
-	        </li>
-	        <li class="nav-item">
-	          <a class="nav-link">메뉴4</a>
+	          <a class="nav-link" href="./index.jsp?menu=menu3">수강신청</a>
 	        </li>
           </ul>
 <!--[[ LOGIN AREA ]]-->          
